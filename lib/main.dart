@@ -2,18 +2,18 @@ import 'package:dewitapp/colors.dart';
 import 'package:flutter/material.dart';
 import 'colors.dart';
 
-
-//final ThemeData DarkTheme = new ThemeData(
-//    brightness: Brightness.light,
-//    primaryColorBrightness: Brightness.light,
-//    accentColor: CustomColors.custom,
-//    accentColorBrightness: Brightness.light
-//);
-
-void main() {
-  runApp(MyApp());
-}
-
+//
+////final ThemeData DarkTheme = new ThemeData(
+////    brightness: Brightness.light,
+////    primaryColorBrightness: Brightness.light,
+////    accentColor: CustomColors.custom,
+////    accentColorBrightness: Brightness.light
+////);
+//
+//void main() {
+//  runApp(MyApp());
+//}
+//
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
@@ -39,100 +39,187 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Dewit'),
+      //home: MyHomePage(title: 'Dewit'),
     );
   }
 }
+//
+//class MyHomePage extends StatefulWidget {
+//  MyHomePage({Key key, this.title}) : super(key: key);
+//
+//  // This widget is the home page of your application. It is stateful, meaning
+//  // that it has a State object (defined below) that contains fields that affect
+//  // how it looks.
+//
+//  // This class is the configuration for the state. It holds the values (in this
+//  // case the title) provided by the parent (in this case the App widget) and
+//  // used by the build method of the State. Fields in a Widget subclass are
+//  // always marked "final".
+//
+//  final String title;
+//
+//  @override
+//  _MyHomePageState createState() => _MyHomePageState();
+//}
+//
+//class _MyHomePageState extends State<MyHomePage> {
+//  int _counter = 0;
+//
+//  void _incrementCounter() {
+//    setState(() {
+//      // This call to setState tells the Flutter framework that something has
+//      // changed in this State, which causes it to rerun the build method below
+//      // so that the display can reflect the updated values. If we changed
+//      // _counter without calling setState(), then the build method would not be
+//      // called again, and so nothing would appear to happen.
+//      _counter++;
+//    });
+//  }
+//
+//  @override
+//  Widget build(BuildContext context) {
+//    // This method is rerun every time setState is called, for instance as done
+//    // by the _incrementCounter method above.
+//    //
+//    // The Flutter framework has been optimized to make rerunning build methods
+//    // fast, so that you can just rebuild anything that needs updating rather
+//    // than having to individually change instances of widgets.
+//    return Scaffold(
+//      appBar: AppBar(
+//        // Here we take the value from the MyHomePage object that was created by
+//        // the App.build method, and use it to set our appbar title.
+//        //title: Text(widget.title),
+//        title: const Text("Dewit", style: TextStyle(
+//            color: DewitColors.lightGray,
+//        )),
+//      ),
+//      body: Center(
+//        // Center is a layout widget. It takes a single child and positions it
+//        // in the middle of the parent.
+//        child: Column(
+//          // Column is also a layout widget. It takes a list of children and
+//          // arranges them vertically. By default, it sizes itself to fit its
+//          // children horizontally, and tries to be as tall as its parent.
+//          //
+//          // Invoke "debug painting" (press "p" in the console, choose the
+//          // "Toggle Debug Paint" action from the Flutter Inspector in Android
+//          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
+//          // to see the wireframe for each widget.
+//          //
+//          // Column has various properties to control how it sizes itself and
+//          // how it positions its children. Here we use mainAxisAlignment to
+//          // center the children vertically; the main axis here is the vertical
+//          // axis because Columns are vertical (the cross axis would be
+//          // horizontal).
+//          mainAxisAlignment: MainAxisAlignment.center,
+//          children: <Widget>[
+//            Text(
+//              'You have pushed the button this many times:',
+//              style: TextStyle(color: DewitColors.lightPurple),
+//            ),
+//            Text(
+//              '$_counter',
+////              style: Theme.of(context).textTheme.headline4,
+//              style: TextStyle(
+//                  color: DewitColors.darkPurple,
+//                  fontSize: 40,
+//              ),
+//            ),
+//          ],
+//        ),
+//      ),
+//      floatingActionButton: FloatingActionButton(
+//        onPressed: _incrementCounter,
+//        tooltip: 'Increment',
+//        child: Icon(Icons.add),
+//      ), // This trailing comma makes auto-formatting nicer for build methods.
+//    );
+//  }
+//}
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+//HELP FROM: The Chromium Authors.
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
+// This app is a stateful, it tracks the user's current choice.
+class TopBar extends StatefulWidget {
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _TopBarState createState() => _TopBarState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _TopBarState extends State<TopBar> {
+  Select _selectedChoice = selection[0]; // The app's "state".
 
-  void _incrementCounter() {
+  void _select(Select selection) {
+    // Causes the app to rebuild with the new _selectedChoice.
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
+      _selectedChoice = selection;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        //title: Text(widget.title),
-        title: const Text("Dewit", style: TextStyle(
-            color: DewitColors.lightGray,
-        )),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-              style: TextStyle(color: DewitColors.lightPurple),
-            ),
-            Text(
-              '$_counter',
-//              style: Theme.of(context).textTheme.headline4,
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: DewitColors.coalBlack,
+          iconTheme: new IconThemeData(color: DewitColors.lightGray),
+          title: const Text("Dewit",
               style: TextStyle(
-                  color: DewitColors.darkPurple,
-                  fontSize: 40,
-              ),
+                color: DewitColors.lightGray,
+              )
+          ),
+          actions: <Widget>[
+            // action button
+            IconButton(
+//              color: DewitColors.lightGray,
+              icon: Icon(selection[0].icon),
+              onPressed: () {
+                _select(selection[0]);
+              },
+            ),
+            PopupMenuButton<Select>(
+              onSelected: _select,
+              itemBuilder: (BuildContext context) {
+                return selection.skip(1).map((Select selection) {
+                  return PopupMenuItem<Select>(
+                    value: selection,
+                    child: Text(selection.title),
+                  );
+                }).toList();
+              },
             ),
           ],
         ),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Center(
+            child: Text("Hello, World!",
+                style: TextStyle(
+                  color: DewitColors.darkPurple,
+                  fontSize: 60,
+                )
+            ),
+          )
+        ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
+
+class Select {
+  const Select({this.title, this.icon});
+
+  final String title;
+  final IconData icon;
+}
+
+const List<Select> selection = const <Select>[
+  const Select(title: "Search", icon: Icons.search),
+  const Select(title: "Extra1", icon: Icons.search),
+  const Select(title: "Extra2", icon: Icons.search),
+];
+
+
+void main() {
+  runApp(TopBar());
+}
+
