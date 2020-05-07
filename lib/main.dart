@@ -1,6 +1,7 @@
 import 'package:dewitapp/colors.dart';
 import 'package:flutter/material.dart';
 import 'colors.dart';
+import 'package:toast/toast.dart';
 
 //
 ////final ThemeData DarkTheme = new ThemeData(
@@ -138,6 +139,7 @@ class MyApp extends StatelessWidget {
 //}
 
 //HELP FROM: The Chromium Authors.
+//at https://flutter.dev/docs/catalog/samples/basic-app-bar
 
 // This app is a stateful, it tracks the user's current choice.
 class TopBar extends StatefulWidget {
@@ -162,6 +164,17 @@ class _TopBarState extends State<TopBar> {
         appBar: AppBar(
           backgroundColor: DewitColors.coalBlack,
           iconTheme: new IconThemeData(color: DewitColors.lightGray),
+          leading: Builder(
+              builder: (BuildContext context){
+                return IconButton(
+                  icon: Icon(Icons.menu),
+                  onPressed: () {
+                    Toast.show("You selected menu!", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+                    print("TESTING");
+                  },
+                );
+              },
+          ),
           title: const Text("Dewit",
               style: TextStyle(
                 color: DewitColors.lightGray,
@@ -171,15 +184,14 @@ class _TopBarState extends State<TopBar> {
             // action button
             IconButton(
 //              color: DewitColors.lightGray,
-              icon: Icon(selection[0].icon),
+              icon: Icon(Icons.search),
               onPressed: () {
-                _select(selection[0]);
+                Toast.show("You selected search!", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
               },
             ),
             PopupMenuButton<Select>(
-              onSelected: _select,
               itemBuilder: (BuildContext context) {
-                return selection.skip(1).map((Select selection) {
+                return selection.skip(0).map((Select selection) {
                   return PopupMenuItem<Select>(
                     value: selection,
                     child: Text(selection.title),
@@ -213,7 +225,6 @@ class Select {
 }
 
 const List<Select> selection = const <Select>[
-  const Select(title: "Search", icon: Icons.search),
   const Select(title: "Extra1", icon: Icons.search),
   const Select(title: "Extra2", icon: Icons.search),
 ];
@@ -222,4 +233,3 @@ const List<Select> selection = const <Select>[
 void main() {
   runApp(TopBar());
 }
-
