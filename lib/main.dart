@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         primaryColor: DewitColors.coalBlack,
         accentColor: DewitColors.darkPurple,
         canvasColor: DewitColors.background,
-        //primarySwatch: CustomColors1.custom1,
+        //primarySwatch: DewitColors.darkPurple,
         // This makes the visual density adapt to the platform that you run
         // the app on. For desktop platforms, the controls will be smaller and
         // closer together (more dense) than on mobile platforms.
@@ -169,8 +169,10 @@ class _TopBarState extends State<TopBar> {
                 return IconButton(
                   icon: Icon(Icons.menu),
                   onPressed: () {
-                    Toast.show("You selected menu!", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-                    print("TESTING");
+                    Scaffold.of(context).showSnackBar(SnackBar(
+                      content: Text("SnackBar menu!"),
+                    ));
+                    //Toast.show("You selected menu!", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
                   },
                 );
               },
@@ -182,11 +184,18 @@ class _TopBarState extends State<TopBar> {
           ),
           actions: <Widget>[
             // action button
-            IconButton(
-//              color: DewitColors.lightGray,
-              icon: Icon(Icons.search),
-              onPressed: () {
-                Toast.show("You selected search!", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+            Builder(
+              builder: (BuildContext context){
+                return IconButton(
+                  icon: Icon(Icons.search),
+                  onPressed: () {
+                    //one or the other
+                    Scaffold.of(context).showSnackBar(SnackBar(
+                      content: Text("SnackBar search!"),
+                    ));
+                    //Toast.show("You selected search!", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+                  },
+                );
               },
             ),
             PopupMenuButton<Select>(
@@ -212,6 +221,7 @@ class _TopBarState extends State<TopBar> {
             ),
           )
         ),
+        backgroundColor: DewitColors.background,
       ),
     );
   }
