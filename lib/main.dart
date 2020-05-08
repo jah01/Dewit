@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Dewit',
+      title: "Dewit",
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -210,16 +210,105 @@ class _TopBarState extends State<TopBar> {
             ),
           ],
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Center(
-            child: Text("Hello, World!",
-                style: TextStyle(
-                  color: DewitColors.darkPurple,
-                  fontSize: 60,
-                )
+        body: Column(
+          //padding: const EdgeInsets.all(16.0),
+          children: <Widget>[
+            Expanded(
+              child: Align(
+                  alignment: FractionalOffset(0.5, 1),
+                  child: Container(
+                      color: Colors.transparent,
+                      width: double.infinity,
+                      height: 60.0,
+                      margin: const EdgeInsets.all(6.0),
+                      //padding: EdgeInsets.only(bottom: 20.0, top: 20.0),
+                    child: Container(
+                      decoration: new BoxDecoration(
+                          color: DewitColors.darkPurple,
+                          borderRadius: new BorderRadius.all(
+                            Radius.circular(4.0),
+                          )
+                      ),
+                      child: Row(
+                        children: <Widget>[
+                          //TODO any other children go BEFORE this (the bottom bar is right below)
+                          Expanded(
+                            child: Container(
+                              padding: EdgeInsets.all(10.0),
+                              color: Colors.transparent,
+                              //width: 300.0,
+                              //margin: new EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0, bottom: 8.0),
+                              child: Row(
+                                children: <Widget>[
+                                  Expanded(
+                                    flex: 30,
+                                    child: Container(
+                                      decoration: new BoxDecoration(
+                                          color: DewitColors.lightPurple,
+                                          borderRadius: new BorderRadius.all(
+                                            Radius.circular(4.0),
+                                          )
+                                      ),
+                                    ),
+                                  ),
+                                  Spacer(),
+                                  Expanded(
+                                    flex: 4,
+                                    child: Container(
+                                      decoration: new BoxDecoration(
+                                          color: DewitColors.lightPurple,
+                                          borderRadius: new BorderRadius.all(
+                                            Radius.circular(4.0),
+                                          )
+                                      ),
+                                    ),
+                                  ),
+                                  Spacer(),
+                                  Expanded(
+                                    flex: 4,
+                                    child: Container(
+                                      decoration: new BoxDecoration(
+                                          color: DewitColors.lightPurple,
+                                          borderRadius: new BorderRadius.all(
+                                            Radius.circular(4.0),
+                                          )
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    ),
+//                        child: Text("TESTING",
+//                          textAlign: TextAlign.center,
+//                        ),
+                  ),
+              ),
             ),
-          )
+//            Container(
+//              //padding: EdgeInsets.all(20.0),
+//              //margin: new EdgeInsets.all(20.0),
+//              color: DewitColors.darkPurple,
+//              child: Align(
+//                alignment: FractionalOffset.bottomCenter,
+//                child: Padding(
+//                    padding: EdgeInsets.only(bottom: 10.0, top: 10.0),
+//                    child: Text("TESTING"),
+//                )
+//              ),
+//            ),
+//            Container(
+//              padding: EdgeInsets.all(30.0),
+//              color: Colors.blue,
+//              child: Text("ern"),
+//            ),
+
+
+
+          ],
         ),
         backgroundColor: DewitColors.background,
       ),
