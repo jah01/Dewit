@@ -63,4 +63,5 @@ class DewitColors {
   static const darkGray = const Color(0xFFA2A2A2);
   static const lightPurple = const Color(0xFFC7C9ED);
   static const darkPurple = const Color(0xFF9092CA);
+  static const iconColor = const Color(0xFF5E5E5E);
 }

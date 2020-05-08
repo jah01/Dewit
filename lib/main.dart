@@ -190,9 +190,12 @@ class _TopBarState extends State<TopBar> {
                   icon: Icon(Icons.search),
                   onPressed: () {
                     //one or the other
-                    Scaffold.of(context).showSnackBar(SnackBar(
-                      content: Text("SnackBar search!"),
-                    ));
+//                    Scaffold.of(context).showSnackBar(SnackBar(
+//                      content: Text("SnackBar search!"),
+//                    ));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SecondRoute()));
                     //Toast.show("You selected search!", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
                   },
                 );
@@ -241,16 +244,35 @@ class _TopBarState extends State<TopBar> {
                               child: Row(
                                 children: <Widget>[
                                   Expanded(
-                                    flex: 30,
-                                    child: GestureDetector(
-
-                                      onTap: () {print("CLICKED");},
+                                    flex: 31,
+                                    child: Container(
                                       child: Container(
+                                        height: double.infinity,
+                                        //child: Text("testing this out"),
                                         decoration: new BoxDecoration(
                                             color: DewitColors.lightPurple,
                                             borderRadius: new BorderRadius.all(
                                               Radius.circular(4.0),
                                             )
+                                        ),
+                                        child: FlatButton(
+                                          onPressed: () {
+                                            print("BIG ADD TEST");
+                                          },
+                                          child: Row(
+                                            children: <Widget>[
+                                              Container(
+                                                //padding: EdgeInsets.all(10.0),
+                                                child: Text(
+                                                  "Add something!",
+                                                  style: TextStyle(
+                                                    color: DewitColors.iconColor,
+                                                    fontSize: 16.0,
+                                                  )
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
 
@@ -261,26 +283,78 @@ class _TopBarState extends State<TopBar> {
                                   Expanded(
                                     flex: 4,
                                     child: Container(
-                                      decoration: new BoxDecoration(
-                                          color: DewitColors.lightPurple,
-                                          borderRadius: new BorderRadius.all(
-                                            Radius.circular(4.0),
-                                          )
+                                      child: Container(
+                                        height: double.infinity,
+                                        width: double.infinity,
+                                        decoration: new BoxDecoration(
+                                            color: DewitColors.lightPurple,
+                                            borderRadius: new BorderRadius.all(
+                                              Radius.circular(4.0),
+                                            )
+                                        ),
+                                        child: FlatButton(
+                                          onPressed: () {
+                                            print("BIG MIC TEST");
+                                          },
+                                          padding: EdgeInsets.all(0.0),
+                                          child: Icon(
+                                            Icons.mic,
+                                            color: DewitColors.iconColor,
+                                            size: 24.0,
+                                          ),
+//                                            child: new Icon(
+//                                              Icons.mic,
+//                                              color: DewitColors.iconColor,
+//                                              size: 24.0,
+//                                            ),
+
+//                                          child: Column(
+//                                            children: <Widget>[
+//                                              Container(
+//                                                padding: EdgeInsets.only(top: 8.0, bottom: 8.0, left: 10.0),
+//
+//                                                child: Icon(
+//                                                  Icons.mic,
+//                                                  color: DewitColors.iconColor,
+//                                                  size: 24.0,
+//                                                ),
+//                                              ),
+//                                            ],
+//                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
-                                  Spacer(),
-                                  Expanded(
-                                    flex: 4,
-                                    child: Container(
-                                      decoration: new BoxDecoration(
-                                          color: DewitColors.lightPurple,
-                                          borderRadius: new BorderRadius.all(
-                                            Radius.circular(4.0),
-                                          )
-                                      ),
-                                    ),
-                                  ),
+                                  //Spacer(),
+//                                  Expanded(
+//                                    flex: 4,
+//                                    child: GestureDetector(
+//                                        onTap: () {
+//                                          print("PIC CLICKED");
+//                                        },
+//                                      child: Container(
+//                                        decoration: new BoxDecoration(
+//                                            color: DewitColors.lightPurple,
+//                                            borderRadius: new BorderRadius.all(
+//                                              Radius.circular(4.0),
+//                                            )
+//                                        ),
+//                                        child: Column(
+//                                          children: <Widget>[
+//                                            Container(
+//                                              padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
+//
+//                                              child: Icon(
+//                                                Icons.photo_camera,
+//                                                color: DewitColors.iconColor,
+//                                                size: 24.0,
+//                                              ),
+//                                            ),
+//                                          ],
+//                                        ),
+//                                      ),
+//                                    ),
+//                                  ),
                                 ],
                               ),
                             ),
@@ -333,6 +407,30 @@ const List<Select> selection = const <Select>[
   const Select(title: "Extra1", icon: Icons.search),
   const Select(title: "Extra2", icon: Icons.search),
 ];
+
+
+
+
+class SecondRoute extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Second Route"),
+      ),
+      body: Center(
+        child: RaisedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: Text('Go back!'),
+        ),
+      ),
+    );
+  }
+}
+
+
 
 
 void main() {
