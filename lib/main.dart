@@ -242,14 +242,20 @@ class _TopBarState extends State<TopBar> {
                                 children: <Widget>[
                                   Expanded(
                                     flex: 30,
-                                    child: Container(
-                                      decoration: new BoxDecoration(
-                                          color: DewitColors.lightPurple,
-                                          borderRadius: new BorderRadius.all(
-                                            Radius.circular(4.0),
-                                          )
+                                    child: GestureDetector(
+
+                                      onTap: () {print("CLICKED");},
+                                      child: Container(
+                                        decoration: new BoxDecoration(
+                                            color: DewitColors.lightPurple,
+                                            borderRadius: new BorderRadius.all(
+                                              Radius.circular(4.0),
+                                            )
+                                        ),
                                       ),
-                                    ),
+
+
+                                    )
                                   ),
                                   Spacer(),
                                   Expanded(
