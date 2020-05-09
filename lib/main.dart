@@ -4,19 +4,13 @@ import 'colors.dart';
 import 'package:toast/toast.dart';
 
 
-//
-////final ThemeData DarkTheme = new ThemeData(
-////    brightness: Brightness.light,
-////    primaryColorBrightness: Brightness.light,
-////    accentColor: CustomColors.custom,
-////    accentColorBrightness: Brightness.light
-////);
-//
-//void main() {
-//  runApp(MyApp());
-//}
-//
 
+//final ThemeData DarkTheme = new ThemeData(
+//    brightness: Brightness.light,
+//    primaryColorBrightness: Brightness.light,
+//    accentColor: CustomColors.custom,
+//    accentColorBrightness: Brightness.light
+//);
 
 class MyApp extends StatelessWidget {
   @override
@@ -88,12 +82,22 @@ class FirstScreen extends StatelessWidget {
         //padding: const EdgeInsets.all(16.0),
         children: <Widget>[
           Expanded(
+            flex: 100,
+            child: Container(
+              width: double.infinity,
+              color: Colors.blue,
+            ),
+//            width: double.infinity,
+          ),
+          //TODO any other children go BEFORE this (the bottom bar is right below)
+          Expanded(
+            flex: 12,
             child: Align(
               alignment: FractionalOffset(0.5, 1),
               child: Container(
                 color: Colors.transparent,
                 width: double.infinity,
-                height: 60.0,
+                //height: 60.0,
                 margin: const EdgeInsets.all(6.0),
                 //padding: EdgeInsets.only(bottom: 20.0, top: 20.0),
                 child: Container(
@@ -105,7 +109,6 @@ class FirstScreen extends StatelessWidget {
                     ),
                     child: Row(
                       children: <Widget>[
-                        //TODO any other children go BEFORE this (the bottom bar is right below)
                         Expanded(
                           child: Container(
                             padding: EdgeInsets.all(10.0),
@@ -128,6 +131,9 @@ class FirstScreen extends StatelessWidget {
                                             )
                                         ),
                                         child: FlatButton(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(4.0),
+                                          ),
                                           onPressed: () {
                                             Navigator.push(
                                                 context,
@@ -168,6 +174,9 @@ class FirstScreen extends StatelessWidget {
                                           )
                                       ),
                                       child: FlatButton(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(4.0),
+                                        ),
                                         onPressed: () {
                                           print("BIG MIC TEST");
                                         },
