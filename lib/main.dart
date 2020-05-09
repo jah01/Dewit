@@ -15,35 +15,44 @@ import 'package:toast/toast.dart';
 //  runApp(MyApp());
 //}
 //
+
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "Dewit",
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primaryColor: DewitColors.coalBlack,
-        accentColor: DewitColors.darkPurple,
-        canvasColor: DewitColors.background,
-        //primarySwatch: DewitColors.darkPurple,
-        // This makes the visual density adapt to the platform that you run
-        // the app on. For desktop platforms, the controls will be smaller and
-        // closer together (more dense) than on mobile platforms.
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      //home: MyHomePage(title: 'Dewit'),
-    );
+    return new MaterialApp(
+        home: new TopBar());
   }
 }
+
+//class MyApp extends StatelessWidget {
+//  // This widget is the root of your application.
+//  @override
+//  Widget build(BuildContext context) {
+//    return MaterialApp(
+//      title: "Dewit",
+//      theme: ThemeData(
+//        // This is the theme of your application.
+//        //
+//        // Try running your application with "flutter run". You'll see the
+//        // application has a blue toolbar. Then, without quitting the app, try
+//        // changing the primarySwatch below to Colors.green and then invoke
+//        // "hot reload" (press "r" in the console where you ran "flutter run",
+//        // or simply save your changes to "hot reload" in a Flutter IDE).
+//        // Notice that the counter didn't reset back to zero; the application
+//        // is not restarted.
+//        primaryColor: DewitColors.coalBlack,
+//        accentColor: DewitColors.darkPurple,
+//        canvasColor: DewitColors.background,
+//        //primarySwatch: DewitColors.darkPurple,
+//        // This makes the visual density adapt to the platform that you run
+//        // the app on. For desktop platforms, the controls will be smaller and
+//        // closer together (more dense) than on mobile platforms.
+//        visualDensity: VisualDensity.adaptivePlatformDensity,
+//      ),
+//      //home: MyHomePage(title: 'Dewit'),
+//    );
+//  }
+//}
 //
 //class MyHomePage extends StatefulWidget {
 //  MyHomePage({Key key, this.title}) : super(key: key);
@@ -193,9 +202,10 @@ class _TopBarState extends State<TopBar> {
 //                    Scaffold.of(context).showSnackBar(SnackBar(
 //                      content: Text("SnackBar search!"),
 //                    ));
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => SecondRoute()));
+                  //TODO THIS IS IMPORTANT FOR LATER
+//                    Navigator.push(
+//                        context,
+//                        MaterialPageRoute(builder: (context) => SecondRoute()));
                     //Toast.show("You selected search!", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
                   },
                 );
@@ -245,7 +255,8 @@ class _TopBarState extends State<TopBar> {
                                 children: <Widget>[
                                   Expanded(
                                     flex: 31,
-                                    child: Container(
+                                    child: Hero(
+                                      tag: "addSomething",
                                       child: Container(
                                         height: double.infinity,
                                         //child: Text("testing this out"),
@@ -257,7 +268,10 @@ class _TopBarState extends State<TopBar> {
                                         ),
                                         child: FlatButton(
                                           onPressed: () {
-                                            print("BIG ADD TEST");
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(builder: (context) => SecondRoute())
+                                            );
                                           },
                                           child: Row(
                                             children: <Widget>[
@@ -415,17 +429,43 @@ class SecondRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Second Route"),
-      ),
-      body: Center(
-        child: RaisedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Text('Go back!'),
+//      appBar: AppBar(
+//        //title: Text("Second Route"),
+//        backgroundColor: DewitColors.lightPurple,
+//      ),
+        body: Stack(
+
+        //padding: const EdgeInsets.all(16.0),
+          children: <Widget>[
+            Container(
+              width: double.infinity,
+              height: double.infinity,
+              color: DewitColors.darkPurple,
+              child: SafeArea(
+                top: true,
+                bottom: true,
+                //alignment: FractionalOffset(0.5, 0),
+                  child: Hero(
+                    tag: "addSomething",
+                    child: Container(
+                      color: DewitColors.lightPurple,
+                      width: double.infinity,
+                      height: 60.0,
+                    ),
+                    //margin: const EdgeInsets.all(6.0),
+                  ),
+              ),
+            ),
+          ],
         ),
-      ),
+//      body: Center(
+//        child: RaisedButton(
+//          onPressed: () {
+//            Navigator.pop(context);
+//          },
+//          child: Text('Go back!'),
+//        ),
+//      ),
     );
   }
 }
