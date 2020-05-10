@@ -86,7 +86,20 @@ class FirstScreen extends StatelessWidget {
           Expanded(
             child: Container(
               color: Colors.transparent,
+              margin: const EdgeInsets.only(top: 3.0, left: 3.0, right: 3.0),
               //TODO all other things on this page belong here and only here-- do not mess up the search bar
+              child: ListView(
+                children: <Widget>[
+                  Card(
+                    child: ListTile(
+                      title: Text('testCard'),
+                      trailing: Icon(Icons.android),
+                      contentPadding: EdgeInsets.all(100),
+                    ),
+                  ),
+                ],
+              ),
+
             ),
           ),
           //TODO any other children go BEFORE this (the bottom bar is right below)
