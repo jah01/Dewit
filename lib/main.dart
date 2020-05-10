@@ -25,6 +25,7 @@ class FirstScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      backgroundColor: DewitColors.background,
       appBar: AppBar(
         backgroundColor: DewitColors.coalBlack,
         iconTheme: new IconThemeData(color: DewitColors.lightGray),
@@ -80,24 +81,22 @@ class FirstScreen extends StatelessWidget {
       ),
       body: Column(
         //padding: const EdgeInsets.all(16.0),
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Expanded(
-            flex: 100,
             child: Container(
-              width: double.infinity,
-              color: Colors.blue,
+              color: Colors.transparent,
+              //TODO all other things on this page belong here and only here-- do not mess up the search bar
             ),
-//            width: double.infinity,
           ),
           //TODO any other children go BEFORE this (the bottom bar is right below)
-          Expanded(
-            flex: 12,
+          Container(
             child: Align(
               alignment: FractionalOffset(0.5, 1),
               child: Container(
                 color: Colors.transparent,
                 width: double.infinity,
-                //height: 60.0,
+                height: 60.0,
                 margin: const EdgeInsets.all(6.0),
                 //padding: EdgeInsets.only(bottom: 20.0, top: 20.0),
                 child: Container(
@@ -156,8 +155,6 @@ class FirstScreen extends StatelessWidget {
                                           ),
                                         ),
                                       ),
-
-
                                     )
                                 ),
                                 Spacer(),
@@ -246,9 +243,6 @@ class FirstScreen extends StatelessWidget {
                       ],
                     )
                 ),
-//                        child: Text("TESTING",
-//                          textAlign: TextAlign.center,
-//                        ),
               ),
             ),
           ),
@@ -269,12 +263,8 @@ class FirstScreen extends StatelessWidget {
 //              color: Colors.blue,
 //              child: Text("ern"),
 //            ),
-
-
-
         ],
       ),
-      backgroundColor: DewitColors.background,
     );
   }
 }
