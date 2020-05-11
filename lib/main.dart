@@ -359,35 +359,54 @@ class SecondScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-//      appBar: AppBar(
-//        //title: Text("Second Route"),
-//        backgroundColor: DewitColors.lightPurple,
-//      ),
-        body: Stack(
-
-        //padding: const EdgeInsets.all(16.0),
-          children: <Widget>[
-            Container(
-              width: double.infinity,
-              height: double.infinity,
-              color: DewitColors.darkPurple,
-              child: SafeArea(
-                top: true,
-                bottom: true,
-                //alignment: FractionalOffset(0.5, 0),
-                  child: Hero(
-                    tag: "addSomething",
-                    child: Container(
-                      color: DewitColors.lightPurple,
-                      width: double.infinity,
-                      height: 60.0,
-                    ),
-                    //margin: const EdgeInsets.all(6.0),
-                  ),
-              ),
+      appBar: AppBar(
+        title: Text("Add a task!"),
+        backgroundColor: DewitColors.darkPurple,
+      ),
+      body: Stack(
+        children: <Widget>[
+          Container(
+//            width: double.infinity,
+//            height: double.infinity,
+//            color: DewitColors.darkPurple,
+            child: Hero(
+                tag: "addSomething",
+                child: Container(
+                  color: DewitColors.lightPurple,
+                  width: double.infinity,
+                  height: double.infinity,
+                ),
             ),
-          ],
-        ),
+          ),
+          Container(
+            //margin: EdgeInsets.all(6.0),
+            child: Column(
+              children: <Widget>[
+                Container(
+                  margin: const EdgeInsets.all(20.0),
+                  child: Expanded(
+                  //color: Colors.greenAccent,
+                  //margin: EdgeInsets.all(20.0),
+                    child: TextField(
+                      keyboardType: TextInputType.multiline,
+                      maxLines: null,
+                      autofocus: true,
+                      showCursor: true,
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Enter your task...",
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
 //      body: Center(
 //        child: RaisedButton(
 //          onPressed: () {
