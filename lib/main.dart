@@ -117,7 +117,7 @@ class FirstScreen extends StatelessWidget {
                             child: ListTile(
                               //leading: Icon(Icons.ac_unit),
                               title: Text(
-                                "Entry ${_tasks.elementAt(counter).index.toString()}",
+                                "Entry ${_tasks.elementAt(counter).goal.toString()}",
                                 style: TextStyle(
                                   color: DewitColors.lightGray,
                                   fontWeight: FontWeight.bold,
@@ -331,12 +331,13 @@ final List<int> colorCodes = <int>[600, 500, 100];
 //TODO THIS WILL BE A PART OF THE FINAL PRODUCT (NEED BACKEND HELP)-- REGARDLESS, THIS IS A GOOD STARTING POINT
 class Tasks {
   final int index;
+  final String goal;
   //final List<int> colorCodes;
-  Tasks(this.index);
+  Tasks(this.index, this.goal);
 }
 
 
-List<Tasks> _tasks = [Tasks(1), Tasks(2), Tasks(3)];
+List<Tasks> _tasks = [Tasks(1, "goal 1"), Tasks(2, "goal 2"), Tasks(3, "goal 3")];
 
 
 class Select {
