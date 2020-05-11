@@ -94,7 +94,7 @@ class FirstScreen extends StatelessWidget {
                     itemCount: _tasks.length,
                     itemBuilder: (BuildContext context, int counter) {
                       return Container(
-                        margin: EdgeInsets.only(bottom: 16.0),
+                        margin: EdgeInsets.only(bottom: 8.0),
                         decoration: new BoxDecoration(
                           //might need this later just to test colors
                             //color: Colors.amber[colorCodes[index]],
@@ -105,6 +105,7 @@ class FirstScreen extends StatelessWidget {
                         child: Hero(
                           tag: "task${_tasks.elementAt(counter).index.toString()}",
                           child: FlatButton(
+                            padding: EdgeInsets.all(16.0),
                             onPressed: () {
                               Navigator.push(
                                   context,
@@ -121,14 +122,14 @@ class FirstScreen extends StatelessWidget {
                                 style: TextStyle(
                                   color: DewitColors.lightGray,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 20,
+                                  fontSize: 22,
                                 ),
                               ),
                               subtitle: Text(
                                 "just a test\ntesting",
                                 style: TextStyle(
                                   color: DewitColors.darkGray,
-                                  fontSize: 16,
+                                  fontSize: 18,
                                 ),
                               ),
                               isThreeLine: true,
@@ -200,7 +201,7 @@ class FirstScreen extends StatelessWidget {
                                                     "Add something!",
                                                     style: TextStyle(
                                                       color: DewitColors.iconColor,
-                                                      fontSize: 16.0,
+                                                      fontSize: 18.0,
                                                     )
                                                 ),
                                               ),
