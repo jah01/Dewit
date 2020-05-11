@@ -91,8 +91,8 @@ class FirstScreen extends StatelessWidget {
 
                 child: ListView.builder(
                     //padding: const EdgeInsets.all(0),
-                    itemCount: entries.length,
-                    itemBuilder: (BuildContext context, int index) {
+                    itemCount: _tasks.length,
+                    itemBuilder: (BuildContext context, int counter) {
                       return Container(
                         margin: EdgeInsets.only(bottom: 16.0),
                         decoration: new BoxDecoration(
@@ -102,32 +102,38 @@ class FirstScreen extends StatelessWidget {
                               Radius.circular(4.0),
                             )
                         ),
-                        child: FlatButton(
-                          onPressed: () {
-                            print("this works");
-                          },
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(4.0),
-                          ),
-                          child: ListTile(
-                            //leading: Icon(Icons.ac_unit),
-                            title: Text(
-                              "Entry ${entries[index]}",
-                              style: TextStyle(
-                                color: DewitColors.lightGray,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                              ),
+                        child: Hero(
+                          tag: "task${_tasks.elementAt(counter).index.toString()}",
+                          child: FlatButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => ThirdScreen("task${_tasks.elementAt(counter).index.toString()}"))
+                              );
+                            },
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(4.0),
                             ),
-                            subtitle: Text(
-                              "just a test\ntesting",
-                              style: TextStyle(
-                                color: DewitColors.darkGray,
-                                fontSize: 16,
+                            child: ListTile(
+                              //leading: Icon(Icons.ac_unit),
+                              title: Text(
+                                "Entry ${_tasks.elementAt(counter).index.toString()}",
+                                style: TextStyle(
+                                  color: DewitColors.lightGray,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
                               ),
+                              subtitle: Text(
+                                "just a test\ntesting",
+                                style: TextStyle(
+                                  color: DewitColors.darkGray,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              isThreeLine: true,
+                              //trailing: Icon(Icons.access_alarm),
                             ),
-                            isThreeLine: true,
-                            //trailing: Icon(Icons.access_alarm),
                           ),
                         ),
                       );
@@ -322,6 +328,17 @@ final List<String> entries = <String>['A', 'B', 'C'];
 final List<int> colorCodes = <int>[600, 500, 100];
 
 
+//TODO THIS WILL BE A PART OF THE FINAL PRODUCT (NEED BACKEND HELP)-- REGARDLESS, THIS IS A GOOD STARTING POINT
+class Tasks {
+  final int index;
+  //final List<int> colorCodes;
+  Tasks(this.index);
+}
+
+
+List<Tasks> _tasks = [Tasks(1), Tasks(2), Tasks(3)];
+
+
 class Select {
   const Select({this.title, this.icon});
 
@@ -369,6 +386,56 @@ class SecondScreen extends StatelessWidget {
             ),
           ],
         ),
+//      body: Center(
+//        child: RaisedButton(
+//          onPressed: () {
+//            Navigator.pop(context);
+//          },
+//          child: Text('Go back!'),
+//        ),
+//      ),
+    );
+  }
+}
+
+
+class ThirdScreen extends StatelessWidget {
+  final String _selectedTask;
+  ThirdScreen(this._selectedTask);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+//      appBar: AppBar(
+//        //title: Text("Second Route"),
+//        backgroundColor: DewitColors.lightPurple,
+//      ),
+      body: Stack(
+
+        //padding: const EdgeInsets.all(16.0),
+        children: <Widget>[
+          Container(
+            width: double.infinity,
+            height: double.infinity,
+            color: DewitColors.darkGray,
+            child: SafeArea(
+              top: true,
+              bottom: true,
+              //alignment: FractionalOffset(0.5, 0),
+              child: Hero(
+                //tag: "task${entries[index]}",
+                tag: _selectedTask,
+                child: Container(
+                  color: DewitColors.lightGray,
+                  width: double.infinity,
+                  height: 60.0,
+                ),
+                //margin: const EdgeInsets.all(6.0),
+              ),
+            ),
+          ),
+        ],
+      ),
 //      body: Center(
 //        child: RaisedButton(
 //          onPressed: () {
