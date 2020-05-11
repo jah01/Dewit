@@ -96,7 +96,8 @@ class FirstScreen extends StatelessWidget {
                       return Container(
                         margin: EdgeInsets.only(bottom: 16.0),
                         decoration: new BoxDecoration(
-                            color: Colors.amber[colorCodes[index]],
+                          //might need this later just to test colors
+                            //color: Colors.amber[colorCodes[index]],
                             borderRadius: new BorderRadius.all(
                               Radius.circular(4.0),
                             )
@@ -109,11 +110,24 @@ class FirstScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(4.0),
                           ),
                           child: ListTile(
-                            leading: Icon(Icons.ac_unit),
-                            title: Text('Entry ${entries[index]}'),
-                            subtitle: Text("just a test"),
+                            //leading: Icon(Icons.ac_unit),
+                            title: Text(
+                              "Entry ${entries[index]}",
+                              style: TextStyle(
+                                color: DewitColors.lightGray,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
+                            subtitle: Text(
+                              "just a test\ntesting",
+                              style: TextStyle(
+                                color: DewitColors.darkGray,
+                                fontSize: 16,
+                              ),
+                            ),
                             isThreeLine: true,
-                            trailing: Icon(Icons.access_alarm),
+                            //trailing: Icon(Icons.access_alarm),
                           ),
                         ),
                       );
