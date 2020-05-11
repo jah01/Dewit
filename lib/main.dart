@@ -384,21 +384,17 @@ class SecondScreen extends StatelessWidget {
               children: <Widget>[
                 Container(
                   margin: const EdgeInsets.all(20.0),
-                  child: Expanded(
-                  //color: Colors.greenAccent,
-                  //margin: EdgeInsets.all(20.0),
-                    child: TextField(
-                      keyboardType: TextInputType.multiline,
-                      maxLines: null,
-                      autofocus: true,
-                      showCursor: true,
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: "Enter your task...",
-                      ),
+                  child: TextField(
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
+                    autofocus: true,
+                    showCursor: true,
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: "Enter your task...",
                     ),
                   ),
                 ),
