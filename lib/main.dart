@@ -88,17 +88,37 @@ class FirstScreen extends StatelessWidget {
               color: Colors.transparent,
               margin: const EdgeInsets.only(top: 3.0, left: 3.0, right: 3.0),
               //TODO all other things on this page belong here and only here-- do not mess up the search bar
-              child: ListView(
-                children: <Widget>[
-                  Card(
-                    child: ListTile(
-                      title: Text('testCard'),
-                      trailing: Icon(Icons.android),
-                      contentPadding: EdgeInsets.all(100),
-                    ),
-                  ),
-                ],
-              ),
+
+                child: ListView.builder(
+                    //padding: const EdgeInsets.all(0),
+                    itemCount: entries.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Container(
+                        margin: EdgeInsets.only(bottom: 16.0),
+                        decoration: new BoxDecoration(
+                            color: Colors.amber[colorCodes[index]],
+                            borderRadius: new BorderRadius.all(
+                              Radius.circular(4.0),
+                            )
+                        ),
+                        child: FlatButton(
+                          onPressed: () {
+                            print("this works");
+                          },
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(4.0),
+                          ),
+                          child: ListTile(
+                            leading: Icon(Icons.ac_unit),
+                            title: Text('Entry ${entries[index]}'),
+                            subtitle: Text("just a test"),
+                            isThreeLine: true,
+                            trailing: Icon(Icons.access_alarm),
+                          ),
+                        ),
+                      );
+                    }
+                ),
 
             ),
           ),
@@ -281,6 +301,11 @@ class FirstScreen extends StatelessWidget {
     );
   }
 }
+
+
+//TODO these will be created later
+final List<String> entries = <String>['A', 'B', 'C'];
+final List<int> colorCodes = <int>[600, 500, 100];
 
 
 class Select {
