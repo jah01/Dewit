@@ -91,85 +91,83 @@ class FirstScreen extends StatelessWidget {
           Expanded(
             child: Container(
               color: Colors.transparent,
-              margin: const EdgeInsets.only(top: 8.0, left: 6.0, right: 6.0),
+              margin: const EdgeInsets.only(top: 0.0, left: 0.0, right: 0.0),
               //TODO all other things on this page belong here and only here-- do not mess up the search bar
-
-              child: ListView.builder(
-                //padding: const EdgeInsets.all(0),
-                  itemCount: _tasks.length,
-                  itemBuilder: (BuildContext context, int counter) {
-                    return Column(
-                      children: <Widget>[
-                        Hero(
-                          tag: "task${_tasks.elementAt(counter).index.toString()}",
-                          child: Container(
-                            //margin: EdgeInsets.only(bottom: 8.0),
-                            decoration: new BoxDecoration(
-                              //color: DewitColors.veryDarkPurple,
-                              //might need this later just to test colors
-                              //color: Colors.amber[colorCodes[index]],
-                              borderRadius: new BorderRadius.all(
-                                Radius.circular(8.0),
-                              ),
+              child: ListView.separated(
+                //padding: const EdgeInsets.all(6.0),
+                itemCount: _tasks.length,
+                itemBuilder: (BuildContext context, int counter) {
+                  return Column(
+                    children: <Widget>[
+                      Hero(
+                        tag: "task${_tasks.elementAt(counter).index.toString()}",
+                        child: Container(
+                          //margin: EdgeInsets.only(bottom: 8.0),
+                          decoration: new BoxDecoration(
+                            //color: DewitColors.veryDarkPurple,
+                            //might need this later just to test colors
+                            //color: Colors.amber[colorCodes[index]],
+                            borderRadius: new BorderRadius.all(
+                              Radius.circular(8.0),
+                            ),
 //                                border: Border.all(
 //                                  width: 3.0,
 //                                  color: DewitColors.coalBlack,
 //                                ),
+                          ),
+                          child: FlatButton(
+                            padding: EdgeInsets.all(0.0),
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) => ThirdScreen("task${_tasks.elementAt(counter).index.toString()}")));
+                            },
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0),
                             ),
-                            child: FlatButton(
-                              padding: EdgeInsets.all(8.0),
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) =>
-                                        ThirdScreen("task${_tasks
-                                            .elementAt(counter)
-                                            .index
-                                            .toString()}"))
-                                );
-                              },
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              //color: DewitColors.veryDarkPurple,
-                              child: ListTile(
-                                //leading: Icon(Icons.ac_unit),
-                                title: Text(
-                                  "${_tasks
-                                      .elementAt(counter)
-                                      .goal
-                                      .toString()}",
-                                  style: TextStyle(
-                                    color: DewitColors.lightGray,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 22,
-                                  ),
+                            //color: DewitColors.veryDarkPurple,
+                            child: ListTile(
+                              leading: Container(
+                                padding: EdgeInsets.all(0.0),
+                                child: Icon(
+                                  Icons.check_box_outline_blank,
+                                  color: DewitColors.darkGray,
+                                  size: 24.0,
                                 ),
-                                subtitle: Text(
-                                  "just a test\ntesting",
-                                  style: TextStyle(
-                                    color: DewitColors.darkGray,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                                isThreeLine: true,
-                                //trailing: Icon(Icons.access_alarm),
                               ),
+                              title: Text(
+                                "${_tasks.elementAt(counter).goal.toString()}",
+                                style: TextStyle(
+                                  color: DewitColors.lightGray,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              subtitle: Text(
+                                "just a test\ntesting",
+                                style: TextStyle(
+                                  color: DewitColors.darkGray,
+                                  fontSize: 12,
+                                ),
+                              ),
+                              isThreeLine: true,
+                              //trailing: Icon(Icons.access_alarm),
                             ),
                           ),
                         ),
-                        Divider(
-                          color: Colors.black,
-                          height: 20,
-                          thickness: 5,
-                        ),
-
-
-                      ],
-                    );
-                  }
+                      ),
+                    ],
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return Divider(
+                    color: DewitColors.coalBlack,
+                    height: 10,
+                    thickness: 1,
+                    indent: 16,
+                    endIndent: 16,
+                  );
+                },
               ),
-
             ),
           ),
           //TODO any other children go BEFORE this (the bottom bar is right below)
@@ -386,9 +384,10 @@ List<Tasks> populateTasks() {
   _tasks[3] = Tasks(3, "drop off sister");
   _tasks[4] = Tasks(4, "review essay");
   _tasks[5] = Tasks(5, "get gas before Thursday");
+  _tasks[6] = Tasks(6, "pick up milk and eggs");
 
 
-  for (int i = 6; i < 20; i++) {
+  for (int i = 7; i < 20; i++) {
     _tasks[i] = Tasks(i, "goal $i");
   }
   return _tasks;
@@ -488,7 +487,7 @@ class ThirdScreen extends StatelessWidget {
           Container(
             width: double.infinity,
             height: double.infinity,
-            color: DewitColors.darkGray,
+            color: DewitColors.background,
             child: SafeArea(
               top: true,
               bottom: true,
@@ -497,7 +496,7 @@ class ThirdScreen extends StatelessWidget {
                 //tag: "task${entries[index]}",
                 tag: _selectedTask,
                 child: Container(
-                  color: DewitColors.lightGray,
+                  color: DewitColors.background,
                   width: double.infinity,
                   height: double.infinity,
                 ),
