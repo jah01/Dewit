@@ -22,6 +22,11 @@ class MyApp extends StatelessWidget {
 
 
 class FirstScreen extends StatelessWidget {
+  //final Tasks t;
+  //FirstScreen(this.t);
+  //Tasks temp;
+  List<Tasks> _tasks = populateTasks();
+  //final Tasks _tasks;
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -86,60 +91,84 @@ class FirstScreen extends StatelessWidget {
           Expanded(
             child: Container(
               color: Colors.transparent,
-              margin: const EdgeInsets.only(top: 3.0, left: 3.0, right: 3.0),
+              margin: const EdgeInsets.only(top: 8.0, left: 6.0, right: 6.0),
               //TODO all other things on this page belong here and only here-- do not mess up the search bar
 
-                child: ListView.builder(
-                    //padding: const EdgeInsets.all(0),
-                    itemCount: _tasks.length,
-                    itemBuilder: (BuildContext context, int counter) {
-                      return Container(
-                        margin: EdgeInsets.only(bottom: 8.0),
-                        decoration: new BoxDecoration(
-                          //might need this later just to test colors
-                            //color: Colors.amber[colorCodes[index]],
-                            borderRadius: new BorderRadius.all(
-                              Radius.circular(4.0),
-                            )
-                        ),
-                        child: Hero(
+              child: ListView.builder(
+                //padding: const EdgeInsets.all(0),
+                  itemCount: _tasks.length,
+                  itemBuilder: (BuildContext context, int counter) {
+                    return Column(
+                      children: <Widget>[
+                        Hero(
                           tag: "task${_tasks.elementAt(counter).index.toString()}",
-                          child: FlatButton(
-                            padding: EdgeInsets.all(16.0),
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => ThirdScreen("task${_tasks.elementAt(counter).index.toString()}"))
-                              );
-                            },
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4.0),
+                          child: Container(
+                            //margin: EdgeInsets.only(bottom: 8.0),
+                            decoration: new BoxDecoration(
+                              //color: DewitColors.veryDarkPurple,
+                              //might need this later just to test colors
+                              //color: Colors.amber[colorCodes[index]],
+                              borderRadius: new BorderRadius.all(
+                                Radius.circular(8.0),
+                              ),
+//                                border: Border.all(
+//                                  width: 3.0,
+//                                  color: DewitColors.coalBlack,
+//                                ),
                             ),
-                            child: ListTile(
-                              //leading: Icon(Icons.ac_unit),
-                              title: Text(
-                                "Entry ${_tasks.elementAt(counter).goal.toString()}",
-                                style: TextStyle(
-                                  color: DewitColors.lightGray,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 22,
-                                ),
+                            child: FlatButton(
+                              padding: EdgeInsets.all(8.0),
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) =>
+                                        ThirdScreen("task${_tasks
+                                            .elementAt(counter)
+                                            .index
+                                            .toString()}"))
+                                );
+                              },
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0),
                               ),
-                              subtitle: Text(
-                                "just a test\ntesting",
-                                style: TextStyle(
-                                  color: DewitColors.darkGray,
-                                  fontSize: 18,
+                              //color: DewitColors.veryDarkPurple,
+                              child: ListTile(
+                                //leading: Icon(Icons.ac_unit),
+                                title: Text(
+                                  "${_tasks
+                                      .elementAt(counter)
+                                      .goal
+                                      .toString()}",
+                                  style: TextStyle(
+                                    color: DewitColors.lightGray,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 22,
+                                  ),
                                 ),
+                                subtitle: Text(
+                                  "just a test\ntesting",
+                                  style: TextStyle(
+                                    color: DewitColors.darkGray,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                isThreeLine: true,
+                                //trailing: Icon(Icons.access_alarm),
                               ),
-                              isThreeLine: true,
-                              //trailing: Icon(Icons.access_alarm),
                             ),
                           ),
                         ),
-                      );
-                    }
-                ),
+                        Divider(
+                          color: Colors.black,
+                          height: 20,
+                          thickness: 5,
+                        ),
+
+
+                      ],
+                    );
+                  }
+              ),
 
             ),
           ),
@@ -335,10 +364,35 @@ class Tasks {
   final String goal;
   //final List<int> colorCodes;
   Tasks(this.index, this.goal);
+
+//  List<Tasks> populateTasks() {
+//    List<Tasks> _tasks;
+//
+//    for (int i = 0; i < 20; i++) {
+//      _tasks.add(Tasks(i, "goal $i"));
+//    }
+//    return _tasks;
+//  }
 }
 
 
-List<Tasks> _tasks = [Tasks(1, "goal 1"), Tasks(2, "goal 2"), Tasks(3, "goal 3")];
+//List<Tasks> _tasks = [Tasks(1, "goal 1"), Tasks(2, "goal 2"), Tasks(3, "goal 3")];
+
+List<Tasks> populateTasks() {
+  List<Tasks> _tasks = new List(20);
+  _tasks[0] = Tasks(0, "buy a new dishwasher");
+  _tasks[1] = Tasks(1, "insurance bill");
+  _tasks[2] = Tasks(2, "gift for Mom");
+  _tasks[3] = Tasks(3, "drop off sister");
+  _tasks[4] = Tasks(4, "review essay");
+  _tasks[5] = Tasks(5, "get gas before Thursday");
+
+
+  for (int i = 6; i < 20; i++) {
+    _tasks[i] = Tasks(i, "goal $i");
+  }
+  return _tasks;
+}
 
 
 class Select {
@@ -445,7 +499,7 @@ class ThirdScreen extends StatelessWidget {
                 child: Container(
                   color: DewitColors.lightGray,
                   width: double.infinity,
-                  height: 60.0,
+                  height: double.infinity,
                 ),
                 //margin: const EdgeInsets.all(6.0),
               ),
