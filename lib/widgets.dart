@@ -7,17 +7,17 @@ class NavDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: Container(
-        color: DewitColors.darkGray,
+        color: DewitColors.background,
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
               child: Text(
                 'Side menu',
-                style: TextStyle(color: DewitColors.lightGray, fontSize: 25),
+                style: TextStyle(color: DewitColors.darkGray, fontSize: 25),
               ),
               decoration: BoxDecoration(
-                color: DewitColors.darkGray,
+                color: DewitColors.coalBlack,
 //                image: DecorationImage(
 //                    fit: BoxFit.fill,
 //                    image: AssetImage('assets/images/cover.jpg'))
@@ -27,6 +27,19 @@ class NavDrawer extends StatelessWidget {
               leading: Icon(Icons.home),
               title: Text("Home"),
               onTap: () => {},
+            ),
+            FlatButton(
+              padding: EdgeInsets.all(0.0),
+              onPressed: () => {Navigator.of(context).pop()},
+              child: ListTile(
+                leading: Icon(Icons.drafts,
+                  color: DewitColors.darkGray,
+                ),
+                title: Text(
+                    "Other",
+                  style: TextStyle(color: DewitColors.darkGray),
+                ),
+              ),
             ),
             ListTile(
               leading: Icon(Icons.drafts),
