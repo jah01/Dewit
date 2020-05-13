@@ -77,6 +77,16 @@ class FirstScreen extends State<MyApp> {
               );
             },
           ),
+          PopupMenuButton<Select>(
+            itemBuilder: (BuildContext context) {
+              return selection.skip(0).map((Select selection) {
+                return PopupMenuItem<Select>(
+                  value: selection,
+                  child: Text(selection.title),
+                );
+              }).toList();
+            },
+          ),
         ],
       ),
       body: Column(
