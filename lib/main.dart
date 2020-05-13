@@ -1,4 +1,5 @@
 import 'package:dewitapp/colors.dart';
+import 'package:dewitapp/widgets.dart';
 import 'package:flutter/material.dart';
 import 'colors.dart';
 import 'package:toast/toast.dart';
@@ -37,22 +38,23 @@ class FirstScreen extends State<MyApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: DewitColors.background,
+      drawer: NavDrawer(),
       appBar: AppBar(
         backgroundColor: DewitColors.coalBlack,
         iconTheme: new IconThemeData(color: DewitColors.lightGray),
-        leading: Builder(
-          builder: (BuildContext context) {
-            return IconButton(
-              icon: Icon(Icons.menu),
-              onPressed: () {
-                Scaffold.of(context).showSnackBar(SnackBar(
-                  content: Text("SnackBar menu!"),
-                ));
-                //Toast.show("You selected menu!", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-              },
-            );
-          },
-        ),
+//        leading: Builder(
+//          builder: (BuildContext context) {
+//            return IconButton(
+//              icon: Icon(Icons.menu),
+//              onPressed: () {
+//                Scaffold.of(context).showSnackBar(SnackBar(
+//                  content: Text("SnackBar menu!"),
+//                ));
+//                //Toast.show("You selected menu!", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+//              },
+//            );
+//          },
+//        ),
         title: const Text("Dewit",
             style: TextStyle(
               color: DewitColors.lightGray,
