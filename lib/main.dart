@@ -12,30 +12,36 @@ import 'package:toast/toast.dart';
 //    accentColorBrightness: Brightness.light
 //);
 
-class MyApp extends StatelessWidget {
+void main() {
+  runApp(MaterialApp(
+    home: MyApp(),
+  ));
+}
+
+
+class MyApp extends StatefulWidget {
+  MyApp({Key key}) : super(key: key);
+
   @override
-  Widget build(BuildContext context) {
-    return new MaterialApp(
-        home: new FirstScreen());
+  FirstScreen createState() {
+    return FirstScreen();
   }
 }
 
 
-class FirstScreen extends StatelessWidget {
-  //final Tasks t;
-  //FirstScreen(this.t);
-  //Tasks temp;
-  List<Tasks> _tasks = populateTasks();
-  //final Tasks _tasks;
+class FirstScreen extends State<MyApp> {
+  //this will be redone once backend is developed
+  final items = List<String>.generate(20, (i) => "Item ${i + 1}");
+
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
       backgroundColor: DewitColors.background,
       appBar: AppBar(
         backgroundColor: DewitColors.coalBlack,
         iconTheme: new IconThemeData(color: DewitColors.lightGray),
         leading: Builder(
-          builder: (BuildContext context){
+          builder: (BuildContext context) {
             return IconButton(
               icon: Icon(Icons.menu),
               onPressed: () {
@@ -50,12 +56,11 @@ class FirstScreen extends StatelessWidget {
         title: const Text("Dewit",
             style: TextStyle(
               color: DewitColors.lightGray,
-            )
-        ),
+            )),
         actions: <Widget>[
           // action button
           Builder(
-            builder: (BuildContext context){
+            builder: (BuildContext context) {
               return IconButton(
                 icon: Icon(Icons.search),
                 onPressed: () {
@@ -72,16 +77,6 @@ class FirstScreen extends StatelessWidget {
               );
             },
           ),
-          PopupMenuButton<Select>(
-            itemBuilder: (BuildContext context) {
-              return selection.skip(0).map((Select selection) {
-                return PopupMenuItem<Select>(
-                  value: selection,
-                  child: Text(selection.title),
-                );
-              }).toList();
-            },
-          ),
         ],
       ),
       body: Column(
@@ -91,71 +86,84 @@ class FirstScreen extends StatelessWidget {
           Expanded(
             child: Container(
               color: Colors.transparent,
-              margin: const EdgeInsets.only(top: 0.0, left: 0.0, right: 0.0),
+              margin:
+              const EdgeInsets.only(top: 0.0, left: 0.0, right: 0.0),
               //TODO all other things on this page belong here and only here-- do not mess up the search bar
               child: ListView.separated(
                 //padding: const EdgeInsets.all(6.0),
-                itemCount: _tasks.length,
+                itemCount: items.length,
                 itemBuilder: (BuildContext context, int counter) {
-                  return Column(
-                    children: <Widget>[
-                      Hero(
-                        tag: "task${_tasks.elementAt(counter).index.toString()}",
-                        child: Container(
-                          //margin: EdgeInsets.only(bottom: 8.0),
-                          decoration: new BoxDecoration(
-                            //color: DewitColors.veryDarkPurple,
-                            //might need this later just to test colors
-                            //color: Colors.amber[colorCodes[index]],
-                            borderRadius: new BorderRadius.all(
-                              Radius.circular(8.0),
-                            ),
+                  return Dismissible(
+                    key: Key(items.toString()),
+                    onDismissed: (direction) {
+                      setState(() {
+                        items.removeAt(counter);
+                      });
+                      Scaffold.of(context)
+                          .showSnackBar(SnackBar(content: Text("Task dismissed")));
+                    },
+                    background: Container(color: DewitColors.darkPurple),
+                    child: Hero(
+                      tag:
+                      "task${items.elementAt(counter).toString()}",
+                      child: Container(
+                        margin: EdgeInsets.only(left: 4.0, right: 4.0),
+                        decoration: new BoxDecoration(
+                          //color: DewitColors.veryDarkPurple,
+                          //might need this later just to test colors
+                          //color: Colors.amber[colorCodes[index]],
+                          borderRadius: new BorderRadius.all(
+                            Radius.circular(8.0),
+                          ),
 //                                border: Border.all(
 //                                  width: 3.0,
 //                                  color: DewitColors.coalBlack,
 //                                ),
+                        ),
+                        child: FlatButton(
+                          padding: EdgeInsets.all(0.0),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ThirdScreen(
+                                        "task${items.elementAt(counter).toString()}")));
+                          },
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0),
                           ),
-                          child: FlatButton(
-                            padding: EdgeInsets.all(0.0),
-                            onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(
-                                  builder: (context) => ThirdScreen("task${_tasks.elementAt(counter).index.toString()}")));
-                            },
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
+                          //color: DewitColors.veryDarkPurple,
+                          child: ListTile(
+                            contentPadding: EdgeInsets.only(left: 16.0, right: 16.0),
+//                                  leading: Container(
+//                                    padding: EdgeInsets.all(0.0),
+//                                    child: Icon(
+//                                      Icons.check_box_outline_blank,
+//                                      color: DewitColors.darkGray,
+//                                      size: 24.0,
+//                                    ),
+//                                  ),
+                            title: Text(
+                              "${items.elementAt(counter).toString()}",
+                              style: TextStyle(
+                                color: DewitColors.lightGray,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
                             ),
-                            //color: DewitColors.veryDarkPurple,
-                            child: ListTile(
-                              leading: Container(
-                                padding: EdgeInsets.all(0.0),
-                                child: Icon(
-                                  Icons.check_box_outline_blank,
-                                  color: DewitColors.darkGray,
-                                  size: 24.0,
-                                ),
+                            subtitle: Text(
+                              "just a test\ntesting",
+                              style: TextStyle(
+                                color: DewitColors.darkGray,
+                                fontSize: 12,
                               ),
-                              title: Text(
-                                "${_tasks.elementAt(counter).goal.toString()}",
-                                style: TextStyle(
-                                  color: DewitColors.lightGray,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                ),
-                              ),
-                              subtitle: Text(
-                                "just a test\ntesting",
-                                style: TextStyle(
-                                  color: DewitColors.darkGray,
-                                  fontSize: 12,
-                                ),
-                              ),
-                              isThreeLine: true,
-                              //trailing: Icon(Icons.access_alarm),
                             ),
+                            isThreeLine: true,
+                            //trailing: Icon(Icons.access_alarm),
                           ),
                         ),
                       ),
-                    ],
+                    ),
                   );
                 },
                 separatorBuilder: (context, index) {
@@ -185,8 +193,7 @@ class FirstScreen extends StatelessWidget {
                         color: DewitColors.darkPurple,
                         borderRadius: new BorderRadius.all(
                           Radius.circular(4.0),
-                        )
-                    ),
+                        )),
                     child: Row(
                       children: <Widget>[
                         Expanded(
@@ -206,38 +213,39 @@ class FirstScreen extends StatelessWidget {
                                         //child: Text("testing this out"),
                                         decoration: new BoxDecoration(
                                             color: DewitColors.lightPurple,
-                                            borderRadius: new BorderRadius.all(
+                                            borderRadius:
+                                            new BorderRadius.all(
                                               Radius.circular(4.0),
-                                            )
-                                        ),
+                                            )),
                                         child: FlatButton(
                                           shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(4.0),
+                                            borderRadius:
+                                            BorderRadius.circular(4.0),
                                           ),
                                           onPressed: () {
                                             Navigator.push(
                                                 context,
-                                                MaterialPageRoute(builder: (context) => SecondScreen())
-                                            );
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        SecondScreen()));
                                           },
                                           child: Row(
                                             children: <Widget>[
                                               Container(
                                                 //padding: EdgeInsets.all(10.0),
-                                                child: Text(
-                                                    "Add something!",
+                                                child:
+                                                Text("Add something!",
                                                     style: TextStyle(
-                                                      color: DewitColors.iconColor,
+                                                      color: DewitColors
+                                                          .iconColor,
                                                       fontSize: 18.0,
-                                                    )
-                                                ),
+                                                    )),
                                               ),
                                             ],
                                           ),
                                         ),
                                       ),
-                                    )
-                                ),
+                                    )),
                                 Spacer(),
                                 Expanded(
                                   flex: 4,
@@ -247,13 +255,14 @@ class FirstScreen extends StatelessWidget {
                                       width: double.infinity,
                                       decoration: new BoxDecoration(
                                           color: DewitColors.lightPurple,
-                                          borderRadius: new BorderRadius.all(
+                                          borderRadius:
+                                          new BorderRadius.all(
                                             Radius.circular(4.0),
-                                          )
-                                      ),
+                                          )),
                                       child: FlatButton(
                                         shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(4.0),
+                                          borderRadius:
+                                          BorderRadius.circular(4.0),
                                         ),
                                         onPressed: () {
                                           print("BIG MIC TEST");
@@ -322,8 +331,7 @@ class FirstScreen extends StatelessWidget {
                           ),
                         ),
                       ],
-                    )
-                ),
+                    )),
               ),
             ),
           ),
@@ -346,6 +354,8 @@ class FirstScreen extends StatelessWidget {
 //            ),
         ],
       ),
+//        ),
+//      ),
     );
   }
 }
@@ -516,9 +526,4 @@ class ThirdScreen extends StatelessWidget {
 //      ),
     );
   }
-}
-
-
-void main() {
-  runApp(MyApp());
 }
