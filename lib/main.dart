@@ -1,6 +1,9 @@
+import 'dart:io';
 import 'package:dewitapp/colors.dart';
 import 'package:dewitapp/widgets.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'colors.dart';
 import 'package:toast/toast.dart';
 
@@ -431,8 +434,53 @@ class SecondScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: Tooltip(
+          message: "Discard task",
+          child: IconButton(
+            icon:Icon(Icons.delete,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+//            showDialog(
+//              context: context,
+//              builder: (_) => AlertDialog(
+//                title: Text("Delete Task"),
+//                content: Text("Are you sure you want to delete this task?"),
+//                actions: <Widget>[
+//                  FlatButton(
+//                      child: Text("No"),
+//                    onPressed: () {Navigator.pop(context);},
+//                  ),
+//                  FlatButton(
+//                      child: Text("Yes"),
+//                    onPressed: () {
+//                        Navigator.pop(context);
+//                        Navigator.pop(context);
+//                    },
+//                  ),
+//                ],
+//                elevation: 16,
+//              ),
+//              barrierDismissible: false,
+//            );
+            },
+          ),
+        ),
         title: Text("Add a task!"),
         backgroundColor: DewitColors.darkPurple,
+        actions: <Widget>[
+          Tooltip(
+            message: "Add task",
+            child: IconButton(
+              icon: Icon(
+                Icons.check,
+                color: Colors.white,
+              ),
+              onPressed: () {},
+            ),
+          ),
+        ],
       ),
       body: Stack(
         children: <Widget>[
@@ -454,10 +502,12 @@ class SecondScreen extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Container(
-                  margin: const EdgeInsets.all(20.0),
+                  margin: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 4.0),
                   child: TextField(
+                    maxLength: 200,
+                    maxLengthEnforced: true,
                     keyboardType: TextInputType.multiline,
-                    maxLines: null,
+                    maxLines: 1,
                     autofocus: true,
                     showCursor: true,
                     style: TextStyle(
@@ -466,9 +516,32 @@ class SecondScreen extends StatelessWidget {
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: "Enter your task...",
+                      counterText: '',
+                      counterStyle: TextStyle(fontSize: 0),
                     ),
                   ),
                 ),
+                Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.only(
+                        left: 20.0, right: 20.0, bottom: 20.0),
+                    child: TextField(
+                      maxLength: 200,
+                      maxLengthEnforced: true,
+                      keyboardType: TextInputType.multiline,
+                      maxLines: null,
+                      autofocus: true,
+                      showCursor: true,
+                      style: TextStyle(fontSize: 16),
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Any short notes?",
+                        counterText: '',
+                        counterStyle: TextStyle(fontSize: 0),
+                      ),
+                    ),
+                  ),
+                )
               ],
             ),
           ),
