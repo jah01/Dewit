@@ -84,53 +84,74 @@ class FirstScreen extends State<MyApp> {
                 itemCount: items.length,
                 itemBuilder: (BuildContext context, int index) {
                   final item = items[index];
-                  return Dismissible(
-                    key: Key(item),
-                    onDismissed: (direction) {
-                      setState(() {
-                        items.removeAt(index);
-                      });
-                      Scaffold.of(context).showSnackBar(SnackBar(
-                        content: Text("$item dismissed"),
-                        action: SnackBarAction(
-                          label: "UNDO",
-                          onPressed: () => setState(() => items.insert(index, item)),
-                        )
-                      ));
-                    },
-                    background: Container(color: DewitColors.darkPurple),
-                    child: Hero(
-                      tag:
-                      "task${items.elementAt(index)}",
-                      child: Container(
-                        margin: EdgeInsets.only(left: 4.0, right: 4.0),
-                        decoration: new BoxDecoration(
-                          //color: DewitColors.veryDarkPurple,
-                          //might need this later just to test colors
-                          //color: Colors.amber[colorCodes[index]],
-                          borderRadius: new BorderRadius.all(
-                            Radius.circular(8.0),
-                          ),
+                  return Column(
+                    children: <Widget>[
+                      Align(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                                top: 8.0, left: 8.0, right: 8.0, bottom: 2.0),
+                            child: Text(
+                              "Today",
+                              style: TextStyle(
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold,
+                                color: DewitColors.darkPurple,
+                              ),
+                            ),
+                          )
+                      ),
+                      Dismissible(
+                        key: Key(item),
+                        onDismissed: (direction) {
+                          setState(() {
+                            items.removeAt(index);
+                          });
+                          Scaffold.of(context).showSnackBar(SnackBar(
+                              content: Text("$item dismissed"),
+                              action: SnackBarAction(
+                                label: "UNDO",
+                                onPressed: () =>
+                                    setState(() => items.insert(index, item)),
+                              )
+                          ));
+                        },
+                        background: Container(color: DewitColors.darkPurple),
+                        child: Hero(
+                          tag:
+                          "task${items.elementAt(index)}",
+                          child: Container(
+                            margin: EdgeInsets.only(left: 4.0, right: 4.0),
+                            decoration: new BoxDecoration(
+                              //color: DewitColors.veryDarkPurple,
+                              //might need this later just to test colors
+                              //color: Colors.amber[colorCodes[index]],
+                              borderRadius: new BorderRadius.all(
+                                Radius.circular(8.0),
+                              ),
 //                                border: Border.all(
 //                                  width: 3.0,
 //                                  color: DewitColors.coalBlack,
 //                                ),
-                        ),
-                        child: FlatButton(
-                          padding: EdgeInsets.all(0.0),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ThirdScreen(
-                                        "task${items.elementAt(index)}")));
-                          },
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          //color: DewitColors.veryDarkPurple,
-                          child: ListTile(
-                            contentPadding: EdgeInsets.only(left: 16.0, right: 16.0),
+                            ),
+                            child: FlatButton(
+                              padding: EdgeInsets.all(0.0),
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ThirdScreen(
+                                                "task${items.elementAt(
+                                                    index)}")));
+                              },
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              //color: DewitColors.veryDarkPurple,
+                              child: ListTile(
+                                contentPadding: EdgeInsets.only(
+                                    left: 16.0, right: 16.0),
 //                                  leading: Container(
 //                                    padding: EdgeInsets.all(0.0),
 //                                    child: Icon(
@@ -139,27 +160,29 @@ class FirstScreen extends State<MyApp> {
 //                                      size: 24.0,
 //                                    ),
 //                                  ),
-                            title: Text(
-                              "${items.elementAt(index)}",
-                              style: TextStyle(
-                                color: DewitColors.lightGray,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
+                                title: Text(
+                                  "${items.elementAt(index)}",
+                                  style: TextStyle(
+                                    color: DewitColors.lightGray,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                subtitle: Text(
+                                  "just a test\ntesting",
+                                  style: TextStyle(
+                                    color: DewitColors.darkGray,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                                isThreeLine: true,
+                                //trailing: Icon(Icons.access_alarm),
                               ),
                             ),
-                            subtitle: Text(
-                              "just a test\ntesting",
-                              style: TextStyle(
-                                color: DewitColors.darkGray,
-                                fontSize: 12,
-                              ),
-                            ),
-                            isThreeLine: true,
-                            //trailing: Icon(Icons.access_alarm),
                           ),
                         ),
                       ),
-                    ),
+                    ],
                   );
                 },
                 separatorBuilder: (context, index) {

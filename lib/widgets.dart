@@ -23,10 +23,18 @@ class NavDrawer extends StatelessWidget {
 //                    image: AssetImage('assets/images/cover.jpg'))
               ),
             ),
-            ListTile(
-              leading: Icon(Icons.home),
-              title: Text("Home"),
-              onTap: () => {},
+            FlatButton(
+              padding: EdgeInsets.all(0.0),
+              onPressed: () => {},
+              child: ListTile(
+                leading: Icon(Icons.home,
+                  color: DewitColors.darkGray,
+                ),
+                title: Text(
+                  "Home",
+                  style: TextStyle(color: DewitColors.darkGray),
+                ),
+              ),
             ),
             FlatButton(
               padding: EdgeInsets.all(0.0),
@@ -41,20 +49,44 @@ class NavDrawer extends StatelessWidget {
                 ),
               ),
             ),
-            ListTile(
-              leading: Icon(Icons.drafts),
-              title: Text("Other"),
-              onTap: () => {Navigator.of(context).pop()},
+            FlatButton(
+              padding: EdgeInsets.all(0.0),
+              onPressed: () => {Navigator.of(context).pop()},
+              child: ListTile(
+                leading: Icon(Icons.restore,
+                  color: DewitColors.darkGray,
+                ),
+                title: Text(
+                  "Other",
+                  style: TextStyle(color: DewitColors.darkGray),
+                ),
+              ),
             ),
-            ListTile(
-              leading: Icon(Icons.timeline),
-              title: Text("Other"),
-              onTap: () => {Navigator.of(context).pop()},
+            FlatButton(
+              padding: EdgeInsets.all(0.0),
+              onPressed: () => {Navigator.of(context).pop()},
+              child: ListTile(
+                leading: Icon(Icons.timeline,
+                  color: DewitColors.darkGray,
+                ),
+                title: Text(
+                  "Other",
+                  style: TextStyle(color: DewitColors.darkGray),
+                ),
+              ),
             ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text("Other"),
-              onTap: () => {Navigator.of(context).pop()},
+            FlatButton(
+              padding: EdgeInsets.all(0.0),
+              onPressed: () => {Navigator.of(context).pop()},
+              child: ListTile(
+                leading: Icon(Icons.settings,
+                  color: DewitColors.darkGray,
+                ),
+                title: Text(
+                  "Other",
+                  style: TextStyle(color: DewitColors.darkGray),
+                ),
+              ),
             ),
           ],
         ),
