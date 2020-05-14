@@ -82,20 +82,26 @@ class FirstScreen extends State<MyApp> {
               child: ListView.separated(
                 //padding: const EdgeInsets.all(6.0),
                 itemCount: items.length,
-                itemBuilder: (BuildContext context, int counter) {
+                itemBuilder: (BuildContext context, int index) {
+                  final item = items[index];
                   return Dismissible(
-                    key: Key(items.toString()),
+                    key: Key(item),
                     onDismissed: (direction) {
                       setState(() {
-                        items.removeAt(counter);
+                        items.removeAt(index);
                       });
-                      Scaffold.of(context)
-                          .showSnackBar(SnackBar(content: Text("Task dismissed")));
+                      Scaffold.of(context).showSnackBar(SnackBar(
+                        content: Text("$item dismissed"),
+                        action: SnackBarAction(
+                          label: "UNDO",
+                          onPressed: () => setState(() => items.insert(index, item)),
+                        )
+                      ));
                     },
                     background: Container(color: DewitColors.darkPurple),
                     child: Hero(
                       tag:
-                      "task${items.elementAt(counter).toString()}",
+                      "task${items.elementAt(index)}",
                       child: Container(
                         margin: EdgeInsets.only(left: 4.0, right: 4.0),
                         decoration: new BoxDecoration(
@@ -117,7 +123,7 @@ class FirstScreen extends State<MyApp> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => ThirdScreen(
-                                        "task${items.elementAt(counter).toString()}")));
+                                        "task${items.elementAt(index)}")));
                           },
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0),
@@ -134,7 +140,7 @@ class FirstScreen extends State<MyApp> {
 //                                    ),
 //                                  ),
                             title: Text(
-                              "${items.elementAt(counter).toString()}",
+                              "${items.elementAt(index)}",
                               style: TextStyle(
                                 color: DewitColors.lightGray,
                                 fontWeight: FontWeight.bold,
