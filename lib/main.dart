@@ -71,7 +71,6 @@ class FirstScreen extends State<MyApp> {
         ],
       ),
       body: Column(
-        //padding: const EdgeInsets.all(16.0),
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Expanded(
@@ -129,10 +128,6 @@ class FirstScreen extends State<MyApp> {
                               borderRadius: new BorderRadius.all(
                                 Radius.circular(8.0),
                               ),
-//                                border: Border.all(
-//                                  width: 3.0,
-//                                  color: DewitColors.coalBlack,
-//                                ),
                             ),
                             child: FlatButton(
                               padding: EdgeInsets.all(0.0),
@@ -148,7 +143,6 @@ class FirstScreen extends State<MyApp> {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
-                              //color: DewitColors.veryDarkPurple,
                               child: ListTile(
                                 contentPadding: EdgeInsets.only(
                                     left: 16.0, right: 16.0),
