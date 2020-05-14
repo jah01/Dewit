@@ -1,6 +1,17 @@
 import 'package:flutter/material.dart';
 
 //ALL THE COMMENTED STUFF IS FOR REFERENCE----------------------------------
+
+
+//used to be in main.dart:
+//final ThemeData DarkTheme = new ThemeData(
+//    brightness: Brightness.light,
+//    primaryColorBrightness: Brightness.light,
+//    accentColor: CustomColors.custom,
+//    accentColorBrightness: Brightness.light
+//);
+
+
 //class CompanyColors {
 //  CompanyColors._(); // this basically makes it so you can instantiate this class
 //

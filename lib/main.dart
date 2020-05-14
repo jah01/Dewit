@@ -5,14 +5,6 @@ import 'colors.dart';
 import 'package:toast/toast.dart';
 
 
-
-//final ThemeData DarkTheme = new ThemeData(
-//    brightness: Brightness.light,
-//    primaryColorBrightness: Brightness.light,
-//    accentColor: CustomColors.custom,
-//    accentColorBrightness: Brightness.light
-//);
-
 void main() {
   runApp(MaterialApp(
     home: MyApp(),
@@ -31,7 +23,7 @@ class MyApp extends StatefulWidget {
 
 
 class FirstScreen extends State<MyApp> {
-  //this will be redone once backend is developed
+  //TODO this will be redone once backend is developed
   final items = List<String>.generate(20, (i) => "Item ${i + 1}");
 
   @override
@@ -42,19 +34,6 @@ class FirstScreen extends State<MyApp> {
       appBar: AppBar(
         backgroundColor: DewitColors.coalBlack,
         iconTheme: new IconThemeData(color: DewitColors.lightGray),
-//        leading: Builder(
-//          builder: (BuildContext context) {
-//            return IconButton(
-//              icon: Icon(Icons.menu),
-//              onPressed: () {
-//                Scaffold.of(context).showSnackBar(SnackBar(
-//                  content: Text("SnackBar menu!"),
-//                ));
-//                //Toast.show("You selected menu!", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-//              },
-//            );
-//          },
-//        ),
         title: const Text("Dewit",
             style: TextStyle(
               color: DewitColors.lightGray,
@@ -98,8 +77,7 @@ class FirstScreen extends State<MyApp> {
           Expanded(
             child: Container(
               color: Colors.transparent,
-              margin:
-              const EdgeInsets.only(top: 0.0, left: 0.0, right: 0.0),
+              margin: const EdgeInsets.only(top: 0.0, left: 0.0, right: 0.0),
               //TODO all other things on this page belong here and only here-- do not mess up the search bar
               child: ListView.separated(
                 //padding: const EdgeInsets.all(6.0),
@@ -373,11 +351,6 @@ class FirstScreen extends State<MyApp> {
 }
 
 
-//TODO these will be created later
-final List<String> entries = <String>['A', 'B', 'C'];
-final List<int> colorCodes = <int>[600, 500, 100];
-
-
 //TODO THIS WILL BE A PART OF THE FINAL PRODUCT (NEED BACKEND HELP)-- REGARDLESS, THIS IS A GOOD STARTING POINT
 class Tasks {
   final int index;
@@ -528,14 +501,6 @@ class ThirdScreen extends StatelessWidget {
           ),
         ],
       ),
-//      body: Center(
-//        child: RaisedButton(
-//          onPressed: () {
-//            Navigator.pop(context);
-//          },
-//          child: Text('Go back!'),
-//        ),
-//      ),
     );
   }
 }
