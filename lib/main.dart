@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:io';
 import 'package:dewitapp/colors.dart';
 import 'package:dewitapp/widgets.dart';
@@ -11,12 +12,12 @@ import 'package:toast/toast.dart';
 void main() {
   runApp(MaterialApp(
     home: FirstScreen(),
-    initialRoute: '/',
+    initialRoute: "/",
     routes: {
       // When navigating to the "/" route, build the FirstScreen widget.
-      //'/': (context) => MyApp(),
+      //'/': (context) => FirstScreen(),
       // When navigating to the "/second" route, build the SecondScreen widget.
-      '/second': (context) => SecondScreenText1(),
+      "/second": (context) => SecondScreen(),
     },
   ));
 }
@@ -35,6 +36,8 @@ class FirstScreen extends StatefulWidget {
 class _FirstScreen extends State<FirstScreen> {
   //TODO this will be redone once backend is developed
   final items = List<String>.generate(20, (i) => "Item ${i + 1}");
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -432,14 +435,15 @@ const List<Select> selection = const <Select>[
 ];
 
 
-class SecondScreenText1 extends StatefulWidget {
+class SecondScreen extends StatefulWidget {
   @override
   _SecondScreen createState() => _SecondScreen();
 }
 
 
-class _SecondScreen extends State<SecondScreenText1> {
+class _SecondScreen extends State<SecondScreen> {
   final titleController = TextEditingController();
+  final noteController = TextEditingController();
 
   @override
   void dispose() {
@@ -496,8 +500,19 @@ class _SecondScreen extends State<SecondScreenText1> {
                 color: Colors.white,
               ),
               onPressed: () {
-                print(titleController.text);
-                Navigator.pop(context);
+                if (titleController.text.length == 0) {
+//                  Scaffold.of(context).showSnackBar(SnackBar(
+//                      content: Text("You must add something first")));
+                //TODO change this up later
+                  Toast.show("You must add something first", context, duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
+                } else {
+                  //TODO add the data to the
+                  print("Title: " + titleController.text);
+                  print("Optional Notes: " + noteController.text);
+                  //check this
+                  //Navigator.pushNamed(context, "/");
+                  Navigator.pop(context);
+                }
               },
             ),
           ),
@@ -548,6 +563,7 @@ class _SecondScreen extends State<SecondScreenText1> {
                     margin: const EdgeInsets.only(
                         left: 20.0, right: 20.0, bottom: 20.0),
                     child: TextField(
+                      controller: noteController,
                       maxLength: 200,
                       maxLengthEnforced: true,
                       keyboardType: TextInputType.multiline,
@@ -621,4 +637,12 @@ class ThirdScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+
+class TasksTest {
+  final String title;
+  final String note;
+
+  TasksTest(this.title, this.note);
 }
