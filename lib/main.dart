@@ -10,22 +10,29 @@ import 'package:toast/toast.dart';
 
 void main() {
   runApp(MaterialApp(
-    home: MyApp(),
+    home: FirstScreen(),
+    initialRoute: '/',
+    routes: {
+      // When navigating to the "/" route, build the FirstScreen widget.
+      //'/': (context) => MyApp(),
+      // When navigating to the "/second" route, build the SecondScreen widget.
+      '/second': (context) => SecondScreenText1(),
+    },
   ));
 }
 
 
-class MyApp extends StatefulWidget {
-  MyApp({Key key}) : super(key: key);
+class FirstScreen extends StatefulWidget {
+  FirstScreen({Key key}) : super(key: key);
 
   @override
-  FirstScreen createState() {
-    return FirstScreen();
+  _FirstScreen createState() {
+    return _FirstScreen();
   }
 }
 
 
-class FirstScreen extends State<MyApp> {
+class _FirstScreen extends State<FirstScreen> {
   //TODO this will be redone once backend is developed
   final items = List<String>.generate(20, (i) => "Item ${i + 1}");
 
@@ -239,11 +246,7 @@ class FirstScreen extends State<MyApp> {
                                             BorderRadius.circular(4.0),
                                           ),
                                           onPressed: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        SecondScreen()));
+                                            Navigator.pushNamed(context, '/second');
                                           },
                                           child: Row(
                                             children: <Widget>[
@@ -429,7 +432,22 @@ const List<Select> selection = const <Select>[
 ];
 
 
-class SecondScreen extends StatelessWidget {
+class SecondScreenText1 extends StatefulWidget {
+  @override
+  _SecondScreen createState() => _SecondScreen();
+}
+
+
+class _SecondScreen extends State<SecondScreenText1> {
+  final titleController = TextEditingController();
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    titleController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -477,7 +495,10 @@ class SecondScreen extends StatelessWidget {
                 Icons.check,
                 color: Colors.white,
               ),
-              onPressed: () {},
+              onPressed: () {
+                print(titleController.text);
+                Navigator.pop(context);
+              },
             ),
           ),
         ],
@@ -504,6 +525,7 @@ class SecondScreen extends StatelessWidget {
                 Container(
                   margin: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 4.0),
                   child: TextField(
+                    controller: titleController,
                     maxLength: 200,
                     maxLengthEnforced: true,
                     keyboardType: TextInputType.multiline,
