@@ -9,6 +9,10 @@ import 'colors.dart';
 import 'package:toast/toast.dart';
 
 
+int size = 0;
+List<TasksTest> items = new List();
+
+
 void main() {
   runApp(MaterialApp(
     home: FirstScreen(),
@@ -35,7 +39,10 @@ class FirstScreen extends StatefulWidget {
 
 class _FirstScreen extends State<FirstScreen> {
   //TODO this will be redone once backend is developed
-  final items = List<String>.generate(20, (i) => "Item ${i + 1}");
+  //final items = List<String>.generate(20, (i) => "Item ${i + 1}");
+  //final items = new List(size);
+  //items.getItems();
+
 
 
 
@@ -98,29 +105,30 @@ class _FirstScreen extends State<FirstScreen> {
                   final item = items[index];
                   return Column(
                     children: <Widget>[
+                      //TODO WE WILL NEED THIS LATER
                       Align(
                           alignment: Alignment.centerLeft,
                           child: Padding(
                             padding: EdgeInsets.only(
                                 top: 8.0, left: 8.0, right: 8.0, bottom: 2.0),
-                            child: Text(
-                              "Today",
-                              style: TextStyle(
-                                fontSize: 28,
-                                fontWeight: FontWeight.bold,
-                                color: DewitColors.darkPurple,
-                              ),
-                            ),
+//                            child: Text(
+//                              "Today",
+//                              style: TextStyle(
+//                                fontSize: 28,
+//                                fontWeight: FontWeight.bold,
+//                                color: DewitColors.darkPurple,
+//                              ),
+//                            ),
                           )
                       ),
                       Dismissible(
-                        key: Key(item),
+                        key: Key(index.toString()),
                         onDismissed: (direction) {
                           setState(() {
                             items.removeAt(index);
                           });
                           Scaffold.of(context).showSnackBar(SnackBar(
-                              content: Text("$item dismissed"),
+                              content: Text("${item.title} dismissed"),
                               action: SnackBarAction(
                                 label: "UNDO",
                                 onPressed: () =>
@@ -130,8 +138,7 @@ class _FirstScreen extends State<FirstScreen> {
                         },
                         background: Container(color: DewitColors.darkPurple),
                         child: Hero(
-                          tag:
-                          "task${items.elementAt(index)}",
+                          tag: index.toString(),
                           child: Container(
                             margin: EdgeInsets.only(left: 4.0, right: 4.0),
                             decoration: new BoxDecoration(
@@ -149,9 +156,8 @@ class _FirstScreen extends State<FirstScreen> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            ThirdScreen(
-                                                "task${items.elementAt(
-                                                    index)}")));
+                                            ThirdScreen(index.toString(),
+                                                item)));
                               },
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8.0),
@@ -168,7 +174,7 @@ class _FirstScreen extends State<FirstScreen> {
 //                                    ),
 //                                  ),
                                 title: Text(
-                                  "${items.elementAt(index)}",
+                                  "${item.title}",
                                   style: TextStyle(
                                     color: DewitColors.lightGray,
                                     fontWeight: FontWeight.bold,
@@ -176,7 +182,7 @@ class _FirstScreen extends State<FirstScreen> {
                                   ),
                                 ),
                                 subtitle: Text(
-                                  "just a test\ntesting",
+                                  "${item.note}",
                                   style: TextStyle(
                                     color: DewitColors.darkGray,
                                     fontSize: 12,
@@ -506,12 +512,16 @@ class _SecondScreen extends State<SecondScreen> {
                 //TODO change this up later
                   Toast.show("You must add something first", context, duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
                 } else {
-                  //TODO add the data to the
+                  //TODO add the data to the list
+                  size++;
+                  items.add(TasksTest(titleController.text, noteController.text));
                   print("Title: " + titleController.text);
                   print("Optional Notes: " + noteController.text);
+                  print("SIZE: " + size.toString());
+
                   //check this
-                  //Navigator.pushNamed(context, "/");
-                  Navigator.pop(context);
+                  Navigator.pushNamed(context, "/");
+                  //Navigator.pop(context);
                 }
               },
             ),
@@ -574,7 +584,7 @@ class _SecondScreen extends State<SecondScreen> {
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: "Any short notes?",
-                        counterText: '',
+                        counterText: "",
                         counterStyle: TextStyle(fontSize: 0),
                       ),
                     ),
@@ -599,8 +609,9 @@ class _SecondScreen extends State<SecondScreen> {
 
 
 class ThirdScreen extends StatelessWidget {
-  final String _selectedTask;
-  ThirdScreen(this._selectedTask);
+  final String index;
+  final TasksTest _selectedTask;
+  ThirdScreen(this.index, this._selectedTask);
 
   @override
   Widget build(BuildContext context) {
@@ -617,19 +628,30 @@ class ThirdScreen extends StatelessWidget {
             width: double.infinity,
             height: double.infinity,
             color: DewitColors.background,
-            child: SafeArea(
-              top: true,
-              bottom: true,
               //alignment: FractionalOffset(0.5, 0),
               child: Hero(
                 //tag: "task${entries[index]}",
-                tag: _selectedTask,
+                tag: index,
                 child: Container(
                   color: DewitColors.background,
                   width: double.infinity,
                   height: double.infinity,
+                  //child: Text("HELLO"),
                 ),
                 //margin: const EdgeInsets.all(6.0),
+              ),
+          ),
+          Container(
+            child: Container(
+//              top: true,
+//              bottom: true,
+              child: Center(
+                child: Container(
+                  child: Text(
+                    "${_selectedTask.title}\n${_selectedTask.note}",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
               ),
             ),
           ),
@@ -646,3 +668,13 @@ class TasksTest {
 
   TasksTest(this.title, this.note);
 }
+
+
+//List<Tasks> getItems() {
+//  List<Tasks> tasks = new List();
+//
+//  for (int i = 0; i < size; i++) {
+//    tasks.add(note)
+//  }
+//  return tasks;
+//}
