@@ -470,7 +470,8 @@ class _SecondScreen extends State<SecondScreen> {
               color: Colors.white,
             ),
             onPressed: () {
-              Navigator.pop(context);
+              //Navigator.pop(context);
+              Navigator.popAndPushNamed(context, '/');
 //            showDialog(
 //              context: context,
 //              builder: (_) => AlertDialog(
@@ -559,6 +560,7 @@ class _SecondScreen extends State<SecondScreen> {
                     maxLines: 1,
                     autofocus: true,
                     showCursor: true,
+                    textCapitalization: TextCapitalization.sentences,
                     style: TextStyle(
                       fontSize: 20,
                     ),
@@ -582,6 +584,7 @@ class _SecondScreen extends State<SecondScreen> {
                       maxLines: null,
                       autofocus: true,
                       showCursor: true,
+                      textCapitalization: TextCapitalization.sentences,
                       style: TextStyle(fontSize: 16),
                       decoration: InputDecoration(
                         border: InputBorder.none,
@@ -685,8 +688,8 @@ class GoalsScreen extends StatefulWidget {
   GoalsScreen({Key key}) : super(key: key);
 
   @override
-  _FirstScreen createState() {
-    return _FirstScreen();
+  _GoalsScreen createState() {
+    return _GoalsScreen();
   }
 }
 
