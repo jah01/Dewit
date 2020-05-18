@@ -32,6 +32,9 @@ dependencies:
   # This is for the toasts to show up
   toast: ^0.1.5
 
+  # This is for the auto-sizing of task text
+  auto_size_text: ^2.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

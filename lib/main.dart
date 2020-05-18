@@ -7,9 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'colors.dart';
 import 'package:toast/toast.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 
-int size = 0;
+//int size = 0;
 List<TasksTest> items = new List();
 
 
@@ -126,11 +127,12 @@ class _FirstScreen extends State<FirstScreen> {
                             items.removeAt(index);
                           });
                           Scaffold.of(context).showSnackBar(SnackBar(
-                              content: Text("${item.title} dismissed"),
+                              content: Text("\"" + "${item.title}" + "\" dismissed."),
                               action: SnackBarAction(
                                 label: "UNDO",
-                                onPressed: () =>
-                                    setState(() => items.insert(index, item)),
+                                onPressed: () {
+                                    setState(() => items.insert(index, item));
+                                },
                               )
                           ));
                         },
@@ -168,15 +170,18 @@ class _FirstScreen extends State<FirstScreen> {
 //                                      size: 24.0,
 //                                    ),
 //                                  ),
-                                title: Text(
+                                title: AutoSizeText(
                                   "${item.title}",
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  minFontSize: 20,
                                   style: TextStyle(
                                     color: DewitColors.lightGray,
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 16,
+                                    fontSize: 20,
                                   ),
                                 ),
-                                subtitle: Text(
+                                subtitle: AutoSizeText(
                                   "${item.note}",
                                   style: TextStyle(
                                     color: DewitColors.darkGray,
@@ -289,7 +294,7 @@ class _FirstScreen extends State<FirstScreen> {
                                           BorderRadius.circular(4.0),
                                         ),
                                         onPressed: () {
-                                          print("BIG MIC TEST");
+                                          //TODO this button must do something
                                         },
                                         padding: EdgeInsets.all(0.0),
                                         child: Icon(
@@ -510,11 +515,8 @@ class _SecondScreen extends State<SecondScreen> {
                   Toast.show("You must add something first", context, duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
                 } else {
                   //TODO add the data to the list
-                  size++;
+                  //size++;
                   items.add(TasksTest(titleController.text, noteController.text));
-                  print("Title: " + titleController.text);
-                  print("Optional Notes: " + noteController.text);
-                  print("SIZE: " + size.toString());
 
                   //check this
                   Navigator.popAndPushNamed(context, '/');
