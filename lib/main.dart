@@ -18,9 +18,7 @@ void main() {
     home: FirstScreen(),
     initialRoute: "/",
     routes: {
-      // When navigating to the "/" route, build the FirstScreen widget.
       //'/': (context) => FirstScreen(),
-      // When navigating to the "/second" route, build the SecondScreen widget.
       "/second": (context) => SecondScreen(),
     },
   ));
@@ -142,9 +140,6 @@ class _FirstScreen extends State<FirstScreen> {
                           child: Container(
                             margin: EdgeInsets.only(left: 4.0, right: 4.0),
                             decoration: new BoxDecoration(
-                              //color: DewitColors.veryDarkPurple,
-                              //might need this later just to test colors
-                              //color: Colors.amber[colorCodes[index]],
                               borderRadius: new BorderRadius.all(
                                 Radius.circular(8.0),
                               ),
