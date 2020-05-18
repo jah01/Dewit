@@ -680,3 +680,27 @@ class TasksTest {
 //  }
 //  return tasks;
 //}
+
+class GoalsScreen extends StatefulWidget {
+  GoalsScreen({Key key}) : super(key: key);
+
+  @override
+  _FirstScreen createState() {
+    return _FirstScreen();
+  }
+}
+
+
+class _GoalsScreen extends State<GoalsScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold (
+      appBar: AppBar(
+        //app bar will go here
+      ),
+      body: Expanded(
+        //body goes here-- does not have to be "Expanded," but might be the best way later on
+      ),
+    );
+  }
+}
