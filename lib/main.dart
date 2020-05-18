@@ -96,20 +96,22 @@ class _FirstScreen extends State<FirstScreen> {
             child: Container(
               color: Colors.transparent,
               margin: const EdgeInsets.only(top: 0.0, left: 0.0, right: 0.0),
-              //TODO all other things on this page belong here and only here-- do not mess up the search bar
-              child: ListView.separated(
-                //padding: const EdgeInsets.all(6.0),
-                itemCount: items.length,
-                itemBuilder: (BuildContext context, int index) {
-                  final item = items[index];
-                  return Column(
-                    children: <Widget>[
-                      //TODO WE WILL NEED THIS LATER
-                      Align(
-                          alignment: Alignment.centerLeft,
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                                top: 8.0, left: 8.0, right: 8.0, bottom: 2.0),
+              child: Container(
+                margin: EdgeInsets.only(top: 4.0),
+                //TODO all other things on this page belong here and only here-- do not mess up the search bar
+                child: ListView.separated(
+                  //padding: const EdgeInsets.all(6.0),
+                  itemCount: items.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final item = items[index];
+                    return Column(
+                      children: <Widget>[
+                        //TODO WE WILL NEED THIS LATER
+                        Align(
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                  top: 0.0, left: 8.0, right: 8.0, bottom: 0.0),
 //                            child: Text(
 //                              "Today",
 //                              style: TextStyle(
@@ -118,50 +120,48 @@ class _FirstScreen extends State<FirstScreen> {
 //                                color: DewitColors.darkPurple,
 //                              ),
 //                            ),
-                          )
-                      ),
-                      Dismissible(
-                        key: Key(index.toString()),
-                        onDismissed: (direction) {
-                          setState(() {
-                            items.removeAt(index);
-                          });
-                          Scaffold.of(context).showSnackBar(SnackBar(
-                              content: Text("\"" + "${item.title}" + "\" dismissed."),
-                              action: SnackBarAction(
-                                label: "UNDO",
-                                onPressed: () {
+                            )),
+                        Dismissible(
+                          key: Key(index.toString()),
+                          onDismissed: (direction) {
+                            setState(() {
+                              items.removeAt(index);
+                            });
+                            Scaffold.of(context).showSnackBar(SnackBar(
+                                content: Text(
+                                    "\"" + "${item.title}" + "\" dismissed."),
+                                action: SnackBarAction(
+                                  label: "UNDO",
+                                  onPressed: () {
                                     setState(() => items.insert(index, item));
+                                  },
+                                )));
+                          },
+                          background: Container(color: DewitColors.darkPurple),
+                          child: Hero(
+                            tag: index.toString(),
+                            child: Container(
+                              margin: EdgeInsets.only(left: 4.0, right: 4.0),
+                              decoration: new BoxDecoration(
+                                borderRadius: new BorderRadius.all(
+                                  Radius.circular(8.0),
+                                ),
+                              ),
+                              child: FlatButton(
+                                padding: EdgeInsets.all(0.0),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ThirdScreen(
+                                              index.toString(), item)));
                                 },
-                              )
-                          ));
-                        },
-                        background: Container(color: DewitColors.darkPurple),
-                        child: Hero(
-                          tag: index.toString(),
-                          child: Container(
-                            margin: EdgeInsets.only(left: 4.0, right: 4.0),
-                            decoration: new BoxDecoration(
-                              borderRadius: new BorderRadius.all(
-                                Radius.circular(8.0),
-                              ),
-                            ),
-                            child: FlatButton(
-                              padding: EdgeInsets.all(0.0),
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            ThirdScreen(index.toString(),
-                                                item)));
-                              },
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              child: ListTile(
-                                contentPadding: EdgeInsets.only(
-                                    left: 16.0, right: 16.0),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                child: ListTile(
+                                  contentPadding:
+                                      EdgeInsets.only(left: 16.0, right: 16.0),
 //                                  leading: Container(
 //                                    padding: EdgeInsets.all(0.0),
 //                                    child: Icon(
@@ -170,43 +170,54 @@ class _FirstScreen extends State<FirstScreen> {
 //                                      size: 24.0,
 //                                    ),
 //                                  ),
-                                title: AutoSizeText(
-                                  "${item.title}",
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  minFontSize: 20,
-                                  style: TextStyle(
-                                    color: DewitColors.lightGray,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20,
+                                  dense: false,
+                                  title: Container(
+                                    margin:
+                                        EdgeInsets.only(top: 4.0, bottom: 8.0),
+                                    child: AutoSizeText(
+                                      "${item.title}",
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      minFontSize: 20,
+                                      style: TextStyle(
+                                        color: DewitColors.lightGray,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                                subtitle: AutoSizeText(
-                                  "${item.note}",
-                                  style: TextStyle(
-                                    color: DewitColors.darkGray,
-                                    fontSize: 12,
+                                  //TODO make an if statement, make the cards less dense if desired
+                                  subtitle: Container(
+                                    margin:
+                                        EdgeInsets.only(top: 0.0, bottom: 8.0),
+                                    child: AutoSizeText(
+                                      "${item.note}",
+                                      style: TextStyle(
+                                        color: DewitColors.darkGray,
+                                        fontSize: 12,
+                                      ),
+                                    ),
                                   ),
+                                  isThreeLine: true,
+                                  //trailing: Icon(Icons.access_alarm),
                                 ),
-                                isThreeLine: true,
-                                //trailing: Icon(Icons.access_alarm),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  );
-                },
-                separatorBuilder: (context, index) {
-                  return Divider(
-                    color: DewitColors.coalBlack,
-                    height: 10,
-                    thickness: 1,
-                    indent: 16,
-                    endIndent: 16,
-                  );
-                },
+                      ],
+                    );
+                  },
+                  separatorBuilder: (context, index) {
+                    return Divider(
+                      color: DewitColors.coalBlack,
+                      height: 10,
+                      thickness: 1,
+                      indent: 16,
+                      endIndent: 16,
+                    );
+                  },
+                ),
               ),
             ),
           ),
@@ -245,28 +256,28 @@ class _FirstScreen extends State<FirstScreen> {
                                         //child: Text("testing this out"),
                                         decoration: new BoxDecoration(
                                             color: DewitColors.lightPurple,
-                                            borderRadius:
-                                            new BorderRadius.all(
+                                            borderRadius: new BorderRadius.all(
                                               Radius.circular(4.0),
                                             )),
                                         child: FlatButton(
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
-                                            BorderRadius.circular(4.0),
+                                                BorderRadius.circular(4.0),
                                           ),
                                           onPressed: () {
-                                            Navigator.of(context).pushReplacementNamed('/second');
+                                            Navigator.of(context)
+                                                .pushReplacementNamed(
+                                                    '/second');
                                             //Navigator.pushNamed(context, '/second');
                                           },
                                           child: Row(
                                             children: <Widget>[
                                               Container(
                                                 //padding: EdgeInsets.all(10.0),
-                                                child:
-                                                Text("Add something!",
+                                                child: Text("Add something!",
                                                     style: TextStyle(
-                                                      color: DewitColors
-                                                          .iconColor,
+                                                      color:
+                                                          DewitColors.iconColor,
                                                       fontSize: 18.0,
                                                     )),
                                               ),
@@ -284,14 +295,13 @@ class _FirstScreen extends State<FirstScreen> {
                                       width: double.infinity,
                                       decoration: new BoxDecoration(
                                           color: DewitColors.lightPurple,
-                                          borderRadius:
-                                          new BorderRadius.all(
+                                          borderRadius: new BorderRadius.all(
                                             Radius.circular(4.0),
                                           )),
                                       child: FlatButton(
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
-                                          BorderRadius.circular(4.0),
+                                              BorderRadius.circular(4.0),
                                         ),
                                         onPressed: () {
                                           //TODO this button must do something
