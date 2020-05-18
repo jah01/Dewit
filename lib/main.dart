@@ -255,7 +255,8 @@ class _FirstScreen extends State<FirstScreen> {
                                             BorderRadius.circular(4.0),
                                           ),
                                           onPressed: () {
-                                            Navigator.pushNamed(context, '/second');
+                                            Navigator.of(context).pushReplacementNamed('/second');
+                                            //Navigator.pushNamed(context, '/second');
                                           },
                                           child: Row(
                                             children: <Widget>[
@@ -520,7 +521,8 @@ class _SecondScreen extends State<SecondScreen> {
                   print("SIZE: " + size.toString());
 
                   //check this
-                  Navigator.pushNamed(context, "/");
+                  Navigator.popAndPushNamed(context, '/');
+                  //Navigator.pushNamed(context, "/");
                   //Navigator.pop(context);
                 }
               },
