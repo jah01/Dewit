@@ -417,44 +417,6 @@ class _FirstScreen extends State<FirstScreen> {
 }
 
 
-//TODO THIS WILL BE A PART OF THE FINAL PRODUCT (NEED BACKEND HELP)-- REGARDLESS, THIS IS A GOOD STARTING POINT
-class Tasks {
-  final int index;
-  final String goal;
-  //final List<int> colorCodes;
-  Tasks(this.index, this.goal);
-
-//  List<Tasks> populateTasks() {
-//    List<Tasks> _tasks;
-//
-//    for (int i = 0; i < 20; i++) {
-//      _tasks.add(Tasks(i, "goal $i"));
-//    }
-//    return _tasks;
-//  }
-}
-
-
-//List<Tasks> _tasks = [Tasks(1, "goal 1"), Tasks(2, "goal 2"), Tasks(3, "goal 3")];
-
-List<Tasks> populateTasks() {
-  List<Tasks> _tasks = new List(20);
-  _tasks[0] = Tasks(0, "buy a new dishwasher");
-  _tasks[1] = Tasks(1, "insurance bill");
-  _tasks[2] = Tasks(2, "gift for Mom");
-  _tasks[3] = Tasks(3, "drop off sister");
-  _tasks[4] = Tasks(4, "review essay");
-  _tasks[5] = Tasks(5, "get gas before Thursday");
-  _tasks[6] = Tasks(6, "pick up milk and eggs");
-
-
-  for (int i = 7; i < 20; i++) {
-    _tasks[i] = Tasks(i, "goal $i");
-  }
-  return _tasks;
-}
-
-
 class Select {
   const Select({this.title, this.icon});
 
@@ -618,7 +580,53 @@ class _SecondScreen extends State<SecondScreen> {
                       ),
                     ),
                   ),
-                )
+                ),
+                Container(
+                  child: Align(
+                    alignment: FractionalOffset(0.5, 1),
+                    child: Container(
+                      color: Colors.transparent,
+                      width: double.infinity,
+                      height: 60.0,
+                      margin: const EdgeInsets.only(left: 0.0, right: 0.0, top: 4.0, bottom: 0.0),
+                      //padding: EdgeInsets.only(bottom: 20.0, top: 20.0),
+                      child: Container(
+                          decoration: new BoxDecoration(
+                            color: DewitColors.darkPurple,
+                            borderRadius: new BorderRadius.vertical(
+                              top: new Radius.circular(4.0),
+                            ),
+                          ),
+                          child: Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: Container(
+                                  padding: EdgeInsets.all(10.0),
+                                  color: Colors.transparent,
+                                  //width: 300.0,
+                                  //margin: new EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0, bottom: 8.0),
+                                  child: Row(
+                                    children: <Widget>[
+                                      Tooltip(
+                                        verticalOffset: -66.0,
+                                        message: "Add a time",
+                                        child: IconButton(
+                                          icon: Icon(
+                                            Icons.access_time,
+                                            color: Colors.white,
+                                          ),
+                                          onPressed: () {},
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
