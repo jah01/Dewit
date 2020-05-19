@@ -4,6 +4,7 @@ import 'package:dewitapp/colors.dart';
 import 'package:dewitapp/widgets.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'colors.dart';
 import 'package:toast/toast.dart';
@@ -282,10 +283,10 @@ class _FirstScreen extends State<FirstScreen> {
                                                 BorderRadius.circular(4.0),
                                           ),
                                           onPressed: () {
-                                            Navigator.of(context)
-                                                .pushReplacementNamed(
-                                                    '/second');
-                                            //Navigator.pushNamed(context, '/second');
+//                                            Navigator.of(context)
+//                                                .pushReplacementNamed(
+//                                                    '/second');
+                                            Navigator.pushNamed(context, '/second');
                                           },
                                           child: Row(
                                             children: <Widget>[
@@ -459,8 +460,8 @@ class _SecondScreen extends State<SecondScreen> {
               color: Colors.white,
             ),
             onPressed: () {
-              //Navigator.pop(context);
-              Navigator.popAndPushNamed(context, '/');
+              Navigator.pop(context);
+              //Navigator.popAndPushNamed(context, '/');
 //            showDialog(
 //              context: context,
 //              builder: (_) => AlertDialog(
@@ -508,7 +509,18 @@ class _SecondScreen extends State<SecondScreen> {
                   items.add(TasksTest(titleController.text, noteController.text));
 
                   //check this
-                  Navigator.popAndPushNamed(context, '/');
+                  SchedulerBinding.instance.addPostFrameCallback((_) {
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                        "/", (Route<dynamic> route) => false);
+                  });
+//                  Navigator.pushAndRemoveUntil(
+//                      context,
+//                      MaterialPageRoute(
+//                          builder: (context) => FirstScreen()
+//                      ),
+//                      ModalRoute.withName("/")
+//                  );
+                  //Navigator.popAndPushNamed(context, '/');
                   //Navigator.pushNamed(context, "/");
                   //Navigator.pop(context);
                 }
@@ -613,6 +625,17 @@ class _SecondScreen extends State<SecondScreen> {
                                         child: IconButton(
                                           icon: Icon(
                                             Icons.access_time,
+                                            color: Colors.white,
+                                          ),
+                                          onPressed: () {},
+                                        ),
+                                      ),
+                                      Tooltip(
+                                        verticalOffset: -66.0,
+                                        message: "Set as priority",
+                                        child: IconButton(
+                                          icon: Icon(
+                                            Icons.outlined_flag,
                                             color: Colors.white,
                                           ),
                                           onPressed: () {},
