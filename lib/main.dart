@@ -121,7 +121,7 @@ class _FirstScreen extends State<FirstScreen> {
 //                            ),
                             )),
                         Dismissible(
-                          key: Key(index.toString()),
+                          key: UniqueKey(),
                           onDismissed: (direction) {
                             setState(() {
                               items.removeAt(index);
@@ -136,7 +136,25 @@ class _FirstScreen extends State<FirstScreen> {
                                   },
                                 )));
                           },
-                          background: Container(color: DewitColors.darkPurple),
+                          //background: Container(color: DewitColors.darkPurple),
+                          background: Container(
+                            color: DewitColors.darkPurple,
+                            padding: EdgeInsets.symmetric(horizontal: 20),
+                            alignment: AlignmentDirectional.centerStart,
+                            child: Icon(
+                              Icons.delete,
+                              color: DewitColors.lightGray,
+                            ),
+                          ),
+                          secondaryBackground: Container(
+                            color: DewitColors.darkPurple,
+                            padding: EdgeInsets.symmetric(horizontal: 20),
+                            alignment: AlignmentDirectional.centerEnd,
+                            child: Icon(
+                              Icons.delete,
+                              color: DewitColors.lightGray,
+                            ),
+                          ),
                           child: Hero(
                             tag: index.toString(),
                             child: Container(
