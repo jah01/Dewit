@@ -630,12 +630,61 @@ class _SecondScreen extends State<SecondScreen> {
                                           onPressed: () {},
                                         ),
                                       ),
+                                      Spacer(),
                                       Tooltip(
                                         verticalOffset: -66.0,
                                         message: "Set as priority",
                                         child: IconButton(
                                           icon: Icon(
                                             Icons.outlined_flag,
+                                            color: Colors.white,
+                                          ),
+                                          onPressed: () {},
+                                        ),
+                                      ),
+                                      Spacer(),
+                                      Tooltip(
+                                        verticalOffset: -66.0,
+                                        message: "Schedule this",
+                                        child: IconButton(
+                                          icon: Icon(
+                                            Icons.event,
+                                            color: Colors.white,
+                                          ),
+                                          onPressed: () {},
+                                        ),
+                                      ),
+                                      Spacer(),
+                                      Tooltip(
+                                        verticalOffset: -66.0,
+                                        message: "Send a notification in advance",
+                                        child: IconButton(
+                                          icon: Icon(
+                                            Icons.notifications_none,
+                                            color: Colors.white,
+                                          ),
+                                          onPressed: () {},
+                                        ),
+                                      ),
+                                      Spacer(),
+                                      Tooltip(
+                                        verticalOffset: -66.0,
+                                        message: "Create a tag",
+                                        child: IconButton(
+                                          icon: Icon(
+                                            Icons.label_outline,
+                                            color: Colors.white,
+                                          ),
+                                          onPressed: () {},
+                                        ),
+                                      ),
+                                      Spacer(),
+                                      Tooltip(
+                                        verticalOffset: -66.0,
+                                        message: "Add a color",
+                                        child: IconButton(
+                                          icon: Icon(
+                                            Icons.color_lens,
                                             color: Colors.white,
                                           ),
                                           onPressed: () {},
