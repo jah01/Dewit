@@ -94,3 +94,18 @@ class NavDrawer extends StatelessWidget {
     );
   }
 }
+
+
+//huge help from zyllus17 on https://github.com/flutter/flutter/issues/12463
+Widget flightShuttleBuilder(
+    BuildContext flightContext,
+    Animation<double> animation,
+    HeroFlightDirection flightDirection,
+    BuildContext fromHeroContext,
+    BuildContext toHeroContext,
+    ) {
+  return DefaultTextStyle(
+    style: DefaultTextStyle.of(toHeroContext).style,
+    child: toHeroContext.widget,
+  );
+}

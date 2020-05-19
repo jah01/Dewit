@@ -43,9 +43,6 @@ class _FirstScreen extends State<FirstScreen> {
   //final items = new List(size);
   //items.getItems();
 
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -720,6 +717,7 @@ class _SecondScreen extends State<SecondScreen> {
 class ThirdScreen extends StatelessWidget {
   final String index;
   final TasksTest _selectedTask;
+
   ThirdScreen(this.index, this._selectedTask);
 
   @override
@@ -729,47 +727,27 @@ class ThirdScreen extends StatelessWidget {
 //        //title: Text("Second Route"),
 //        backgroundColor: DewitColors.lightPurple,
 //      ),
-      body: Stack(
-
-        //padding: const EdgeInsets.all(16.0),
-        children: <Widget>[
-          Container(
-            width: double.infinity,
-            height: double.infinity,
-            color: DewitColors.background,
-              //alignment: FractionalOffset(0.5, 0),
-              child: Hero(
-                //tag: "task${entries[index]}",
-                tag: index,
-                child: Container(
-                  color: DewitColors.background,
-                  width: double.infinity,
-                  height: double.infinity,
-                  //child: Text("HELLO"),
+      body: Container(
+        color: DewitColors.background,
+        child: Align(
+        alignment: FractionalOffset(0.5, 0.3),
+        child: Hero(
+          tag: index,
+          flightShuttleBuilder: flightShuttleBuilder,
+              child: Text(
+                "${_selectedTask.title}\n${_selectedTask.note}",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
                 ),
-                //margin: const EdgeInsets.all(6.0),
-              ),
           ),
-          Container(
-            child: Container(
-//              top: true,
-//              bottom: true,
-              child: Center(
-                child: Container(
-                  child: Text(
-                    "${_selectedTask.title}\n${_selectedTask.note}",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
+        ),
+      ),
       ),
     );
   }
 }
-
 
 class TasksTest {
   final String title;
