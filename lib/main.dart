@@ -97,16 +97,15 @@ class _FirstScreen extends State<FirstScreen> {
               color: Colors.transparent,
               margin: const EdgeInsets.only(top: 0.0, left: 0.0, right: 0.0),
               child: Container(
-                margin: EdgeInsets.only(top: 4.0),
+//                margin: EdgeInsets.only(top: 4.0, bottom: 4.0),
                 //TODO all other things on this page belong here and only here-- do not mess up the search bar
                 child: ListView.separated(
-                  //padding: const EdgeInsets.all(6.0),
+                  padding: const EdgeInsets.only(top: 4.0, bottom: 4.0),
                   itemCount: items.length,
                   itemBuilder: (BuildContext context, int index) {
                     final item = items[index];
                     return Column(
                       children: <Widget>[
-                        //TODO WE WILL NEED THIS LATER
                         Align(
                             alignment: Alignment.centerLeft,
                             child: Padding(
@@ -173,7 +172,7 @@ class _FirstScreen extends State<FirstScreen> {
                                   dense: false,
                                   title: Container(
                                     margin:
-                                        EdgeInsets.only(top: 4.0, bottom: 8.0),
+                                        EdgeInsets.only(top: 8.0, bottom: 8.0),
                                     child: AutoSizeText(
                                       "${item.title}",
                                       maxLines: 1,
@@ -189,7 +188,7 @@ class _FirstScreen extends State<FirstScreen> {
                                   //TODO make an if statement, make the cards less dense if desired
                                   subtitle: Container(
                                     margin:
-                                        EdgeInsets.only(top: 0.0, bottom: 8.0),
+                                        EdgeInsets.only(top: 0.0, bottom: 10.0),
                                     child: AutoSizeText(
                                       "${item.note}",
                                       style: TextStyle(
