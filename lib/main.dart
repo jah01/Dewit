@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:toast/toast.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 
 
 void main() {
@@ -40,40 +39,7 @@ class _FirstScreen extends State<FirstScreen> {
     return Scaffold(
       backgroundColor: DewitColors.background,
       drawer: NavDrawer(),
-      appBar: AppBar(
-        backgroundColor: DewitColors.coalBlack,
-        iconTheme: new IconThemeData(color: DewitColors.lightGray),
-        title: const Text(
-            "Dewit",
-            style: TextStyle(color: DewitColors.lightGray),
-        ),
-        actions: <Widget>[
-          Builder(
-            builder: (BuildContext context) {
-              return IconButton(
-                icon: Icon(Icons.search),
-                onPressed: () {
-                  //one or the other
-                  //Scaffold.of(context).showSnackBar(SnackBar(content: Text("SnackBar search!"),));
-                  //TODO THIS IS IMPORTANT FOR LATER
-                  //Navigator.push(context, MaterialPageRoute(builder: (context) => SecondScreen()));
-                  //Toast.show("You selected search!", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-                },
-              );
-            },
-          ),
-          PopupMenuButton<Select>(
-            itemBuilder: (BuildContext context) {
-              return selection.skip(0).map((Select selection) {
-                return PopupMenuItem<Select>(
-                  value: selection,
-                  child: Text(selection.title),
-                );
-              }).toList();
-            },
-          ),
-        ],
-      ),
+      appBar: FirstScreenAppBar(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
@@ -88,6 +54,8 @@ class _FirstScreen extends State<FirstScreen> {
                   itemCount: items.length,
                   itemBuilder: (BuildContext context, int index) {
                     final item = items[index];
+                    final String title = "${item.title}";
+                    final String note = "${item.note}";
                     return Column(
                       children: <Widget>[
                         Align(
@@ -112,7 +80,7 @@ class _FirstScreen extends State<FirstScreen> {
                             });
                             Scaffold.of(context).showSnackBar(SnackBar(
                                 content: Text(
-                                    "\"" + "${item.title}" + "\" dismissed."),
+                                    "\"" + title + "\" dismissed."),
                                 action: SnackBarAction(
                                   label: "UNDO",
                                   onPressed: () {
@@ -159,48 +127,7 @@ class _FirstScreen extends State<FirstScreen> {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),
-                                child: ListTile(
-                                  contentPadding:
-                                      EdgeInsets.only(left: 16.0, right: 16.0),
-//                                  leading: Container(
-//                                    padding: EdgeInsets.all(0.0),
-//                                    child: Icon(
-//                                      Icons.check_box_outline_blank,
-//                                      color: DewitColors.darkGray,
-//                                      size: 24.0,
-//                                    ),
-//                                  ),
-                                  dense: false,
-                                  title: Container(
-                                    margin:
-                                        EdgeInsets.only(top: 8.0, bottom: 8.0),
-                                    child: AutoSizeText(
-                                      "${item.title}",
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                      minFontSize: 20,
-                                      style: TextStyle(
-                                        color: DewitColors.lightGray,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20,
-                                      ),
-                                    ),
-                                  ),
-                                  //TODO make an if statement, make the cards less dense if desired
-                                  subtitle: Container(
-                                    margin:
-                                        EdgeInsets.only(top: 0.0, bottom: 10.0),
-                                    child: AutoSizeText(
-                                      "${item.note}",
-                                      style: TextStyle(
-                                        color: DewitColors.darkGray,
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
-                                  isThreeLine: true,
-                                  //trailing: Icon(Icons.access_alarm),
-                                ),
+                                child: FirstScreenListTile(title, note),
                               ),
                             ),
                           ),
@@ -209,122 +136,13 @@ class _FirstScreen extends State<FirstScreen> {
                     );
                   },
                   separatorBuilder: (context, index) {
-                    return Divider(
-                      color: DewitColors.coalBlack,
-                      height: 10,
-                      thickness: 1,
-                      indent: 16,
-                      endIndent: 16,
-                    );
+                    return FirstScreenDivider();
                   },
                 ),
               ),
             ),
           ),
-          //TODO any other children go BEFORE this (the bottom bar is right below)
-          Container(
-            child: Align(
-              alignment: FractionalOffset(0.5, 1),
-              child: Container(
-                color: Colors.transparent,
-                width: double.infinity,
-                height: 60.0,
-                margin: const EdgeInsets.all(6.0),
-                child: Container(
-                    decoration: new BoxDecoration(
-                        color: DewitColors.darkPurple,
-                        borderRadius: new BorderRadius.all(
-                          Radius.circular(4.0),
-                        )),
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: Container(
-                            padding: EdgeInsets.all(10.0),
-                            color: Colors.transparent,
-                            child: Row(
-                              children: <Widget>[
-                                Expanded(
-                                    flex: 31,
-                                    child: Hero(
-                                      tag: "addSomething",
-                                      child: Container(
-                                        height: double.infinity,
-                                        decoration: new BoxDecoration(
-                                            color: DewitColors.lightPurple,
-                                            borderRadius: new BorderRadius.all(
-                                              Radius.circular(4.0),
-                                            )),
-                                        child: FlatButton(
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4.0),
-                                          ),
-                                          onPressed: () {
-//                                            Navigator.of(context)
-//                                                .pushReplacementNamed(
-//                                                    '/second');
-                                            Navigator.pushNamed(context, '/second');
-                                          },
-                                          child: Row(
-                                            children: <Widget>[
-                                              Container(
-                                                //padding: EdgeInsets.all(10.0),
-                                                child: Text("Add something!",
-                                                    style: TextStyle(
-                                                      color:
-                                                          DewitColors.iconColor,
-                                                      fontSize: 18.0,
-                                                    )),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    )),
-                                Spacer(),
-                                Expanded(
-                                  flex: 4,
-                                  child: Container(
-                                    child: Container(
-                                      height: double.infinity,
-                                      width: double.infinity,
-                                      decoration: new BoxDecoration(
-                                          color: DewitColors.lightPurple,
-                                          borderRadius: new BorderRadius.all(
-                                            Radius.circular(4.0),
-                                          )),
-                                      child: Tooltip(
-                                        message: "Use voice",
-                                        verticalOffset: 36,
-                                        child: FlatButton(
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4.0),
-                                          ),
-                                          onPressed: () {
-                                            //TODO this button must do something
-                                          },
-                                          padding: EdgeInsets.all(0.0),
-                                          child: Icon(
-                                            Icons.mic,
-                                            color: DewitColors.iconColor,
-                                            size: 24.0,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    )),
-              ),
-            ),
-          ),
+          FirstScreenBottomBar(),
         ],
       ),
     );
