@@ -1,5 +1,3 @@
-import 'dart:collection';
-import 'dart:io';
 import 'package:dewitapp/colors.dart';
 import 'package:dewitapp/widgets.dart';
 import 'package:dewitapp/data.dart';
@@ -7,13 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'colors.dart';
 import 'package:toast/toast.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-
-
-//int size = 0;
-List<Tasks> items = new List();
 
 
 void main() {
