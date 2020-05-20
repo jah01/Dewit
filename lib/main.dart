@@ -2,6 +2,7 @@ import 'dart:collection';
 import 'dart:io';
 import 'package:dewitapp/colors.dart';
 import 'package:dewitapp/widgets.dart';
+import 'package:dewitapp/data.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -732,14 +733,6 @@ class ThirdScreen extends StatelessWidget {
       ),
     );
   }
-}
-
-
-class Tasks {
-  final String title;
-  final String note;
-
-  Tasks(this.title, this.note);
 }
 
 
