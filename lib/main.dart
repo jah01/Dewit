@@ -88,24 +88,8 @@ class _FirstScreen extends State<FirstScreen> {
                                   },
                                 )));
                           },
-                          background: Container(
-                            color: DewitColors.darkPurple,
-                            padding: EdgeInsets.symmetric(horizontal: 20),
-                            alignment: AlignmentDirectional.centerStart,
-                            child: Icon(
-                              Icons.delete,
-                              color: DewitColors.lightGray,
-                            ),
-                          ),
-                          secondaryBackground: Container(
-                            color: DewitColors.darkPurple,
-                            padding: EdgeInsets.symmetric(horizontal: 20),
-                            alignment: AlignmentDirectional.centerEnd,
-                            child: Icon(
-                              Icons.delete,
-                              color: DewitColors.lightGray,
-                            ),
-                          ),
+                          background: DismissibleBackground1(),
+                          secondaryBackground: DismissibleBackground2(),
                           child: Hero(
                             tag: index.toString(),
                             child: Container(
@@ -115,20 +99,7 @@ class _FirstScreen extends State<FirstScreen> {
                                   Radius.circular(8.0),
                                 ),
                               ),
-                              child: FlatButton(
-                                padding: EdgeInsets.all(0.0),
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => ThirdScreen(
-                                              index.toString(), item)));
-                                },
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                child: FirstScreenListTile(title, note),
-                              ),
+                              child: FirstScreenListButton(index, item, title, note),
                             ),
                           ),
                         ),
@@ -226,156 +197,9 @@ class _SecondScreen extends State<SecondScreen> {
           Container(
             child: Column(
               children: <Widget>[
-                Container(
-                  margin: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 4.0),
-                  child: TextField(
-                    controller: titleController,
-                    maxLength: 200,
-                    maxLengthEnforced: true,
-                    keyboardType: TextInputType.multiline,
-                    maxLines: 1,
-                    autofocus: true,
-                    showCursor: true,
-                    textCapitalization: TextCapitalization.sentences,
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "Enter your task...",
-                      counterText: '',
-                      counterStyle: TextStyle(fontSize: 0),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.only(
-                        left: 20.0, right: 20.0, bottom: 20.0),
-                    child: TextField(
-                      controller: noteController,
-                      maxLength: 200,
-                      maxLengthEnforced: true,
-                      keyboardType: TextInputType.multiline,
-                      maxLines: null,
-                      autofocus: true,
-                      showCursor: true,
-                      textCapitalization: TextCapitalization.sentences,
-                      style: TextStyle(fontSize: 16),
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: "Any short notes?",
-                        counterText: "",
-                        counterStyle: TextStyle(fontSize: 0),
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  child: Align(
-                    alignment: FractionalOffset(0.5, 1),
-                    child: Container(
-                      color: Colors.transparent,
-                      width: double.infinity,
-                      height: 60.0,
-                      margin: const EdgeInsets.only(left: 0.0, right: 0.0, top: 4.0, bottom: 0.0),
-                      //padding: EdgeInsets.only(bottom: 20.0, top: 20.0),
-                      child: Container(
-                          decoration: new BoxDecoration(
-                            color: DewitColors.darkPurple,
-                            borderRadius: new BorderRadius.vertical(
-                              top: new Radius.circular(4.0),
-                            ),
-                          ),
-                          child: Row(
-                            children: <Widget>[
-                              Expanded(
-                                child: Container(
-                                  padding: EdgeInsets.all(10.0),
-                                  color: Colors.transparent,
-                                  child: Row(
-                                    children: <Widget>[
-                                      Tooltip(
-                                        verticalOffset: -66.0,
-                                        message: "Add a time",
-                                        child: IconButton(
-                                          icon: Icon(
-                                            Icons.access_time,
-                                            color: Colors.white,
-                                          ),
-                                          onPressed: () {},
-                                        ),
-                                      ),
-                                      Spacer(),
-                                      Tooltip(
-                                        verticalOffset: -66.0,
-                                        message: "Set as priority",
-                                        child: IconButton(
-                                          icon: Icon(
-                                            Icons.outlined_flag,
-                                            color: Colors.white,
-                                          ),
-                                          onPressed: () {},
-                                        ),
-                                      ),
-                                      Spacer(),
-                                      Tooltip(
-                                        verticalOffset: -66.0,
-                                        message: "Schedule this",
-                                        child: IconButton(
-                                          icon: Icon(
-                                            Icons.event,
-                                            color: Colors.white,
-                                          ),
-                                          onPressed: () {},
-                                        ),
-                                      ),
-                                      Spacer(),
-                                      Tooltip(
-                                        verticalOffset: -66.0,
-                                        message: "Send a notification in advance",
-                                        child: IconButton(
-                                          icon: Icon(
-                                            Icons.notifications_none,
-                                            color: Colors.white,
-                                          ),
-                                          onPressed: () {},
-                                        ),
-                                      ),
-                                      Spacer(),
-                                      Tooltip(
-                                        verticalOffset: -66.0,
-                                        message: "Create a tag",
-                                        child: IconButton(
-                                          icon: Icon(
-                                            Icons.label_outline,
-                                            color: Colors.white,
-                                          ),
-                                          onPressed: () {},
-                                        ),
-                                      ),
-                                      Spacer(),
-                                      Tooltip(
-                                        verticalOffset: -66.0,
-                                        message: "Add a color",
-                                        child: IconButton(
-                                          icon: Icon(
-                                            Icons.color_lens,
-                                            color: Colors.white,
-                                          ),
-                                          onPressed: () {},
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                      ),
-                    ),
-                  ),
-                ),
+                Container(child: SecondScreenTitle(titleController)),
+                Expanded(child: SecondScreenNotes(noteController)),
+                SecondScreenBottomBar(),
               ],
             ),
           ),

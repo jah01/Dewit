@@ -1,3 +1,4 @@
+import 'package:dewitapp/main.dart';
 import 'package:dewitapp/colors.dart';
 import 'package:dewitapp/data.dart';
 import 'package:flutter/foundation.dart';
@@ -255,6 +256,33 @@ class FirstScreenBottomBar extends StatelessWidget {
 }
 
 
+class FirstScreenListButton extends StatelessWidget {
+  final int index;
+  final Tasks item;
+  final String title;
+  final String note;
+  FirstScreenListButton(this.index, this.item, this.title, this.note);
+
+  @override
+  Widget build(BuildContext context) {
+    return FlatButton(
+      padding: EdgeInsets.all(0.0),
+      onPressed: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ThirdScreen(
+                    index.toString(), item)));
+      },
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      child: FirstScreenListTile(title, note),
+    );
+  }
+}
+
+
 class FirstScreenListTile extends StatelessWidget {
   final String title;
   final String note;
@@ -281,6 +309,7 @@ class FirstScreenListTile extends StatelessWidget {
     );
   }
 }
+
 
 class FirstScreenTitle extends StatelessWidget {
   final String title;
@@ -339,7 +368,212 @@ Widget FirstScreenDivider() {
 }
 
 
+class DismissibleBackground1 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: DewitColors.darkPurple,
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      alignment: AlignmentDirectional.centerStart,
+      child: Icon(
+        Icons.delete,
+        color: DewitColors.lightGray,
+      ),
+    );
+  }
+}
+
+
+class DismissibleBackground2 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: DewitColors.darkPurple,
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      alignment: AlignmentDirectional.centerEnd,
+      child: Icon(
+        Icons.delete,
+        color: DewitColors.lightGray,
+      ),
+    );
+  }
+}
+
+
 //TODO SecondScreen starts here
+class SecondScreenTitle extends StatelessWidget {
+  final titleController;
+  SecondScreenTitle(this.titleController);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 4.0),
+      child: TextField(
+        controller: titleController,
+        maxLength: 200,
+        maxLengthEnforced: true,
+        keyboardType: TextInputType.multiline,
+        maxLines: 1,
+        autofocus: true,
+        showCursor: true,
+        textCapitalization: TextCapitalization.sentences,
+        style: TextStyle(
+          fontSize: 20,
+        ),
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          hintText: "Enter your task...",
+          counterText: '',
+          counterStyle: TextStyle(fontSize: 0),
+        ),
+      ),
+    );
+  }
+}
+
+
+class SecondScreenNotes extends StatelessWidget {
+  final noteController;
+
+  SecondScreenNotes(this.noteController);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0),
+      child: TextField(
+        controller: noteController,
+        maxLength: 200,
+        maxLengthEnforced: true,
+        keyboardType: TextInputType.multiline,
+        maxLines: null,
+        autofocus: true,
+        showCursor: true,
+        textCapitalization: TextCapitalization.sentences,
+        style: TextStyle(fontSize: 16),
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          hintText: "Any short notes?",
+          counterText: "",
+          counterStyle: TextStyle(fontSize: 0),
+        ),
+      ),
+    );
+  }
+}
+
+
+class SecondScreenBottomBar extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Align(
+        alignment: FractionalOffset(0.5, 1),
+        child: Container(
+          color: Colors.transparent,
+          width: double.infinity,
+          height: 60.0,
+          margin: const EdgeInsets.only(left: 0.0, right: 0.0, top: 4.0, bottom: 0.0),
+          //padding: EdgeInsets.only(bottom: 20.0, top: 20.0),
+          child: Container(
+            decoration: new BoxDecoration(
+              color: DewitColors.darkPurple,
+              borderRadius: new BorderRadius.vertical(
+                top: new Radius.circular(4.0),
+              ),
+            ),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: Container(
+                    padding: EdgeInsets.all(10.0),
+                    color: Colors.transparent,
+                    child: Row(
+                      children: <Widget>[
+                        Tooltip(
+                          verticalOffset: -66.0,
+                          message: "Add a time",
+                          child: IconButton(
+                            icon: Icon(
+                              Icons.access_time,
+                              color: Colors.white,
+                            ),
+                            onPressed: () {},
+                          ),
+                        ),
+                        Spacer(),
+                        Tooltip(
+                          verticalOffset: -66.0,
+                          message: "Set as priority",
+                          child: IconButton(
+                            icon: Icon(
+                              Icons.outlined_flag,
+                              color: Colors.white,
+                            ),
+                            onPressed: () {},
+                          ),
+                        ),
+                        Spacer(),
+                        Tooltip(
+                          verticalOffset: -66.0,
+                          message: "Schedule this",
+                          child: IconButton(
+                            icon: Icon(
+                              Icons.event,
+                              color: Colors.white,
+                            ),
+                            onPressed: () {},
+                          ),
+                        ),
+                        Spacer(),
+                        Tooltip(
+                          verticalOffset: -66.0,
+                          message: "Send a notification in advance",
+                          child: IconButton(
+                            icon: Icon(
+                              Icons.notifications_none,
+                              color: Colors.white,
+                            ),
+                            onPressed: () {},
+                          ),
+                        ),
+                        Spacer(),
+                        Tooltip(
+                          verticalOffset: -66.0,
+                          message: "Create a tag",
+                          child: IconButton(
+                            icon: Icon(
+                              Icons.label_outline,
+                              color: Colors.white,
+                            ),
+                            onPressed: () {},
+                          ),
+                        ),
+                        Spacer(),
+                        Tooltip(
+                          verticalOffset: -66.0,
+                          message: "Add a color",
+                          child: IconButton(
+                            icon: Icon(
+                              Icons.color_lens,
+                              color: Colors.white,
+                            ),
+                            onPressed: () {},
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
 
 
 //TODO ThirdScreen starts here
