@@ -12,7 +12,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 
 
 //int size = 0;
-List<TasksTest> items = new List();
+List<Tasks> items = new List();
 
 
 void main() {
@@ -313,39 +313,24 @@ class _FirstScreen extends State<FirstScreen> {
                                           borderRadius: new BorderRadius.all(
                                             Radius.circular(4.0),
                                           )),
-                                      child: FlatButton(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(4.0),
+                                      child: Tooltip(
+                                        message: "Use voice",
+                                        verticalOffset: 36,
+                                        child: FlatButton(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4.0),
+                                          ),
+                                          onPressed: () {
+                                            //TODO this button must do something
+                                          },
+                                          padding: EdgeInsets.all(0.0),
+                                          child: Icon(
+                                            Icons.mic,
+                                            color: DewitColors.iconColor,
+                                            size: 24.0,
+                                          ),
                                         ),
-                                        onPressed: () {
-                                          //TODO this button must do something
-                                        },
-                                        padding: EdgeInsets.all(0.0),
-                                        child: Icon(
-                                          Icons.mic,
-                                          color: DewitColors.iconColor,
-                                          size: 24.0,
-                                        ),
-//                                            child: new Icon(
-//                                              Icons.mic,
-//                                              color: DewitColors.iconColor,
-//                                              size: 24.0,
-//                                            ),
-
-//                                          child: Column(
-//                                            children: <Widget>[
-//                                              Container(
-//                                                padding: EdgeInsets.only(top: 8.0, bottom: 8.0, left: 10.0),
-//
-//                                                child: Icon(
-//                                                  Icons.mic,
-//                                                  color: DewitColors.iconColor,
-//                                                  size: 24.0,
-//                                                ),
-//                                              ),
-//                                            ],
-//                                          ),
                                       ),
                                     ),
                                   ),
@@ -503,7 +488,7 @@ class _SecondScreen extends State<SecondScreen> {
                 } else {
                   //TODO add the data to the list
                   //size++;
-                  items.add(TasksTest(titleController.text, noteController.text));
+                  items.add(Tasks(titleController.text, noteController.text));
 
                   //check this
                   SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -716,7 +701,7 @@ class _SecondScreen extends State<SecondScreen> {
 
 class ThirdScreen extends StatelessWidget {
   final String index;
-  final TasksTest _selectedTask;
+  final Tasks _selectedTask;
 
   ThirdScreen(this.index, this._selectedTask);
 
@@ -749,22 +734,14 @@ class ThirdScreen extends StatelessWidget {
   }
 }
 
-class TasksTest {
+
+class Tasks {
   final String title;
   final String note;
 
-  TasksTest(this.title, this.note);
+  Tasks(this.title, this.note);
 }
 
-
-//List<Tasks> getItems() {
-//  List<Tasks> tasks = new List();
-//
-//  for (int i = 0; i < size; i++) {
-//    tasks.add(note)
-//  }
-//  return tasks;
-//}
 
 class GoalsScreen extends StatefulWidget {
   GoalsScreen({Key key}) : super(key: key);
