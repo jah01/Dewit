@@ -41,8 +41,6 @@ class FirstScreen extends StatefulWidget {
 class _FirstScreen extends State<FirstScreen> {
   //TODO this will be redone once backend is developed
   //final items = List<String>.generate(20, (i) => "Item ${i + 1}");
-  //final items = new List(size);
-  //items.getItems();
 
   @override
   Widget build(BuildContext context) {
@@ -52,25 +50,20 @@ class _FirstScreen extends State<FirstScreen> {
       appBar: AppBar(
         backgroundColor: DewitColors.coalBlack,
         iconTheme: new IconThemeData(color: DewitColors.lightGray),
-        title: const Text("Dewit",
-            style: TextStyle(
-              color: DewitColors.lightGray,
-            )),
+        title: const Text(
+            "Dewit",
+            style: TextStyle(color: DewitColors.lightGray),
+        ),
         actions: <Widget>[
-          // action button
           Builder(
             builder: (BuildContext context) {
               return IconButton(
                 icon: Icon(Icons.search),
                 onPressed: () {
                   //one or the other
-//                    Scaffold.of(context).showSnackBar(SnackBar(
-//                      content: Text("SnackBar search!"),
-//                    ));
+                  //Scaffold.of(context).showSnackBar(SnackBar(content: Text("SnackBar search!"),));
                   //TODO THIS IS IMPORTANT FOR LATER
-//                    Navigator.push(
-//                        context,
-//                        MaterialPageRoute(builder: (context) => SecondScreen()));
+                  //Navigator.push(context, MaterialPageRoute(builder: (context) => SecondScreen()));
                   //Toast.show("You selected search!", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
                 },
               );
@@ -96,7 +89,6 @@ class _FirstScreen extends State<FirstScreen> {
               color: Colors.transparent,
               margin: const EdgeInsets.only(top: 0.0, left: 0.0, right: 0.0),
               child: Container(
-//                margin: EdgeInsets.only(top: 4.0, bottom: 4.0),
                 //TODO all other things on this page belong here and only here-- do not mess up the search bar
                 child: ListView.separated(
                   padding: const EdgeInsets.only(top: 4.0, bottom: 4.0),
@@ -135,7 +127,6 @@ class _FirstScreen extends State<FirstScreen> {
                                   },
                                 )));
                           },
-                          //background: Container(color: DewitColors.darkPurple),
                           background: Container(
                             color: DewitColors.darkPurple,
                             padding: EdgeInsets.symmetric(horizontal: 20),
@@ -246,7 +237,6 @@ class _FirstScreen extends State<FirstScreen> {
                 width: double.infinity,
                 height: 60.0,
                 margin: const EdgeInsets.all(6.0),
-                //padding: EdgeInsets.only(bottom: 20.0, top: 20.0),
                 child: Container(
                     decoration: new BoxDecoration(
                         color: DewitColors.darkPurple,
@@ -259,8 +249,6 @@ class _FirstScreen extends State<FirstScreen> {
                           child: Container(
                             padding: EdgeInsets.all(10.0),
                             color: Colors.transparent,
-                            //width: 300.0,
-                            //margin: new EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0, bottom: 8.0),
                             child: Row(
                               children: <Widget>[
                                 Expanded(
@@ -269,7 +257,6 @@ class _FirstScreen extends State<FirstScreen> {
                                       tag: "addSomething",
                                       child: Container(
                                         height: double.infinity,
-                                        //child: Text("testing this out"),
                                         decoration: new BoxDecoration(
                                             color: DewitColors.lightPurple,
                                             borderRadius: new BorderRadius.all(
@@ -336,36 +323,6 @@ class _FirstScreen extends State<FirstScreen> {
                                     ),
                                   ),
                                 ),
-                                //Spacer(),
-//                                  Expanded(
-//                                    flex: 4,
-//                                    child: GestureDetector(
-//                                        onTap: () {
-//                                          print("PIC CLICKED");
-//                                        },
-//                                      child: Container(
-//                                        decoration: new BoxDecoration(
-//                                            color: DewitColors.lightPurple,
-//                                            borderRadius: new BorderRadius.all(
-//                                              Radius.circular(4.0),
-//                                            )
-//                                        ),
-//                                        child: Column(
-//                                          children: <Widget>[
-//                                            Container(
-//                                              padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
-//
-//                                              child: Icon(
-//                                                Icons.photo_camera,
-//                                                color: DewitColors.iconColor,
-//                                                size: 24.0,
-//                                              ),
-//                                            ),
-//                                          ],
-//                                        ),
-//                                      ),
-//                                    ),
-//                                  ),
                               ],
                             ),
                           ),
@@ -375,44 +332,11 @@ class _FirstScreen extends State<FirstScreen> {
               ),
             ),
           ),
-//            Container(
-//              //padding: EdgeInsets.all(20.0),
-//              //margin: new EdgeInsets.all(20.0),
-//              color: DewitColors.darkPurple,
-//              child: Align(
-//                alignment: FractionalOffset.bottomCenter,
-//                child: Padding(
-//                    padding: EdgeInsets.only(bottom: 10.0, top: 10.0),
-//                    child: Text("TESTING"),
-//                )
-//              ),
-//            ),
-//            Container(
-//              padding: EdgeInsets.all(30.0),
-//              color: Colors.blue,
-//              child: Text("ern"),
-//            ),
         ],
       ),
-//        ),
-//      ),
     );
   }
 }
-
-
-class Select {
-  const Select({this.title, this.icon});
-
-  final String title;
-  final IconData icon;
-}
-
-
-const List<Select> selection = const <Select>[
-  const Select(title: "Extra1", icon: Icons.search),
-  const Select(title: "Extra2", icon: Icons.search),
-];
 
 
 class SecondScreen extends StatefulWidget {
@@ -444,29 +368,6 @@ class _SecondScreen extends State<SecondScreen> {
             ),
             onPressed: () {
               Navigator.pop(context);
-              //Navigator.popAndPushNamed(context, '/');
-//            showDialog(
-//              context: context,
-//              builder: (_) => AlertDialog(
-//                title: Text("Delete Task"),
-//                content: Text("Are you sure you want to delete this task?"),
-//                actions: <Widget>[
-//                  FlatButton(
-//                      child: Text("No"),
-//                    onPressed: () {Navigator.pop(context);},
-//                  ),
-//                  FlatButton(
-//                      child: Text("Yes"),
-//                    onPressed: () {
-//                        Navigator.pop(context);
-//                        Navigator.pop(context);
-//                    },
-//                  ),
-//                ],
-//                elevation: 16,
-//              ),
-//              barrierDismissible: false,
-//            );
             },
           ),
         ),
@@ -482,8 +383,7 @@ class _SecondScreen extends State<SecondScreen> {
               ),
               onPressed: () {
                 if (titleController.text.length == 0) {
-//                  Scaffold.of(context).showSnackBar(SnackBar(
-//                      content: Text("You must add something first")));
+                  //Scaffold.of(context).showSnackBar(SnackBar(content: Text("You must add something first")));
                 //TODO change this up later
                   Toast.show("You must add something first", context, duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
                 } else {
@@ -496,16 +396,6 @@ class _SecondScreen extends State<SecondScreen> {
                     Navigator.of(context).pushNamedAndRemoveUntil(
                         "/", (Route<dynamic> route) => false);
                   });
-//                  Navigator.pushAndRemoveUntil(
-//                      context,
-//                      MaterialPageRoute(
-//                          builder: (context) => FirstScreen()
-//                      ),
-//                      ModalRoute.withName("/")
-//                  );
-                  //Navigator.popAndPushNamed(context, '/');
-                  //Navigator.pushNamed(context, "/");
-                  //Navigator.pop(context);
                 }
               },
             ),
@@ -514,21 +404,15 @@ class _SecondScreen extends State<SecondScreen> {
       ),
       body: Stack(
         children: <Widget>[
-          Container(
-//            width: double.infinity,
-//            height: double.infinity,
-//            color: DewitColors.darkPurple,
-            child: Hero(
-                tag: "addSomething",
-                child: Container(
-                  color: DewitColors.lightPurple,
-                  width: double.infinity,
-                  height: double.infinity,
-                ),
+          Hero(
+            tag: "addSomething",
+            child: Container(
+              color: DewitColors.lightPurple,
+              width: double.infinity,
+              height: double.infinity,
             ),
           ),
           Container(
-            //margin: EdgeInsets.all(6.0),
             child: Column(
               children: <Widget>[
                 Container(
@@ -598,8 +482,6 @@ class _SecondScreen extends State<SecondScreen> {
                                 child: Container(
                                   padding: EdgeInsets.all(10.0),
                                   color: Colors.transparent,
-                                  //width: 300.0,
-                                  //margin: new EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0, bottom: 8.0),
                                   child: Row(
                                     children: <Widget>[
                                       Tooltip(
@@ -678,7 +560,8 @@ class _SecondScreen extends State<SecondScreen> {
                                 ),
                               ),
                             ],
-                          )),
+                          ),
+                      ),
                     ),
                   ),
                 ),
@@ -687,14 +570,6 @@ class _SecondScreen extends State<SecondScreen> {
           ),
         ],
       ),
-//      body: Center(
-//        child: RaisedButton(
-//          onPressed: () {
-//            Navigator.pop(context);
-//          },
-//          child: Text('Go back!'),
-//        ),
-//      ),
     );
   }
 }
