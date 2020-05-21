@@ -58,48 +58,24 @@ class _FirstScreen extends State<FirstScreen> {
                     final String note = "${item.note}";
                     return Column(
                       children: <Widget>[
-                        Align(
-                            alignment: Alignment.centerLeft,
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                  top: 0.0, left: 8.0, right: 8.0, bottom: 0.0),
-//                            child: Text(
-//                              "Today",
-//                              style: TextStyle(
-//                                fontSize: 28,
-//                                fontWeight: FontWeight.bold,
-//                                color: DewitColors.darkPurple,
-//                              ),
-//                            ),
-                            )),
+                        FirstScreenTopPadding(),
                         Dismissible(
                           key: UniqueKey(),
                           onDismissed: (direction) {
-                            setState(() {
-                              items.removeAt(index);
-                            });
+                            setState(() {items.removeAt(index);});
                             Scaffold.of(context).showSnackBar(SnackBar(
-                                content: Text(
-                                    "\"" + title + "\" dismissed."),
+                                content: Text("\"" + title + "\" dismissed."),
                                 action: SnackBarAction(
                                   label: "UNDO",
-                                  onPressed: () {
-                                    setState(() => items.insert(index, item));
-                                  },
+                                  onPressed: () => setState(() => items.insert(index, item)),
                                 )));
                           },
                           background: DismissibleBackground1(),
                           secondaryBackground: DismissibleBackground2(),
                           child: Hero(
                             tag: index.toString(),
-                            child: Container(
-                              margin: EdgeInsets.only(left: 4.0, right: 4.0),
-                              decoration: new BoxDecoration(
-                                borderRadius: new BorderRadius.all(
-                                  Radius.circular(8.0),
-                                ),
-                              ),
-                              child: FirstScreenListButton(index, item, title, note),
+                            child: FirstScreenHero(
+                                FirstScreenListButton(index, item, title, note),
                             ),
                           ),
                         ),
@@ -156,6 +132,7 @@ class _SecondScreen extends State<SecondScreen> {
   }
 }
 
+
 class ThirdScreen extends StatelessWidget {
   final String index;
   final Tasks _selectedTask;
@@ -165,28 +142,8 @@ class ThirdScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-//      appBar: AppBar(
-//        //title: Text("Second Route"),
-//        backgroundColor: DewitColors.lightPurple,
-//      ),
-      body: Container(
-        color: DewitColors.background,
-        child: Align(
-        alignment: FractionalOffset(0.5, 0.3),
-        child: Hero(
-          tag: index,
-          flightShuttleBuilder: flightShuttleBuilder,
-              child: Text(
-                "${_selectedTask.title}\n${_selectedTask.note}",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-          ),
-        ),
-      ),
-      ),
+      appBar: ThirdScreenAppBar(),
+      body: ThirdScreenBody(index, _selectedTask),
     );
   }
 }

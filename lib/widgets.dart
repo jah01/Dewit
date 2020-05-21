@@ -148,115 +148,44 @@ class FirstScreenAppBar extends StatelessWidget with PreferredSizeWidget {
 }
 
 
-class FirstScreenBottomBar extends StatelessWidget {
+class FirstScreenTopPadding extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Align(
-        alignment: FractionalOffset(0.5, 1),
-        child: Container(
-          color: Colors.transparent,
-          width: double.infinity,
-          height: 60.0,
-          margin: const EdgeInsets.all(6.0),
-          child: Container(
-              decoration: new BoxDecoration(
-                  color: DewitColors.darkPurple,
-                  borderRadius: new BorderRadius.all(
-                    Radius.circular(4.0),
-                  )),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Container(
-                      padding: EdgeInsets.all(10.0),
-                      color: Colors.transparent,
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(
-                              flex: 31,
-                              child: Hero(
-                                tag: "addSomething",
-                                child: Container(
-                                  height: double.infinity,
-                                  decoration: new BoxDecoration(
-                                      color: DewitColors.lightPurple,
-                                      borderRadius: new BorderRadius.all(
-                                        Radius.circular(4.0),
-                                      )),
-                                  child: FlatButton(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                      BorderRadius.circular(4.0),
-                                    ),
-                                    onPressed: () {
-//                                            Navigator.of(context)
-//                                                .pushReplacementNamed(
-//                                                    '/second');
-                                      Navigator.pushNamed(context, '/second');
-                                    },
-                                    child: Row(
-                                      children: <Widget>[
-                                        Container(
-                                          //padding: EdgeInsets.all(10.0),
-                                          child: Text("Add something!",
-                                              style: TextStyle(
-                                                color:
-                                                DewitColors.iconColor,
-                                                fontSize: 18.0,
-                                              )),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              )),
-                          Spacer(),
-                          Expanded(
-                            flex: 4,
-                            child: Container(
-                              child: Container(
-                                height: double.infinity,
-                                width: double.infinity,
-                                decoration: new BoxDecoration(
-                                    color: DewitColors.lightPurple,
-                                    borderRadius: new BorderRadius.all(
-                                      Radius.circular(4.0),
-                                    )),
-                                child: Tooltip(
-                                  message: "Use voice",
-                                  verticalOffset: 36,
-                                  child: FlatButton(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                      BorderRadius.circular(4.0),
-                                    ),
-                                    onPressed: () {
-                                      //TODO this button must do something
-                                    },
-                                    padding: EdgeInsets.all(0.0),
-                                    child: Icon(
-                                      Icons.mic,
-                                      color: DewitColors.iconColor,
-                                      size: 24.0,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              )),
-        ),
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Padding(
+        padding: EdgeInsets.only(top: 0.0, left: 8.0, right: 8.0, bottom: 0.0),
+//                            child: Text(
+//                              "Today",
+//                              style: TextStyle(
+//                                fontSize: 28,
+//                                fontWeight: FontWeight.bold,
+//                                color: DewitColors.darkPurple,
+//                              ),
+//                            ),
       ),
     );
   }
 }
 
+
+class FirstScreenHero extends StatelessWidget {
+  final w;
+  FirstScreenHero(this.w);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(left: 4.0, right: 4.0),
+      decoration: new BoxDecoration(
+        borderRadius: new BorderRadius.all(
+          Radius.circular(8.0),
+        ),
+      ),
+      child: w,
+    );
+  }
+}
 
 class FirstScreenListButton extends StatelessWidget {
   final int index;
@@ -396,6 +325,116 @@ class DismissibleBackground2 extends StatelessWidget {
       child: Icon(
         Icons.delete,
         color: DewitColors.lightGray,
+      ),
+    );
+  }
+}
+
+
+class FirstScreenBottomBar extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Align(
+        alignment: FractionalOffset(0.5, 1),
+        child: Container(
+          color: Colors.transparent,
+          width: double.infinity,
+          height: 60.0,
+          margin: const EdgeInsets.all(6.0),
+          child: Container(
+              decoration: new BoxDecoration(
+                  color: DewitColors.darkPurple,
+                  borderRadius: new BorderRadius.all(
+                    Radius.circular(4.0),
+                  )),
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.all(10.0),
+                      color: Colors.transparent,
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(
+                              flex: 31,
+                              child: Hero(
+                                tag: "addSomething",
+                                child: Container(
+                                  height: double.infinity,
+                                  decoration: new BoxDecoration(
+                                      color: DewitColors.lightPurple,
+                                      borderRadius: new BorderRadius.all(
+                                        Radius.circular(4.0),
+                                      )),
+                                  child: FlatButton(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                      BorderRadius.circular(4.0),
+                                    ),
+                                    onPressed: () {
+//                                            Navigator.of(context)
+//                                                .pushReplacementNamed(
+//                                                    '/second');
+                                      Navigator.pushNamed(context, '/second');
+                                    },
+                                    child: Row(
+                                      children: <Widget>[
+                                        Container(
+                                          //padding: EdgeInsets.all(10.0),
+                                          child: Text("Add something!",
+                                              style: TextStyle(
+                                                color:
+                                                DewitColors.iconColor,
+                                                fontSize: 18.0,
+                                              )),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              )),
+                          Spacer(),
+                          Expanded(
+                            flex: 4,
+                            child: Container(
+                              child: Container(
+                                height: double.infinity,
+                                width: double.infinity,
+                                decoration: new BoxDecoration(
+                                    color: DewitColors.lightPurple,
+                                    borderRadius: new BorderRadius.all(
+                                      Radius.circular(4.0),
+                                    )),
+                                child: Tooltip(
+                                  message: "Use voice",
+                                  verticalOffset: 36,
+                                  child: FlatButton(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                      BorderRadius.circular(4.0),
+                                    ),
+                                    onPressed: () {
+                                      //TODO this button must do something
+                                    },
+                                    padding: EdgeInsets.all(0.0),
+                                    child: Icon(
+                                      Icons.mic,
+                                      color: DewitColors.iconColor,
+                                      size: 24.0,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              )),
+        ),
       ),
     );
   }
@@ -645,6 +684,52 @@ class SecondScreenBottomBar extends StatelessWidget {
 
 
 //TODO ThirdScreen starts here
+
+
+class ThirdScreenAppBar extends StatelessWidget with PreferredSizeWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      //will be changed later
+      width: 0.0,
+      height: 0.0,
+    );
+  }
+
+  @override
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+}
+
+
+class ThirdScreenBody extends StatelessWidget {
+  String index;
+  Tasks _selectedTask;
+  ThirdScreenBody(this.index, this._selectedTask);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: DewitColors.background,
+      child: Align(
+        alignment: FractionalOffset(0.5, 0.3),
+        child: Hero(
+          tag: index,
+          flightShuttleBuilder: flightShuttleBuilder,
+          child: Text(
+            "${_selectedTask.title}\n${_selectedTask.note}",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
 //huge help from zyllus17 on https://github.com/flutter/flutter/issues/12463
 Widget flightShuttleBuilder(
     BuildContext flightContext,
