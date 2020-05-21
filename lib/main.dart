@@ -106,9 +106,7 @@ class _FirstScreen extends State<FirstScreen> {
                       ],
                     );
                   },
-                  separatorBuilder: (context, index) {
-                    return FirstScreenDivider();
-                  },
+                  separatorBuilder: (context, index) {return firstScreenDivider();},
                 ),
               ),
             ),
@@ -141,74 +139,22 @@ class _SecondScreen extends State<SecondScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Tooltip(
-          message: "Discard task",
-          child: IconButton(
-            icon:Icon(Icons.delete,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-        ),
-        title: Text("Add a task!"),
-        backgroundColor: DewitColors.darkPurple,
-        actions: <Widget>[
-          Tooltip(
-            message: "Add task",
-            child: IconButton(
-              icon: Icon(
-                Icons.check,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                if (titleController.text.length == 0) {
-                  //Scaffold.of(context).showSnackBar(SnackBar(content: Text("You must add something first")));
-                //TODO change this up later
-                  Toast.show("You must add something first", context, duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
-                } else {
-                  //TODO add the data to the list
-                  //size++;
-                  items.add(Tasks(titleController.text, noteController.text));
-
-                  //check this
-                  SchedulerBinding.instance.addPostFrameCallback((_) {
-                    Navigator.of(context).pushNamedAndRemoveUntil(
-                        "/", (Route<dynamic> route) => false);
-                  });
-                }
-              },
-            ),
-          ),
-        ],
-      ),
+      appBar: SecondScreenAppBar(this.titleController, this.noteController),
       body: Stack(
         children: <Widget>[
-          Hero(
-            tag: "addSomething",
-            child: Container(
-              color: DewitColors.lightPurple,
-              width: double.infinity,
-              height: double.infinity,
-            ),
-          ),
-          Container(
-            child: Column(
-              children: <Widget>[
-                Container(child: SecondScreenTitle(titleController)),
-                Expanded(child: SecondScreenNotes(noteController)),
-                SecondScreenBottomBar(),
-              ],
-            ),
+          Hero(tag: "addSomething", child: BigPurple()),
+          Column(
+            children: <Widget>[
+              Container(child: SecondScreenTitle(titleController)),
+              Expanded(child: SecondScreenNotes(noteController)),
+              SecondScreenBottomBar(),
+            ],
           ),
         ],
       ),
     );
   }
 }
-
 
 class ThirdScreen extends StatelessWidget {
   final String index;

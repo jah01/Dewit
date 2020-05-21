@@ -4,6 +4,8 @@ import 'package:dewitapp/data.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:toast/toast.dart';
 
 
 //TODO NAVBAR
@@ -357,7 +359,7 @@ class FirstScreenSubtitle extends StatelessWidget {
 }
 
 
-Widget FirstScreenDivider() {
+Widget firstScreenDivider() {
   return Divider(
     color: DewitColors.coalBlack,
     height: 10,
@@ -401,6 +403,72 @@ class DismissibleBackground2 extends StatelessWidget {
 
 
 //TODO SecondScreen starts here
+class SecondScreenAppBar extends StatelessWidget with PreferredSizeWidget {
+  final titleController;
+  final noteController;
+  SecondScreenAppBar(this.titleController, this.noteController);
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      leading: Tooltip(
+        message: "Discard task",
+        child: IconButton(
+          icon:Icon(Icons.delete,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
+      title: Text("Add a task!"),
+      backgroundColor: DewitColors.darkPurple,
+      actions: <Widget>[
+        Tooltip(
+          message: "Add task",
+          child: IconButton(
+            icon: Icon(
+              Icons.check,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              if (titleController.text.length == 0) {
+                //Scaffold.of(context).showSnackBar(SnackBar(content: Text("You must add something first")));
+                //TODO change this up later
+                Toast.show("You must add something first", context, duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
+              } else {
+                //TODO add the data to the list
+                items.add(Tasks(titleController.text, noteController.text));
+                SchedulerBinding.instance.addPostFrameCallback((_) {
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                      "/", (Route<dynamic> route) => false);
+                });
+              }
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  @override
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+}
+
+
+class BigPurple extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: DewitColors.lightPurple,
+      width: double.infinity,
+      height: double.infinity,
+    );
+  }
+}
+
+
 class SecondScreenTitle extends StatelessWidget {
   final titleController;
   SecondScreenTitle(this.titleController);
