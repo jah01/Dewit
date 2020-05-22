@@ -534,7 +534,7 @@ class SecondScreenTitle extends StatelessWidget {
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: "Enter your task...",
-          counterText: '',
+          counterText: "",
           counterStyle: TextStyle(fontSize: 0),
         ),
       ),
@@ -554,10 +554,10 @@ class SecondScreenNotes extends StatelessWidget {
       margin: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0),
       child: TextField(
         controller: noteController,
-        maxLength: 200,
+        maxLength: 120,
         maxLengthEnforced: true,
         keyboardType: TextInputType.multiline,
-        maxLines: null,
+        maxLines: 4,
         autofocus: true,
         showCursor: true,
         textCapitalization: TextCapitalization.sentences,
@@ -566,8 +566,25 @@ class SecondScreenNotes extends StatelessWidget {
           border: InputBorder.none,
           hintText: "Any short notes?",
           counterText: "",
-          counterStyle: TextStyle(fontSize: 0),
+          counterStyle: TextStyle(fontSize: 0,),
         ),
+      ),
+    );
+  }
+}
+
+
+class SecondScreenSpacer extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      child: FlatButton(
+        highlightColor: Colors.transparent,
+        splashColor: Colors.transparent,
+        onPressed: () {
+          FocusScope.of(context).requestFocus(new FocusNode());
+        },
       ),
     );
   }

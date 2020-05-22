@@ -122,7 +122,15 @@ class _SecondScreen extends State<SecondScreen> {
           Column(
             children: <Widget>[
               Container(child: SecondScreenTitle(titleController)),
-              Expanded(child: SecondScreenNotes(noteController)),
+              SecondScreenNotes(noteController),
+              Expanded(child: SecondScreenSpacer()),
+              Text(
+                "Hello",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 30,
+                ),
+              ),
               //SecondScreenBottomBar(),
             ],
           ),
