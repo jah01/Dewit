@@ -25,3 +25,22 @@ class Tasks {
 
   Tasks(this.title, this.note);
 }
+
+Future<DateTime> getDate(BuildContext context) {
+  return showDatePicker(
+      context: context,
+      initialDate: DateTime.now().add(Duration(seconds: 1)),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2150),
+  );
+}
+
+
+Future<DateTime> getTime(BuildContext context) {
+  showDatePicker(
+    context: context,
+    initialDate: DateTime.now().add(Duration(seconds: 1)),
+    firstDate: DateTime.now(),
+    lastDate: DateTime(2150),
+  );
+}

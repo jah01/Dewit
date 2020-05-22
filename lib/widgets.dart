@@ -471,18 +471,21 @@ class SecondScreenAppBar extends StatelessWidget with PreferredSizeWidget {
               Icons.check,
               color: Colors.white,
             ),
-            onPressed: () {
+            onPressed: () async {
               if (titleController.text.length == 0) {
                 //Scaffold.of(context).showSnackBar(SnackBar(content: Text("You must add something first")));
-                //TODO change this up later
                 Toast.show("You must add something first", context, duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
               } else {
-                //TODO add the data to the list
+                FocusScope.of(context).unfocus();
+                //TODO COME BACK HERE
+                final selectedDate = await getDate(context);
+                if (selectedDate == null) return;
                 items.add(Tasks(titleController.text, noteController.text));
-                SchedulerBinding.instance.addPostFrameCallback((_) {
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                      "/", (Route<dynamic> route) => false);
-                });
+                print(selectedDate);
+                  SchedulerBinding.instance.addPostFrameCallback((_) {
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                        "/", (Route<dynamic> route) => false);
+                  });
               }
             },
           ),

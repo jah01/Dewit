@@ -123,7 +123,7 @@ class _SecondScreen extends State<SecondScreen> {
             children: <Widget>[
               Container(child: SecondScreenTitle(titleController)),
               Expanded(child: SecondScreenNotes(noteController)),
-              SecondScreenBottomBar(),
+              //SecondScreenBottomBar(),
             ],
           ),
         ],
