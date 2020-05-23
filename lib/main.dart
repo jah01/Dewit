@@ -41,60 +41,66 @@ class _FirstScreen extends State<FirstScreen> {
       backgroundColor: DewitColors.background,
       drawer: NavDrawer(),
       appBar: FirstScreenAppBar(),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Expanded(
-            child: Container(
-              color: Colors.transparent,
-              margin: const EdgeInsets.only(top: 0.0, left: 0.0, right: 0.0),
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Expanded(
               child: Container(
-                //TODO all other things on this page belong here and only here-- do not mess up the search bar
-                child: ListView.separated(
-                  padding: const EdgeInsets.only(top: 4.0, bottom: 4.0),
-                  itemCount: items.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    final item = items[index];
-                    final String title = "${item.title}";
-                    final String note = "${item.note}";
-                    return Column(
-                      children: <Widget>[
-                        FirstScreenTopPadding(),
-                        Dismissible(
-                          key: UniqueKey(),
-                          onDismissed: (direction) {
-                            setState(() {items.removeAt(index);});
-                            Scaffold.of(context).showSnackBar(SnackBar(
-                                content: Text("\"" + title + "\" dismissed."),
-                                action: SnackBarAction(
-                                  label: "UNDO",
-                                  onPressed: () => setState(() => items.insert(index, item)),
-                                )));
-                          },
-                          background: DismissibleBackground1(),
-                          secondaryBackground: DismissibleBackground2(),
-                          child: Hero(
-                            tag: index.toString(),
-                            child: FirstScreenHero(
+                color: Colors.transparent,
+                margin: const EdgeInsets.only(top: 0.0, left: 0.0, right: 0.0),
+                child: Container(
+                  //TODO all other things on this page belong here and only here-- do not mess up the search bar
+                  child: ListView.separated(
+                    padding: const EdgeInsets.only(top: 4.0, bottom: 4.0),
+                    itemCount: items.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final item = items[index];
+                      final String title = "${item.title}";
+                      final String note = "${item.note}";
+                      return Column(
+                        children: <Widget>[
+                          FirstScreenTopPadding(),
+                          Dismissible(
+                            key: UniqueKey(),
+                            onDismissed: (direction) {
+                              setState(() {
+                                items.removeAt(index);
+                              });
+                              Scaffold.of(context).showSnackBar(SnackBar(
+                                  content: Text("\"" + title + "\" dismissed."),
+                                  action: SnackBarAction(
+                                    label: "UNDO",
+                                    onPressed: () => setState(
+                                        () => items.insert(index, item)),
+                                  )));
+                            },
+                            background: DismissibleBackground1(),
+                            secondaryBackground: DismissibleBackground2(),
+                            child: Hero(
+                              tag: index.toString(),
+                              child: FirstScreenHero(
                                 FirstScreenListButton(index, item, title, note),
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    );
-                  },
-                  separatorBuilder: (context, index) {return firstScreenDivider();},
+                        ],
+                      );
+                    },
+                    separatorBuilder: (context, index) {
+                      return firstScreenDivider();
+                    },
+                  ),
                 ),
               ),
             ),
-          ),
-          FirstScreenBottomBar(),
-        ],
+            FirstScreenBottomBar(),
+          ],
+        ),
       ),
     );
   }
 }
-
 
 class SecondScreen extends StatefulWidget {
   @override
@@ -117,58 +123,60 @@ class _SecondScreen extends State<SecondScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: SecondScreenAppBar(this.titleController, this.noteController),
-      body: Stack(
-        children: <Widget>[
-          Hero(tag: "addSomething", child: BigPurple()),
-          Column(
-            children: <Widget>[
-              Container(child: SecondScreenTitle(titleController)),
-              SecondScreenNotes(noteController),
-              Expanded(child: SecondScreenSpacer()),
-              Container(
-                height: 236,
-                child: Column(
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        SecondScreenCategory("Required"),
-                      ],
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(left: 20.0, right: 20.0),
-                      alignment: Alignment.topLeft,
-                      child: Wrap(
-                        direction: Axis.horizontal,
+      body: SafeArea(
+        child: Stack(
+          children: <Widget>[
+            Hero(tag: "addSomething", child: BigPurple()),
+            Column(
+              children: <Widget>[
+                Container(child: SecondScreenTitle(titleController)),
+                SecondScreenNotes(noteController),
+                Expanded(child: SecondScreenSpacer()),
+                Container(
+                  height: 236,
+                  child: Column(
+                    children: <Widget>[
+                      Row(
                         children: <Widget>[
-                          SecondScreenIconButton("Add a date"),
+                          SecondScreenCategory("Required"),
                         ],
                       ),
-                    ),
-                    Container(margin: EdgeInsets.only(top: 10.0)),
-                    Row(
-                      children: <Widget>[
-                        SecondScreenCategory("Optional"),
-                      ],
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(left: 20.0, right: 20.0),
-                      alignment: Alignment.topLeft,
-                      child: Wrap(
-                        direction: Axis.horizontal,
+                      Container(
+                        margin: EdgeInsets.only(left: 20.0, right: 20.0),
+                        alignment: Alignment.topLeft,
+                        child: Wrap(
+                          direction: Axis.horizontal,
+                          children: <Widget>[
+                            SecondScreenIconButton("Add a date"),
+                          ],
+                        ),
+                      ),
+                      Container(margin: EdgeInsets.only(top: 10.0)),
+                      Row(
                         children: <Widget>[
-                          SecondScreenIconButton("Add a time"),
-                          SecondScreenIconButton("Add a color"),
-                          SecondScreenIconButton("Add a tag"),
-                          SecondScreenIconButton("Make Priority"),
+                          SecondScreenCategory("Optional"),
                         ],
                       ),
-                    ),
-                  ],
+                      Container(
+                        margin: EdgeInsets.only(left: 20.0, right: 20.0),
+                        alignment: Alignment.topLeft,
+                        child: Wrap(
+                          direction: Axis.horizontal,
+                          children: <Widget>[
+                            SecondScreenIconButton("Add a time"),
+                            SecondScreenIconButton("Add a color"),
+                            SecondScreenIconButton("Add a tag"),
+                            SecondScreenIconButton("Make Priority"),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -184,7 +192,9 @@ class ThirdScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: ThirdScreenAppBar(),
-      body: ThirdScreenBody(index, _selectedTask),
+      body: SafeArea(
+        child: ThirdScreenBody(index, _selectedTask),
+      ),
     );
   }
 }
