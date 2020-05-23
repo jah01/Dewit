@@ -124,14 +124,61 @@ class _SecondScreen extends State<SecondScreen> {
               Container(child: SecondScreenTitle(titleController)),
               SecondScreenNotes(noteController),
               Expanded(child: SecondScreenSpacer()),
-              Text(
-                "Hello",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 30,
+              Container(
+                height: 140,
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              color: DewitColors.darkPurple, width: 2),
+                          color: Colors.transparent,
+                          borderRadius:
+                              new BorderRadius.all(Radius.circular(50.0)),
+                        ),
+                        child: FlatButton.icon(
+                          padding: EdgeInsets.all(0.0),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(48.0),
+                          ),
+                          onPressed: () {
+                            print("test");
+                          },
+                          icon: Padding(
+                            padding: EdgeInsets.only(left: 10.0),
+                            child:
+                                Icon(Icons.add, color: DewitColors.darkPurple),
+                          ),
+                          //child: Text("Hello"),
+                          label: Padding(
+                            padding: EdgeInsets.only(right: 10.0),
+                            child: Text("Add a date",
+                                style:
+                                    TextStyle(color: DewitColors.darkPurple)),
+                          ),
+//                            RichText(
+//                              text: TextSpan(
+//                                style: Theme.of(context).textTheme.body1,
+//                                children: [
+//                                  WidgetSpan(
+//                                    child: Padding(
+//                                      padding: const EdgeInsets.symmetric(horizontal: 2.0),
+//                                      child: Icon(Icons.add),
+//                                    ),
+//                                  ),
+//                                  TextSpan(text: "Add a date"),
+//                                ],
+//                              ),
+//                            ),
+                        ),
+                      ),
+                    ),
+                    Spacer(),
+                    Spacer(),
+                  ],
                 ),
               ),
-              //SecondScreenBottomBar(),
             ],
           ),
         ],
@@ -139,7 +186,6 @@ class _SecondScreen extends State<SecondScreen> {
     );
   }
 }
-
 
 class ThirdScreen extends StatelessWidget {
   final String index;

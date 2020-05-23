@@ -384,8 +384,7 @@ class FirstScreenBottomBar extends StatelessWidget {
                                           //padding: EdgeInsets.all(10.0),
                                           child: Text("Add something!",
                                               style: TextStyle(
-                                                color:
-                                                DewitColors.iconColor,
+                                                color: DewitColors.iconColor,
                                                 fontSize: 18.0,
                                               )),
                                         ),
@@ -530,10 +529,12 @@ class SecondScreenTitle extends StatelessWidget {
         textCapitalization: TextCapitalization.sentences,
         style: TextStyle(
           fontSize: 20,
+          //color: Colors.white,
         ),
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: "Enter your task...",
+          //hintStyle: TextStyle(color: Colors.white),
           counterText: "",
           counterStyle: TextStyle(fontSize: 0),
         ),
@@ -557,14 +558,19 @@ class SecondScreenNotes extends StatelessWidget {
         maxLength: 120,
         maxLengthEnforced: true,
         keyboardType: TextInputType.multiline,
+        minLines: 2,
         maxLines: 4,
         autofocus: true,
         showCursor: true,
         textCapitalization: TextCapitalization.sentences,
-        style: TextStyle(fontSize: 16),
+        style: TextStyle(
+          fontSize: 16,
+          //color: Colors.white,
+        ),
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: "Any short notes?",
+          //hintStyle: TextStyle(color: Colors.white),
           counterText: "",
           counterStyle: TextStyle(fontSize: 0,),
         ),
