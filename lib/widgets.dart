@@ -1,6 +1,7 @@
 import 'package:dewitapp/main.dart';
 import 'package:dewitapp/colors.dart';
 import 'package:dewitapp/data.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -552,7 +553,7 @@ class SecondScreenNotes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0),
+      margin: const EdgeInsets.only(left: 20.0, right: 20.0),
       child: TextField(
         controller: noteController,
         maxLength: 120,
@@ -596,6 +597,66 @@ class SecondScreenSpacer extends StatelessWidget {
   }
 }
 
+
+class SecondScreenCategory extends StatelessWidget {
+  final String text;
+  SecondScreenCategory(this.text);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(left: 28.0, bottom: 10.0),
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: 18,
+          color: DewitColors.darkPurple,
+        ),
+      ),
+    );
+  }
+}
+
+
+class SecondScreenIconButton extends StatelessWidget {
+  final String text;
+  SecondScreenIconButton(this.text);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 10.0, right: 10.0),
+      height: 40,
+      decoration: BoxDecoration(
+        border: Border.all(color: DewitColors.darkPurple, width: 2),
+        color: Colors.transparent,
+        borderRadius: new BorderRadius.all(Radius.circular(50.0)),
+      ),
+      child: FlatButton.icon(
+        padding: EdgeInsets.all(0.0),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(48.0),
+        ),
+        onPressed: () {
+          print("test");
+        },
+        icon: Padding(
+          padding: EdgeInsets.only(left: 4.0, right: 0.0),
+          child: Icon(Icons.add, color: DewitColors.darkPurple, size: 20,),
+        ),
+        label: Padding(
+          padding: EdgeInsets.only(right: 10.0, left: 0.0),
+          child: Text(text,
+              style: TextStyle(
+                color: DewitColors.darkPurple,
+                fontSize: 14,
+              ),
+          ),
+        ),
+      ),
+    );
+  }
+}
 
 class SecondScreenBottomBar extends StatelessWidget {
   @override

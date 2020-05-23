@@ -1,6 +1,7 @@
 import 'package:dewitapp/colors.dart';
 import 'package:dewitapp/widgets.dart';
 import 'package:dewitapp/data.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -125,57 +126,43 @@ class _SecondScreen extends State<SecondScreen> {
               SecondScreenNotes(noteController),
               Expanded(child: SecondScreenSpacer()),
               Container(
-                height: 140,
+                height: 236,
                 child: Column(
                   children: <Widget>[
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                              color: DewitColors.darkPurple, width: 2),
-                          color: Colors.transparent,
-                          borderRadius:
-                              new BorderRadius.all(Radius.circular(50.0)),
-                        ),
-                        child: FlatButton.icon(
-                          padding: EdgeInsets.all(0.0),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(48.0),
-                          ),
-                          onPressed: () {
-                            print("test");
-                          },
-                          icon: Padding(
-                            padding: EdgeInsets.only(left: 10.0),
-                            child:
-                                Icon(Icons.add, color: DewitColors.darkPurple),
-                          ),
-                          //child: Text("Hello"),
-                          label: Padding(
-                            padding: EdgeInsets.only(right: 10.0),
-                            child: Text("Add a date",
-                                style:
-                                    TextStyle(color: DewitColors.darkPurple)),
-                          ),
-//                            RichText(
-//                              text: TextSpan(
-//                                style: Theme.of(context).textTheme.body1,
-//                                children: [
-//                                  WidgetSpan(
-//                                    child: Padding(
-//                                      padding: const EdgeInsets.symmetric(horizontal: 2.0),
-//                                      child: Icon(Icons.add),
-//                                    ),
-//                                  ),
-//                                  TextSpan(text: "Add a date"),
-//                                ],
-//                              ),
-//                            ),
-                        ),
+                    Row(
+                      children: <Widget>[
+                        SecondScreenCategory("Required"),
+                      ],
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(left: 20.0, right: 20.0),
+                      alignment: Alignment.topLeft,
+                      child: Wrap(
+                        direction: Axis.horizontal,
+                        children: <Widget>[
+                          SecondScreenIconButton("Add a date"),
+                        ],
                       ),
                     ),
-                    Spacer(),
-                    Spacer(),
+                    Container(margin: EdgeInsets.only(top: 10.0)),
+                    Row(
+                      children: <Widget>[
+                        SecondScreenCategory("Optional"),
+                      ],
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(left: 20.0, right: 20.0),
+                      alignment: Alignment.topLeft,
+                      child: Wrap(
+                        direction: Axis.horizontal,
+                        children: <Widget>[
+                          SecondScreenIconButton("Add a time"),
+                          SecondScreenIconButton("Add a color"),
+                          SecondScreenIconButton("Add a tag"),
+                          SecondScreenIconButton("Make Priority"),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
