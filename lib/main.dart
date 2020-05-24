@@ -127,54 +127,48 @@ class _SecondScreen extends State<SecondScreen> {
         child: Stack(
           children: <Widget>[
             Hero(tag: "addSomething", child: BigPurple()),
-            Column(
-              children: <Widget>[
-                Container(child: SecondScreenTitle(titleController)),
-                SecondScreenNotes(noteController),
-                Expanded(child: SecondScreenSpacer()),
-                Container(
-                  height: 236,
-                  child: Column(
-                    children: <Widget>[
-                      Row(
+            SecondScreenParent(
+                Column(
+                  children: <Widget>[
+                    Container(child: SecondScreenTitle(titleController)),
+                    SecondScreenNotes(noteController),
+                    SecondScreenSpacer(),
+                    Container(
+                      height: 236,
+                      child: Column(
                         children: <Widget>[
-                          SecondScreenCategory("Required"),
+                          Row(children: <Widget>[SecondScreenCategory("Required")]),
+                          Container(
+                            margin: EdgeInsets.only(left: 20.0, right: 20.0),
+                            alignment: Alignment.topLeft,
+                            child: Wrap(
+                              direction: Axis.horizontal,
+                              children: <Widget>[
+                                SecondScreenIconButton("Add a date", Icons.today, 8.0),
+                              ],
+                            ),
+                          ),
+                          Container(margin: EdgeInsets.only(top: 10.0)),
+                          Row(children: <Widget>[SecondScreenCategory("Optional")]),
+                          Container(
+                            margin: EdgeInsets.only(left: 20.0, right: 20.0),
+                            alignment: Alignment.topLeft,
+                            child: Wrap(
+                              direction: Axis.horizontal,
+                              children: <Widget>[
+                                SecondScreenIconButton("Add a time", Icons.access_time, 8.0),
+                                SecondScreenIconButton("Add a color", Icons.color_lens, 8.0),
+                                SecondScreenIconButton("Add a tag", Icons.label_outline, 8.0),
+                                SecondScreenIconButton("Make Priority", Icons.outlined_flag, 8.0),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
-                      Container(
-                        margin: EdgeInsets.only(left: 20.0, right: 20.0),
-                        alignment: Alignment.topLeft,
-                        child: Wrap(
-                          direction: Axis.horizontal,
-                          children: <Widget>[
-                            SecondScreenIconButton("Add a date"),
-                          ],
-                        ),
-                      ),
-                      Container(margin: EdgeInsets.only(top: 10.0)),
-                      Row(
-                        children: <Widget>[
-                          SecondScreenCategory("Optional"),
-                        ],
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(left: 20.0, right: 20.0),
-                        alignment: Alignment.topLeft,
-                        child: Wrap(
-                          direction: Axis.horizontal,
-                          children: <Widget>[
-                            SecondScreenIconButton("Add a time"),
-                            SecondScreenIconButton("Add a color"),
-                            SecondScreenIconButton("Add a tag"),
-                            SecondScreenIconButton("Make Priority"),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
           ],
         ),
       ),

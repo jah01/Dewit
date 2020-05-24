@@ -461,8 +461,10 @@ class SecondScreenAppBar extends StatelessWidget with PreferredSizeWidget {
           },
         ),
       ),
-      title: Text("Add a task!"),
-      backgroundColor: DewitColors.darkPurple,
+      title: Text("Add a task!",
+        style: TextStyle(color: Colors.white),
+      ),
+      backgroundColor: Color(0xFF1c1d28),
       actions: <Widget>[
         Tooltip(
           message: "Add task",
@@ -503,13 +505,29 @@ class BigPurple extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: DewitColors.lightPurple,
+      color: Color(0xFF393a50),
       width: double.infinity,
       height: double.infinity,
     );
   }
 }
 
+
+class SecondScreenParent extends StatelessWidget {
+  final child;
+  SecondScreenParent(this.child);
+
+  @override
+  Widget build(BuildContext context) {
+    return NotificationListener<OverscrollIndicatorNotification>(
+        onNotification: (OverscrollIndicatorNotification overscroll) {
+          overscroll.disallowGlow();
+        },
+        child: SingleChildScrollView(
+          child: child,
+        ));
+  }
+}
 
 class SecondScreenTitle extends StatelessWidget {
   final titleController;
@@ -530,12 +548,12 @@ class SecondScreenTitle extends StatelessWidget {
         textCapitalization: TextCapitalization.sentences,
         style: TextStyle(
           fontSize: 20,
-          //color: Colors.white,
+          color: Colors.white70,
         ),
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: "Enter your task...",
-          //hintStyle: TextStyle(color: Colors.white),
+          hintStyle: TextStyle(color: Colors.white54),
           counterText: "",
           counterStyle: TextStyle(fontSize: 0),
         ),
@@ -559,19 +577,19 @@ class SecondScreenNotes extends StatelessWidget {
         maxLength: 120,
         maxLengthEnforced: true,
         keyboardType: TextInputType.multiline,
-        minLines: 2,
+        minLines: 4,
         maxLines: 4,
         autofocus: true,
         showCursor: true,
         textCapitalization: TextCapitalization.sentences,
         style: TextStyle(
           fontSize: 16,
-          //color: Colors.white,
+          color: Colors.white70,
         ),
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: "Any short notes?",
-          //hintStyle: TextStyle(color: Colors.white),
+          hintStyle: TextStyle(color: Colors.white54),
           counterText: "",
           counterStyle: TextStyle(fontSize: 0,),
         ),
@@ -586,6 +604,7 @@ class SecondScreenSpacer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
+      height: 40,
       child: FlatButton(
         highlightColor: Colors.transparent,
         splashColor: Colors.transparent,
@@ -610,7 +629,8 @@ class SecondScreenCategory extends StatelessWidget {
         text,
         style: TextStyle(
           fontSize: 18,
-          color: DewitColors.darkPurple,
+          color: Colors.white70,
+          fontWeight: FontWeight.w500,
         ),
       ),
     );
@@ -620,7 +640,9 @@ class SecondScreenCategory extends StatelessWidget {
 
 class SecondScreenIconButton extends StatelessWidget {
   final String text;
-  SecondScreenIconButton(this.text);
+  final IconData ic;
+  final double leftMargin;
+  SecondScreenIconButton(this.text, this.ic, this.leftMargin);
 
   @override
   Widget build(BuildContext context) {
@@ -628,11 +650,13 @@ class SecondScreenIconButton extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 10.0, right: 10.0),
       height: 40,
       decoration: BoxDecoration(
-        border: Border.all(color: DewitColors.darkPurple, width: 2),
+        border: Border.all(color: Colors.white70, width: 2),
         color: Colors.transparent,
         borderRadius: new BorderRadius.all(Radius.circular(50.0)),
       ),
       child: FlatButton.icon(
+        splashColor: Colors.white24,
+        highlightColor: Colors.white24,
         padding: EdgeInsets.all(0.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(48.0),
@@ -641,14 +665,14 @@ class SecondScreenIconButton extends StatelessWidget {
           print("test");
         },
         icon: Padding(
-          padding: EdgeInsets.only(left: 4.0, right: 0.0),
-          child: Icon(Icons.add, color: DewitColors.darkPurple, size: 20,),
+          padding: EdgeInsets.only(left: leftMargin, right: 0.0),
+          child: Icon(ic, color: Colors.white70, size: 20),
         ),
         label: Padding(
           padding: EdgeInsets.only(right: 10.0, left: 0.0),
           child: Text(text,
               style: TextStyle(
-                color: DewitColors.darkPurple,
+                color: Colors.white70,
                 fontSize: 14,
               ),
           ),
