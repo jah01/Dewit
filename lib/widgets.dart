@@ -505,39 +505,54 @@ class SecondScreenAppBar extends StatelessWidget with PreferredSizeWidget {
                   }
                 }
                 String newNote = noteController.text.replaceAll("\n", " ");
-                int len2 = noteController.text.length;
-                if (newNote.length == 0) {
+                print("HERE: " + newNote);
+                int numOfSpaces = 0;
+                for (int i = 0; i < newNote.length; i++) {
+                  if (newNote[i] == ' ') {
+                    numOfSpaces++;
+                  }
+                }
+                if (numOfSpaces == newNote.length) {
                   newNote = null;
                 } else {
-                  while (newNote[len2 - 1] == ' ') {
-                    len2--;
-                    newNote = newNote.substring(0, len2);
-                  }
+                  int len2 = noteController.text.length;
                   if (newNote.length == 0) {
                     newNote = null;
                   } else {
-                    if (newLines.length > 0) {
-                      int i = 0;
-                      while (newLines.length > i && newLines[i] < newNote.length) {
-                        newNote = newNote.substring(0, newLines[i]) + '\n' + newNote.substring(newLines[i] + 1);
-                        i++;
-                      }
-                    }
-                    int startNote = 0;
-                    for (int i = 0; i < newNote.length; i++) {
-                      if (newNote[i] == ' ') {
-                        startNote++;
-                      } else {
-                        break;
-                      }
+                    while (newNote[len2 - 1] == ' ') {
+                      len2--;
+                      newNote = newNote.substring(0, len2);
                     }
                     if (newNote.length == 0) {
                       newNote = null;
                     } else {
-                      newNote = newNote.substring(startNote);
+                      if (newLines.length > 0) {
+                        int i = 0;
+                        while (newLines.length > i &&
+                            newLines[i] < newNote.length) {
+                          newNote = newNote.substring(0, newLines[i]) +
+                              '\n' +
+                              newNote.substring(newLines[i] + 1);
+                          i++;
+                        }
+                      }
+                      int startNote = 0;
+                      for (int i = 0; i < newNote.length; i++) {
+                        if (newNote[i] == ' ') {
+                          startNote++;
+                        } else {
+                          break;
+                        }
+                      }
+                      if (newNote.length == 0) {
+                        newNote = null;
+                      } else {
+                        newNote = newNote.substring(startNote);
+                      }
                     }
                   }
                 }
+                print(newNote);
                 final selectedDate = await getDate(context);
                 if (selectedDate == null) return;
                 items.add(Task(newTitle, newNote));
