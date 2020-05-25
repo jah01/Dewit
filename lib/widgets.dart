@@ -474,20 +474,38 @@ class SecondScreenAppBar extends StatelessWidget with PreferredSizeWidget {
               color: Colors.white,
             ),
             onPressed: () async {
-              if (titleController.text.length == 0) {
+              String newTitle = titleController.text;
+              int len1 = titleController.text.length;
+              while (newTitle[len1 - 1] == ' ') {
+                len1--;
+                newTitle = newTitle.substring(0, len1);
+              }
+              int startTitle = 0;
+              for (int i = 0; i < titleController.text.length; i++) {
+                if (titleController.text[i] == ' ') {
+                  startTitle++;
+                } else {
+                  break;
+                }
+              }
+              newTitle = newTitle.substring(startTitle);
+              if (newTitle.length == 0) {
+                newTitle = null;
+              }
+              if (newTitle == null) {
                 //Scaffold.of(context).showSnackBar(SnackBar(content: Text("You must add something first")));
                 Toast.show("You must add something first", context, duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
               } else {
                 FocusScope.of(context).unfocus();
                 //TODO COME BACK HERE
-                String newTask = titleController.text;
-                String newNote = noteController.text;
-                int len1 = titleController.text.length;
-                int len2 = noteController.text.length;
-                while (newTask[len1 - 1] == ' ') {
-                  len1--;
-                  newTask = newTask.substring(0, len1);
+                List<int> newLines = new List();
+                for (int i = 0; i < noteController.text.length; i++) {
+                  if (noteController.text[i] == '\n') {
+                    newLines.add(i);
+                  }
                 }
+                String newNote = noteController.text.replaceAll("\n", " ");
+                int len2 = noteController.text.length;
                 if (newNote.length == 0) {
                   newNote = null;
                 } else {
@@ -497,11 +515,32 @@ class SecondScreenAppBar extends StatelessWidget with PreferredSizeWidget {
                   }
                   if (newNote.length == 0) {
                     newNote = null;
+                  } else {
+                    if (newLines.length > 0) {
+                      int i = 0;
+                      while (newLines.length > i && newLines[i] < newNote.length) {
+                        newNote = newNote.substring(0, newLines[i]) + '\n' + newNote.substring(newLines[i] + 1);
+                        i++;
+                      }
+                    }
+                    int startNote = 0;
+                    for (int i = 0; i < newNote.length; i++) {
+                      if (newNote[i] == ' ') {
+                        startNote++;
+                      } else {
+                        break;
+                      }
+                    }
+                    if (newNote.length == 0) {
+                      newNote = null;
+                    } else {
+                      newNote = newNote.substring(startNote);
+                    }
                   }
                 }
                 final selectedDate = await getDate(context);
                 if (selectedDate == null) return;
-                items.add(Task(titleController.text, noteController.text));
+                items.add(Task(newTitle, newNote));
                 print(selectedDate);
                   SchedulerBinding.instance.addPostFrameCallback((_) {
                     Navigator.of(context).pushNamedAndRemoveUntil(
