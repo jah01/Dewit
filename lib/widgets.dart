@@ -499,8 +499,9 @@ class SecondScreenAppBar extends StatelessWidget with PreferredSizeWidget {
               } else {
                 FocusScope.of(context).unfocus();
                 //TODO COME BACK HERE
+                //working with "optional" notes
                 String condensed = noteController.text;
-                String newNote = null;
+                String newNote;
                 int leading = 0;
                 for (int i = 0; i < noteController.text.length; i++) {
                   if (condensed[i] == ' ' || condensed[i] == '\n') {
