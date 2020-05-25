@@ -304,7 +304,7 @@ class DismissibleBackground1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: DewitColors.darkPurple,
+      color: DewitColors.lightPurple,
       padding: EdgeInsets.symmetric(horizontal: 20),
       alignment: AlignmentDirectional.centerStart,
       child: Icon(
@@ -320,7 +320,7 @@ class DismissibleBackground2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: DewitColors.darkPurple,
+      color: DewitColors.lightPurple,
       padding: EdgeInsets.symmetric(horizontal: 20),
       alignment: AlignmentDirectional.centerEnd,
       child: Icon(
@@ -494,73 +494,44 @@ class SecondScreenAppBar extends StatelessWidget with PreferredSizeWidget {
               }
               if (newTitle == null) {
                 //Scaffold.of(context).showSnackBar(SnackBar(content: Text("You must add something first")));
-                Toast.show("You must add something first", context, duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
+                Toast.show("You must add something first", context,
+                    duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
               } else {
                 FocusScope.of(context).unfocus();
                 //TODO COME BACK HERE
-                List<int> newLines = new List();
+                String condensed = noteController.text;
+                String newNote = null;
+                int leading = 0;
                 for (int i = 0; i < noteController.text.length; i++) {
-                  if (noteController.text[i] == '\n') {
-                    newLines.add(i);
-                  }
-                }
-                String newNote = noteController.text.replaceAll("\n", " ");
-                print("HERE: " + newNote);
-                int numOfSpaces = 0;
-                for (int i = 0; i < newNote.length; i++) {
-                  if (newNote[i] == ' ') {
-                    numOfSpaces++;
-                  }
-                }
-                if (numOfSpaces == newNote.length) {
-                  newNote = null;
-                } else {
-                  int len2 = noteController.text.length;
-                  if (newNote.length == 0) {
-                    newNote = null;
+                  if (condensed[i] == ' ' || condensed[i] == '\n') {
+                    leading++;
                   } else {
-                    while (newNote[len2 - 1] == ' ') {
-                      len2--;
-                      newNote = newNote.substring(0, len2);
-                    }
-                    if (newNote.length == 0) {
-                      newNote = null;
+                    break;
+                  }
+                }
+                condensed = condensed.substring(leading);
+                int trailing = 0;
+                if (!(condensed.length == 0)) {
+                  for (int i = condensed.length; i > 0; i--) {
+                    if (condensed[i - 1] == ' ' || condensed[i - 1] == '\n') {
+                      trailing++;
                     } else {
-                      if (newLines.length > 0) {
-                        int i = 0;
-                        while (newLines.length > i &&
-                            newLines[i] < newNote.length) {
-                          newNote = newNote.substring(0, newLines[i]) +
-                              '\n' +
-                              newNote.substring(newLines[i] + 1);
-                          i++;
-                        }
-                      }
-                      int startNote = 0;
-                      for (int i = 0; i < newNote.length; i++) {
-                        if (newNote[i] == ' ') {
-                          startNote++;
-                        } else {
-                          break;
-                        }
-                      }
-                      if (newNote.length == 0) {
-                        newNote = null;
-                      } else {
-                        newNote = newNote.substring(startNote);
-                      }
+                      break;
                     }
                   }
                 }
-                print(newNote);
+                condensed = condensed.substring(0, condensed.length - trailing);
+                if (condensed.length > 0) {
+                  newNote = condensed;
+                }
                 final selectedDate = await getDate(context);
                 if (selectedDate == null) return;
                 items.add(Task(newTitle, newNote));
                 print(selectedDate);
-                  SchedulerBinding.instance.addPostFrameCallback((_) {
-                    Navigator.of(context).pushNamedAndRemoveUntil(
-                        "/", (Route<dynamic> route) => false);
-                  });
+                SchedulerBinding.instance.addPostFrameCallback((_) {
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                      "/", (Route<dynamic> route) => false);
+                });
               }
             },
           ),
