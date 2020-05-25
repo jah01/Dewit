@@ -122,6 +122,7 @@ class _SecondScreen extends State<SecondScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: DewitColors.lightPurple,
       appBar: SecondScreenAppBar(this.titleController, this.noteController),
       body: SafeArea(
         child: Stack(
@@ -178,7 +179,7 @@ class _SecondScreen extends State<SecondScreen> {
 
 class ThirdScreen extends StatelessWidget {
   final String index;
-  final Tasks _selectedTask;
+  final Task _selectedTask;
 
   ThirdScreen(this.index, this._selectedTask);
 

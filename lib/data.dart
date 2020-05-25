@@ -16,14 +16,19 @@ const List<Select> selection = const <Select>[
 ];
 
 
-List<Tasks> items = new List();
+List<Task> items = new List();
 
 
-class Tasks {
+class Task {
   final String title;
   final String note;
+  final DateTime date;
+  final DateTime time;
+  final Color color;
+  final String tag;
+  final bool priority;
 
-  Tasks(this.title, this.note);
+  Task(this.title, this.note, [this.date, this.time, this.color, this.tag, this.priority]);
 }
 
 Future<DateTime> getDate(BuildContext context) {
@@ -37,7 +42,7 @@ Future<DateTime> getDate(BuildContext context) {
 
 
 Future<DateTime> getTime(BuildContext context) {
-  showDatePicker(
+  return showDatePicker(
     context: context,
     initialDate: DateTime.now().add(Duration(seconds: 1)),
     firstDate: DateTime.now(),

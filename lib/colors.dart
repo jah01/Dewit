@@ -69,13 +69,16 @@ import 'package:flutter/material.dart';
 
 class DewitColors {
   static const coalBlack = const Color(0xFF121212);
-  static const background1 = const Color(0xFF323232);
-  static const background = const Color(0xFF222222);
+  static const background = const Color(0xFF323232);
+  static const background1 = const Color(0xFF222222);
   static const lightGray = const Color(0xFFF1F1F1);
   static const darkGray = const Color(0xFFA2A2A2);
-  static const lightPurple = const Color(0xFFC7C9ED);
-  static const darkPurple = const Color(0xFF9092CA);
+  static const oldLightPurple = const Color(0xFFC7C9ED);
+  static const oldDarkPurple = const Color(0xFF9092CA);
   static const darkPurple1 = const Color(0xFF150021);
   static const lightPurple1 = const Color(0xFF382345);
-  static const iconColor = const Color(0xFF5E5E5E);
+  static const lightPurple = const Color(0xFF393a50);
+  static const darkPurple = const Color(0xFF1c1d28);
+  static const oldIconColor = const Color(0xFF5E5E5E);
+  static const iconColor = const Color(0xFFF1F1F1);
 }

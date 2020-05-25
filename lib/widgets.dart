@@ -190,7 +190,7 @@ class FirstScreenHero extends StatelessWidget {
 
 class FirstScreenListButton extends StatelessWidget {
   final int index;
-  final Tasks item;
+  final Task item;
   final String title;
   final String note;
   FirstScreenListButton(this.index, this.item, this.title, this.note);
@@ -480,9 +480,28 @@ class SecondScreenAppBar extends StatelessWidget with PreferredSizeWidget {
               } else {
                 FocusScope.of(context).unfocus();
                 //TODO COME BACK HERE
+                String newTask = titleController.text;
+                String newNote = noteController.text;
+                int len1 = titleController.text.length;
+                int len2 = noteController.text.length;
+                while (newTask[len1 - 1] == ' ') {
+                  len1--;
+                  newTask = newTask.substring(0, len1);
+                }
+                if (newNote.length == 0) {
+                  newNote = null;
+                } else {
+                  while (newNote[len2 - 1] == ' ') {
+                    len2--;
+                    newNote = newNote.substring(0, len2);
+                  }
+                  if (newNote.length == 0) {
+                    newNote = null;
+                  }
+                }
                 final selectedDate = await getDate(context);
                 if (selectedDate == null) return;
-                items.add(Tasks(titleController.text, noteController.text));
+                items.add(Task(titleController.text, noteController.text));
                 print(selectedDate);
                   SchedulerBinding.instance.addPostFrameCallback((_) {
                     Navigator.of(context).pushNamedAndRemoveUntil(
@@ -682,6 +701,7 @@ class SecondScreenIconButton extends StatelessWidget {
   }
 }
 
+
 class SecondScreenBottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -813,8 +833,8 @@ class ThirdScreenAppBar extends StatelessWidget with PreferredSizeWidget {
 
 
 class ThirdScreenBody extends StatelessWidget {
-  String index;
-  Tasks _selectedTask;
+  final String index;
+  final Task _selectedTask;
   ThirdScreenBody(this.index, this._selectedTask);
 
   @override
