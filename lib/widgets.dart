@@ -416,6 +416,8 @@ class FirstScreenBottomBar extends StatelessWidget {
                                     ),
                                     onPressed: () {
                                       //TODO this button must do something
+                                      //THIS IS TEMPORARY
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => GoalsScreen()));
                                     },
                                     padding: EdgeInsets.all(0.0),
                                     child: Icon(
