@@ -460,8 +460,8 @@ class SecondScreenAppBar extends StatelessWidget with PreferredSizeWidget {
             color: Colors.white,
           ),
           onPressed: () {
-            selectedDate = null;
-            selectedTime = null;
+//            selectedDate = null;
+//            selectedTime = null;
             Navigator.pop(context);
           },
         ),
@@ -727,6 +727,10 @@ class _SecondScreenIconButton extends State<SecondScreenIconButton> {
   final Key key;
   _SecondScreenIconButton(this.text, this.ic, this.leftMargin, this.key);
   bool hasDate = false;
+  String del = "";
+
+  var selectedDate = null;
+  var selectedTime = null;
 
   @override
   Widget build(BuildContext context) {
@@ -749,6 +753,7 @@ class _SecondScreenIconButton extends State<SecondScreenIconButton> {
         onPressed: () async {
           FocusScope.of(context).unfocus();
           if (key == Key("date")) {
+            del = "Delete date";
               if (selectedDate == null) {
                 selectedDate = await selectDate(context);
               } else {
@@ -758,12 +763,16 @@ class _SecondScreenIconButton extends State<SecondScreenIconButton> {
                 hasDate = (selectedDate != null);
               });
           } else if (key == Key("time")) {
+            del = "Delete time";
             selectedTime = await selectTime(context);
           } else if (key == Key("color")) {
+            del = "Edit color";
 
           } else if (key == Key("tag")) {
+            del = "Edit tags";
 
           } else if (key == Key("priority")) {
+            del = "Delete priority";
 
           } else {
             print("ERROR");
@@ -771,11 +780,17 @@ class _SecondScreenIconButton extends State<SecondScreenIconButton> {
         },
         icon: Padding(
           padding: EdgeInsets.only(left: leftMargin, right: 0.0),
-          child: Icon(ic, color: Colors.white70, size: 20),
+          child: Icon(
+              hasDate ? Icons.clear : ic,
+              color: Colors.white70,
+              size: 20
+          ),
         ),
         label: Padding(
           padding: EdgeInsets.only(right: 10.0, left: 0.0),
-          child: Text(text,
+          child: Text(
+
+            hasDate ? del : text,
               style: TextStyle(
                 color: Colors.white70,
                 fontSize: 14,
