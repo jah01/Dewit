@@ -28,7 +28,7 @@ class Task {
   final String tag;
   final bool priority;
 
-  Task(this.title, this.note, [this.date, this.time, this.color, this.tag, this.priority]);
+  Task(this.title, this.note, this.date, [this.time, this.color, this.tag, this.priority]);
 }
 
 
@@ -49,7 +49,7 @@ Future<DateTime> selectDate(BuildContext context) {
 Future<TimeOfDay> selectTime(BuildContext context) {
   return showTimePicker(
     context: context,
-    initialTime: TimeOfDay(hour: DateTime.now().hour, minute: DateTime.now().minute),
+    initialTime: TimeOfDay(hour: 0, minute: 0),
   );
 }
 

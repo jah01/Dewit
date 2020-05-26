@@ -459,6 +459,8 @@ class SecondScreenAppBar extends StatelessWidget with PreferredSizeWidget {
             color: Colors.white,
           ),
           onPressed: () {
+            selectedDate = null;
+            selectedTime = null;
             Navigator.pop(context);
           },
         ),
@@ -533,12 +535,25 @@ class SecondScreenAppBar extends StatelessWidget with PreferredSizeWidget {
                 }
 //                final selectedDate = await getDate(context);
 //                if (selectedDate == null) return;
-                items.add(Task(newTitle, newNote));
-//                print(selectedDate);
-                SchedulerBinding.instance.addPostFrameCallback((_) {
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                      "/", (Route<dynamic> route) => false);
-                });
+                if (selectedDate == null) {
+                  Toast.show("You must add a date first", context,
+                      duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
+                  return;
+                } else {
+                  items.add(Task(newTitle, newNote, selectedDate));
+                  SchedulerBinding.instance.addPostFrameCallback((_) {
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                        "/", (Route<dynamic> route) => false);
+                  });
+                  print(
+                    selectedDate.year.toString() + "\n" +
+                        selectedDate.month.toString() + "\n" +
+                        selectedDate.day.toString() + "\n" +
+                        selectedTime.hour.toString() + "\n" +
+                        selectedTime.minute.toString()
+                  );
+                  selectedDate = null;
+                }
               }
             },
           ),
@@ -717,10 +732,12 @@ class SecondScreenIconButton extends StatelessWidget {
           FocusScope.of(context).unfocus();
           if (key == Key("date")) {
             selectedDate = await selectDate(context);
-            print(selectedDate);
+            if (selectedDate != null) {
+
+            }
+            //print(selectedDate);
           } else if (key == Key("time")) {
             selectedTime = await selectTime(context);
-            print(selectedTime);
           } else if (key == Key("color")) {
 
           } else if (key == Key("tag")) {
