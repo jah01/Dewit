@@ -478,21 +478,25 @@ class SecondScreenAppBar extends StatelessWidget with PreferredSizeWidget {
             onPressed: () async {
               String newTitle = titleController.text;
               int len1 = titleController.text.length;
-              while (newTitle[len1 - 1] == ' ') {
-                len1--;
-                newTitle = newTitle.substring(0, len1);
-              }
-              int startTitle = 0;
-              for (int i = 0; i < titleController.text.length; i++) {
-                if (titleController.text[i] == ' ') {
-                  startTitle++;
-                } else {
-                  break;
-                }
-              }
-              newTitle = newTitle.substring(startTitle);
-              if (newTitle.length == 0) {
+              if (len1 == 0) {
                 newTitle = null;
+              } else {
+                while (newTitle[len1 - 1] == ' ') {
+                  len1--;
+                  newTitle = newTitle.substring(0, len1);
+                }
+                int startTitle = 0;
+                for (int i = 0; i < titleController.text.length; i++) {
+                  if (titleController.text[i] == ' ') {
+                    startTitle++;
+                  } else {
+                    break;
+                  }
+                }
+                newTitle = newTitle.substring(startTitle);
+                if (newTitle.length == 0) {
+                  newTitle = null;
+                }
               }
               if (newTitle == null) {
                 //Scaffold.of(context).showSnackBar(SnackBar(content: Text("You must add something first")));
