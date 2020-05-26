@@ -31,12 +31,25 @@ class Task {
   Task(this.title, this.note, [this.date, this.time, this.color, this.tag, this.priority]);
 }
 
-Future<DateTime> getDate(BuildContext context) {
+
+var selectedDate;
+var selectedTime;
+
+
+Future<DateTime> selectDate(BuildContext context) {
   return showDatePicker(
-      context: context,
-      initialDate: DateTime.now().add(Duration(seconds: 1)),
-      firstDate: DateTime.now(),
-      lastDate: DateTime(2150),
+    context: context,
+    initialDate: DateTime.now().add(Duration(seconds: 1)),
+    firstDate: DateTime.now(),
+    lastDate: DateTime(2150),
+  );
+}
+
+
+Future<TimeOfDay> selectTime(BuildContext context) {
+  return showTimePicker(
+    context: context,
+    initialTime: TimeOfDay(hour: DateTime.now().hour, minute: DateTime.now().minute),
   );
 }
 

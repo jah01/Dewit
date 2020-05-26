@@ -35,6 +35,9 @@ dependencies:
   # This is for the auto-sizing of task text
   auto_size_text: ^2.1.0
 
+  # This is for the date and time
+  intl: ^0.15.8
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

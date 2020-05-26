@@ -531,10 +531,10 @@ class SecondScreenAppBar extends StatelessWidget with PreferredSizeWidget {
                 if (condensed.length > 0) {
                   newNote = condensed;
                 }
-                final selectedDate = await getDate(context);
-                if (selectedDate == null) return;
+//                final selectedDate = await getDate(context);
+//                if (selectedDate == null) return;
                 items.add(Task(newTitle, newNote));
-                print(selectedDate);
+//                print(selectedDate);
                 SchedulerBinding.instance.addPostFrameCallback((_) {
                   Navigator.of(context).pushNamedAndRemoveUntil(
                       "/", (Route<dynamic> route) => false);
@@ -693,7 +693,8 @@ class SecondScreenIconButton extends StatelessWidget {
   final String text;
   final IconData ic;
   final double leftMargin;
-  SecondScreenIconButton(this.text, this.ic, this.leftMargin);
+  final Key key;
+  SecondScreenIconButton(this.text, this.ic, this.leftMargin, this.key);
 
   @override
   Widget build(BuildContext context) {
@@ -712,8 +713,23 @@ class SecondScreenIconButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(48.0),
         ),
-        onPressed: () {
-          print("test");
+        onPressed: () async {
+          FocusScope.of(context).unfocus();
+          if (key == Key("date")) {
+            selectedDate = await selectDate(context);
+            print(selectedDate);
+          } else if (key == Key("time")) {
+            selectedTime = await selectTime(context);
+            print(selectedTime);
+          } else if (key == Key("color")) {
+
+          } else if (key == Key("tag")) {
+
+          } else if (key == Key("priority")) {
+
+          } else {
+            print("ERROR");
+          }
         },
         icon: Padding(
           padding: EdgeInsets.only(left: leftMargin, right: 0.0),

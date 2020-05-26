@@ -145,7 +145,7 @@ class _SecondScreen extends State<SecondScreen> {
                             child: Wrap(
                               direction: Axis.horizontal,
                               children: <Widget>[
-                                SecondScreenIconButton("Add a date", Icons.today, 8.0),
+                                SecondScreenIconButton("Add a date", Icons.today, 8.0, Key("date")),
                               ],
                             ),
                           ),
@@ -157,10 +157,10 @@ class _SecondScreen extends State<SecondScreen> {
                             child: Wrap(
                               direction: Axis.horizontal,
                               children: <Widget>[
-                                SecondScreenIconButton("Add a time", Icons.access_time, 8.0),
-                                SecondScreenIconButton("Add a color", Icons.color_lens, 8.0),
-                                SecondScreenIconButton("Add a tag", Icons.label_outline, 8.0),
-                                SecondScreenIconButton("Make Priority", Icons.outlined_flag, 8.0),
+                                SecondScreenIconButton("Add a time", Icons.access_time, 8.0, Key("time")),
+                                SecondScreenIconButton("Add a color", Icons.color_lens, 8.0, Key("color")),
+                                SecondScreenIconButton("Add a tag", Icons.label_outline, 8.0, Key("tag")),
+                                SecondScreenIconButton("Make Priority", Icons.outlined_flag, 8.0, Key("priority")),
                               ],
                             ),
                           ),
