@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:toast/toast.dart';
 
 
@@ -545,14 +546,16 @@ class SecondScreenAppBar extends StatelessWidget with PreferredSizeWidget {
                     Navigator.of(context).pushNamedAndRemoveUntil(
                         "/", (Route<dynamic> route) => false);
                   });
-                  print(
-                    selectedDate.year.toString() + "\n" +
-                        selectedDate.month.toString() + "\n" +
-                        selectedDate.day.toString() + "\n" +
-                        selectedTime.hour.toString() + "\n" +
-                        selectedTime.minute.toString()
-                  );
+                  //for later
+//                  print(
+//                    selectedDate.year.toString() + "\n" +
+//                        selectedDate.month.toString() + "\n" +
+//                        selectedDate.day.toString() + "\n" +
+//                        selectedTime.hour.toString() + "\n" +
+//                        selectedTime.minute.toString()
+//                  );
                   selectedDate = null;
+                  selectedTime = null;
                 }
               }
             },
@@ -704,12 +707,26 @@ class SecondScreenCategory extends StatelessWidget {
 }
 
 
-class SecondScreenIconButton extends StatelessWidget {
+class SecondScreenIconButton extends StatefulWidget {
+
   final String text;
   final IconData ic;
   final double leftMargin;
   final Key key;
   SecondScreenIconButton(this.text, this.ic, this.leftMargin, this.key);
+
+  @override
+  _SecondScreenIconButton createState() => new _SecondScreenIconButton(this.text, this.ic, this.leftMargin, this.key);
+}
+
+
+class _SecondScreenIconButton extends State<SecondScreenIconButton> {
+  final String text;
+  final IconData ic;
+  final double leftMargin;
+  final Key key;
+  _SecondScreenIconButton(this.text, this.ic, this.leftMargin, this.key);
+  bool hasDate = false;
 
   @override
   Widget build(BuildContext context) {
@@ -718,7 +735,8 @@ class SecondScreenIconButton extends StatelessWidget {
       height: 40,
       decoration: BoxDecoration(
         border: Border.all(color: Colors.white70, width: 2),
-        color: Colors.transparent,
+        color: (hasDate) ? Colors.white24 : Colors.transparent,
+        //color: Colors.transparent,
         borderRadius: new BorderRadius.all(Radius.circular(50.0)),
       ),
       child: FlatButton.icon(
@@ -731,11 +749,14 @@ class SecondScreenIconButton extends StatelessWidget {
         onPressed: () async {
           FocusScope.of(context).unfocus();
           if (key == Key("date")) {
-            selectedDate = await selectDate(context);
-            if (selectedDate != null) {
-
-            }
-            //print(selectedDate);
+              if (selectedDate == null) {
+                selectedDate = await selectDate(context);
+              } else {
+                selectedDate = null;
+              }
+              setState(() {
+                hasDate = (selectedDate != null);
+              });
           } else if (key == Key("time")) {
             selectedTime = await selectTime(context);
           } else if (key == Key("color")) {
