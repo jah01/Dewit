@@ -65,13 +65,17 @@ void resetAll() {
   selectedTime = null;
   hasDate = false;
   finalDate = null;
+  finalTime = null;
+  hasTime = false;
 }
 
 
 var selectedDate;
 var finalDate;
 var selectedTime;
+var finalTime;
 bool hasDate = false;
+bool hasTime = false;
 
 Future<DateTime> selectDate(BuildContext context) {
   return showDatePicker(

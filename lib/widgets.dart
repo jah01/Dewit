@@ -460,8 +460,6 @@ class SecondScreenAppBar extends StatelessWidget with PreferredSizeWidget {
             color: Colors.white,
           ),
           onPressed: () {
-//            selectedDate = null;
-//            selectedTime = null;
             Navigator.pop(context);
           },
         ),
@@ -534,8 +532,6 @@ class SecondScreenAppBar extends StatelessWidget with PreferredSizeWidget {
                 if (condensed.length > 0) {
                   newNote = condensed;
                 }
-//                final selectedDate = await getDate(context);
-//                if (selectedDate == null) return;
                 if (!hasDate) {
                   Toast.show("You must add a date first", context,
                       duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
@@ -727,9 +723,7 @@ class _SecondScreenIconButton extends State<SecondScreenIconButton> {
   final Key key;
   _SecondScreenIconButton(this.text, this.ic, this.leftMargin, this.key);
   String del = "";
-
-  var selectedDate = null;
-  var selectedTime = null;
+  bool isSelected = false;
 
   @override
   Widget build(BuildContext context) {
@@ -738,7 +732,7 @@ class _SecondScreenIconButton extends State<SecondScreenIconButton> {
       height: 40,
       decoration: BoxDecoration(
         border: Border.all(color: Colors.white70, width: 2),
-        color: (hasDate) ? Colors.white24 : Colors.transparent,
+        color: isSelected ? Colors.white24 : Colors.transparent,
         //color: Colors.transparent,
         borderRadius: new BorderRadius.all(Radius.circular(50.0)),
       ),
@@ -765,10 +759,23 @@ class _SecondScreenIconButton extends State<SecondScreenIconButton> {
               }
               setState(() {
                 hasDate = (selectedDate != null);
+                isSelected = hasDate;
               });
           } else if (key == Key("time")) {
-            del = "Delete time";
-            selectedTime = await selectTime(context);
+            if (selectedTime == null) {
+              selectedTime = await selectTime(context);
+              if (selectedTime != null) {
+                del = selectedTime.hour.toString() + ":" +
+                    selectedTime.minute.toString();
+              }
+              finalTime = selectedTime;
+            } else {
+              selectedTime = null;
+            }
+            setState(() {
+              hasTime = (selectedTime != null);
+              isSelected = hasTime;
+            });
           } else if (key == Key("color")) {
             del = "Edit color";
 
@@ -785,7 +792,7 @@ class _SecondScreenIconButton extends State<SecondScreenIconButton> {
         icon: Padding(
           padding: EdgeInsets.only(left: leftMargin, right: 0.0),
           child: Icon(
-              hasDate ? Icons.clear : ic,
+              isSelected ? Icons.clear : ic,
               color: Colors.white70,
               size: 20
           ),
@@ -794,7 +801,7 @@ class _SecondScreenIconButton extends State<SecondScreenIconButton> {
           padding: EdgeInsets.only(right: 10.0, left: 0.0),
           child: Text(
 
-            hasDate ? del : text,
+            isSelected ? del : text,
               style: TextStyle(
                 color: Colors.white70,
                 fontSize: 14,
