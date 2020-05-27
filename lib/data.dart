@@ -28,11 +28,40 @@ class Task {
   final String tag;
   final bool priority;
 
+  String get getTitle {
+    return title;
+  }
+
+  String get getNote {
+    return note;
+  }
+
+  DateTime get getDate {
+    return date;
+  }
+
+  DateTime get getTime {
+    return time;
+  }
+
+  Color get getColor {
+    return color;
+  }
+
+  String get getTag {
+    return tag;
+  }
+
+  bool get getPriority {
+    return priority;
+  }
+
   Task(this.title, this.note, this.date, [this.time, this.color, this.tag, this.priority]);
 }
 
 
 var selectedDate;
+var finalDate;
 var selectedTime;
 bool hasDate = false;
 

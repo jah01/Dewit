@@ -541,7 +541,7 @@ class SecondScreenAppBar extends StatelessWidget with PreferredSizeWidget {
                       duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
                   return;
                 } else {
-                  items.add(Task(newTitle, newNote, selectedDate));
+                  items.add(Task(newTitle, newNote, finalDate));
                   SchedulerBinding.instance.addPostFrameCallback((_) {
                     Navigator.of(context).pushNamedAndRemoveUntil(
                         "/", (Route<dynamic> route) => false);
@@ -753,9 +753,12 @@ class _SecondScreenIconButton extends State<SecondScreenIconButton> {
         onPressed: () async {
           FocusScope.of(context).unfocus();
           if (key == Key("date")) {
-            del = "Delete date";
               if (selectedDate == null) {
                 selectedDate = await selectDate(context);
+                del = selectedDate.month.toString() + "/" +
+                        selectedDate.day.toString() + "/" +
+                        selectedDate.year.toString();
+                finalDate = selectedDate;
               } else {
                 selectedDate = null;
               }
