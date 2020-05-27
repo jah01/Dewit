@@ -554,9 +554,7 @@ class SecondScreenAppBar extends StatelessWidget with PreferredSizeWidget {
 //                        selectedTime.hour.toString() + "\n" +
 //                        selectedTime.minute.toString()
 //                  );
-                  selectedDate = null;
-                  selectedTime = null;
-                  hasDate = false;
+                  //resetAll();
                 }
               }
             },

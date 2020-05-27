@@ -60,6 +60,14 @@ class Task {
 }
 
 
+void resetAll() {
+  selectedDate = null;
+  selectedTime = null;
+  hasDate = false;
+  finalDate = null;
+}
+
+
 var selectedDate;
 var finalDate;
 var selectedTime;

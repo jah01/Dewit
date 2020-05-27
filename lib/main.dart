@@ -121,6 +121,7 @@ class _SecondScreen extends State<SecondScreen> {
 
   @override
   Widget build(BuildContext context) {
+    resetAll();
     return Scaffold(
       backgroundColor: DewitColors.lightPurple,
       appBar: SecondScreenAppBar(this.titleController, this.noteController),
