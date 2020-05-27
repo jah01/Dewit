@@ -536,7 +536,7 @@ class SecondScreenAppBar extends StatelessWidget with PreferredSizeWidget {
                 }
 //                final selectedDate = await getDate(context);
 //                if (selectedDate == null) return;
-                if (selectedDate == null) {
+                if (!hasDate) {
                   Toast.show("You must add a date first", context,
                       duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
                   return;
@@ -556,6 +556,7 @@ class SecondScreenAppBar extends StatelessWidget with PreferredSizeWidget {
 //                  );
                   selectedDate = null;
                   selectedTime = null;
+                  hasDate = false;
                 }
               }
             },
@@ -726,7 +727,6 @@ class _SecondScreenIconButton extends State<SecondScreenIconButton> {
   final double leftMargin;
   final Key key;
   _SecondScreenIconButton(this.text, this.ic, this.leftMargin, this.key);
-  bool hasDate = false;
   String del = "";
 
   var selectedDate = null;

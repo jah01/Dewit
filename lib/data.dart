@@ -34,7 +34,7 @@ class Task {
 
 var selectedDate;
 var selectedTime;
-
+bool hasDate = false;
 
 Future<DateTime> selectDate(BuildContext context) {
   return showDatePicker(
