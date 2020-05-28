@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:toast/toast.dart';
 
 
@@ -765,8 +766,19 @@ class _SecondScreenIconButton extends State<SecondScreenIconButton> {
             if (selectedTime == null) {
               selectedTime = await selectTime(context);
               if (selectedTime != null) {
-                del = selectedTime.hour.toString() + ":" +
-                    selectedTime.minute.toString();
+                final f = new NumberFormat("00");
+                String format(num n) {
+                  final s = f.format(n);
+                  return s;
+                }
+                int hour = selectedTime.hour;
+                String ending = "AM";
+                if (hour > 12) {
+                  hour -= 12;
+                  ending = "PM";
+                }
+                del = hour.toString() + ":" +
+                    format(selectedTime.minute) + " " + ending;
               }
               finalTime = selectedTime;
             } else {
