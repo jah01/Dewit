@@ -77,6 +77,7 @@ void resetAll() {
   dateAndTime = null;
   selectedColor = null;
   createdTags = null;
+  isPriority = false;
 }
 
 
@@ -89,6 +90,7 @@ bool hasTime = false;
 var dateAndTime;
 var selectedColor;
 var createdTags;
+bool isPriority = false;
 
 Future<DateTime> selectDate(BuildContext context) {
   return showDatePicker(

@@ -547,7 +547,7 @@ class SecondScreenAppBar extends StatelessWidget with PreferredSizeWidget {
                       duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
                   return;
                 } else {
-                  print(newTitle + " " + newNote.toString() + " " + dateAndTime.toString() + " " + selectedColor.toString());
+                  print(newTitle + " " + newNote.toString() + " " + dateAndTime.toString() + " " + selectedColor.toString() + " " + createdTags.toString() + " " + isPriority.toString());
                   items.add(Task(newTitle, newNote, dateAndTime));
                   SchedulerBinding.instance.addPostFrameCallback((_) {
                     Navigator.of(context).pushNamedAndRemoveUntil(
@@ -829,27 +829,18 @@ class _SecondScreenIconButton extends State<SecondScreenIconButton> {
               isSelected = (createdTags.length != 0);
             });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           } else if (key == Key("priority")) {
             altIcon = Icons.clear;
             del = "Delete priority";
+
+            if (isPriority == false) {
+              isPriority = true;
+            } else {
+              isPriority = false;
+            }
+            setState(() {
+              isSelected = isPriority;
+            });
 
           } else {
             print("ERROR");
