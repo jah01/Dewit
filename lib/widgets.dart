@@ -553,15 +553,6 @@ class SecondScreenAppBar extends StatelessWidget with PreferredSizeWidget {
                     Navigator.of(context).pushNamedAndRemoveUntil(
                         "/", (Route<dynamic> route) => false);
                   });
-                  //for later
-//                  print(
-//                    selectedDate.year.toString() + "\n" +
-//                        selectedDate.month.toString() + "\n" +
-//                        selectedDate.day.toString() + "\n" +
-//                        selectedTime.hour.toString() + "\n" +
-//                        selectedTime.minute.toString()
-//                  );
-                  //resetAll();
                 }
               }
             },
@@ -771,6 +762,7 @@ class _SecondScreenIconButton extends State<SecondScreenIconButton> {
                 hasDate = (selectedDate != null);
                 isSelected = hasDate;
               });
+
           } else if (key == Key("time")) {
             if (selectedTime == null) {
               selectedTime = await selectTime(context);
@@ -801,8 +793,75 @@ class _SecondScreenIconButton extends State<SecondScreenIconButton> {
               hasTime = (selectedTime != null);
               isSelected = hasTime;
             });
+
           } else if (key == Key("color")) {
-            del = "Edit color";
+
+            const op1 = "first";
+            const op2 = "second";
+            String selectedColor;
+
+            Future<String> selectColor() async {
+              switch (await showDialog<String>(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return SimpleDialog(
+                      title: const Text("Select a color"),
+                      children: <Widget>[
+                        SimpleDialogOption(
+                          onPressed: () { Navigator.pop(context, op1); },
+                          child: const Text("Blue"),
+                        ),
+                        SimpleDialogOption(
+                          onPressed: () { Navigator.pop(context, op2); },
+                          child: const Text("Purple"),
+                        ),
+                      ],
+                    );
+                  }
+              )) {
+                case op1:
+                  selectedColor = op1;
+                  break;
+                case op2:
+                  selectedColor = op2;
+                  break;
+              }
+            }
+
+
+
+
+
+//            del = "Edit color";
+//            await selectColor();
+//            print(selectedColor);
+//            isSelected = true;
+
+
+
+            if (!isSelected) {
+              await selectColor();
+              if (selectedColor != null) {
+                del = selectedColor;
+                print("test");
+              }
+              //finalDate = selectedDate;
+            } else {
+              isSelected = false;
+            }
+            setState(() {
+              isSelected = (selectedColor != null);
+            });
+
+
+
+
+
+
+
+
+
+
 
           } else if (key == Key("tag")) {
             del = "Edit tags";
