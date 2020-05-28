@@ -725,6 +725,7 @@ class _SecondScreenIconButton extends State<SecondScreenIconButton> {
   _SecondScreenIconButton(this.text, this.ic, this.leftMargin, this.key);
   String del = "";
   bool isSelected = false;
+  var altIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -747,6 +748,7 @@ class _SecondScreenIconButton extends State<SecondScreenIconButton> {
         onPressed: () async {
           FocusScope.of(context).unfocus();
           if (key == Key("date")) {
+            altIcon = Icons.clear;
               if (selectedDate == null) {
                 selectedDate = await selectDate(context);
                 if (selectedDate != null) {
@@ -764,6 +766,7 @@ class _SecondScreenIconButton extends State<SecondScreenIconButton> {
               });
 
           } else if (key == Key("time")) {
+            altIcon = Icons.clear;
             if (selectedTime == null) {
               selectedTime = await selectTime(context);
               if (selectedTime != null) {
@@ -795,6 +798,7 @@ class _SecondScreenIconButton extends State<SecondScreenIconButton> {
             });
 
           } else if (key == Key("color")) {
+            altIcon = Icons.clear;
             if (selectedColor == null) {
               selectedColor = await selectColor(context);
               if (selectedColor != null) {
@@ -808,9 +812,43 @@ class _SecondScreenIconButton extends State<SecondScreenIconButton> {
             });
 
           } else if (key == Key("tag")) {
+            altIcon = Icons.edit;
             del = "Edit tags";
+            String prev = "";
+
+            if (createdTags == null) {
+              createdTags = await createTags(context);
+              print("created: " + createdTags);
+            } else {
+              prev = createdTags;
+              prev = createdTags;
+              createdTags = null;
+              createdTags = await createTags(context, prev);
+            }
+            setState(() {
+              isSelected = (createdTags.length != 0);
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
           } else if (key == Key("priority")) {
+            altIcon = Icons.clear;
             del = "Delete priority";
 
           } else {
@@ -820,7 +858,7 @@ class _SecondScreenIconButton extends State<SecondScreenIconButton> {
         icon: Padding(
           padding: EdgeInsets.only(left: leftMargin, right: 0.0),
           child: Icon(
-              isSelected ? Icons.clear : ic,
+              isSelected ? altIcon : ic,
               color: Colors.white70,
               size: 20
           ),

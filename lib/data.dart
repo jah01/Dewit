@@ -76,6 +76,7 @@ void resetAll() {
   hasTime = false;
   dateAndTime = null;
   selectedColor = null;
+  createdTags = null;
 }
 
 
@@ -87,6 +88,7 @@ bool hasDate = false;
 bool hasTime = false;
 var dateAndTime;
 var selectedColor;
+var createdTags;
 
 Future<DateTime> selectDate(BuildContext context) {
   return showDatePicker(
@@ -154,4 +156,41 @@ Future<String> selectColor(context) async {
       return op5;
       break;
   }
+}
+
+
+//huge help from https://androidkt.com/flutter-alertdialog-example/
+Future<String> createTags(BuildContext context, [String prevText]) async {
+  String current;
+  return showDialog<String>(
+    context: context,
+    barrierDismissible: false, // dialog is dismissible with a tap on the barrier
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("Enter your tags"),
+        content: new Row(
+          children: <Widget>[
+            new Expanded(
+                child: new TextFormField(
+                  initialValue: prevText,
+                  autofocus: true,
+                  decoration: new InputDecoration(
+                      labelText: "Tags", hintText: 'eg. \"shopping list\"'),
+                  onChanged: (value) {
+                    current = value;
+                  },
+                ))
+          ],
+        ),
+        actions: <Widget>[
+          FlatButton(
+            child: Text('Ok'),
+            onPressed: () {
+              Navigator.of(context).pop(current);
+            },
+          ),
+        ],
+      );
+    },
+  );
 }
