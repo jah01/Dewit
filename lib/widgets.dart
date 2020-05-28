@@ -547,7 +547,7 @@ class SecondScreenAppBar extends StatelessWidget with PreferredSizeWidget {
                       duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
                   return;
                 } else {
-                  print(newTitle + " " + newNote.toString() + " " + dateAndTime.toString());
+                  print(newTitle + " " + newNote.toString() + " " + dateAndTime.toString() + " " + selectedColor.toString());
                   items.add(Task(newTitle, newNote, dateAndTime));
                   SchedulerBinding.instance.addPostFrameCallback((_) {
                     Navigator.of(context).pushNamedAndRemoveUntil(
@@ -795,54 +795,13 @@ class _SecondScreenIconButton extends State<SecondScreenIconButton> {
             });
 
           } else if (key == Key("color")) {
-            const op1 = "Orange";
-            const op2 = "Yellow";
-            const op3 = "Green";
-            const op4 = "Blue";
-            const op5 = "Purple";
-            String selectedColor;
-
-            Future<String> selectColor() async {
-              switch (await showDialog<String>(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return SimpleDialog(
-                      title: const Text("Select a color"),
-                      children: <Widget>[
-                        SecondScreenColorOption(context, op1, "Orange"),
-                        SecondScreenColorOption(context, op2, "Yellow"),
-                        SecondScreenColorOption(context, op3, "Green"),
-                        SecondScreenColorOption(context, op4, "Blue"),
-                        SecondScreenColorOption(context, op5, "Purple"),
-                      ],
-                    );
-                  }
-              )) {
-                case op1:
-                  return op1;
-                  break;
-                case op2:
-                  return op2;
-                  break;
-                case op3:
-                  return op3;
-                  break;
-                case op4:
-                  return op4;
-                  break;
-                case op5:
-                  return op5;
-                  break;
-              }
-            }
-
-            if (!isSelected) {
-              selectedColor = await selectColor();
+            if (selectedColor == null) {
+              selectedColor = await selectColor(context);
               if (selectedColor != null) {
                 del = selectedColor;
               }
             } else {
-              isSelected = false;
+              selectedColor = null;
             }
             setState(() {
               isSelected = (selectedColor != null);

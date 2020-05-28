@@ -1,3 +1,5 @@
+import 'package:dewitapp/widgets.dart';
+
 import 'colors.dart';
 import 'package:flutter/material.dart';
 
@@ -73,6 +75,7 @@ void resetAll() {
   finalTime = null;
   hasTime = false;
   dateAndTime = null;
+  selectedColor = null;
 }
 
 
@@ -83,6 +86,7 @@ var finalTime;
 bool hasDate = false;
 bool hasTime = false;
 var dateAndTime;
+var selectedColor;
 
 Future<DateTime> selectDate(BuildContext context) {
   return showDatePicker(
@@ -109,4 +113,45 @@ Future<DateTime> getTime(BuildContext context) {
     firstDate: DateTime.now(),
     lastDate: DateTime(2150),
   );
+}
+
+
+const op1 = "Orange";
+const op2 = "Yellow";
+const op3 = "Green";
+const op4 = "Blue";
+const op5 = "Purple";
+
+Future<String> selectColor(context) async {
+  switch (await showDialog<String>(
+      context: context,
+      builder: (BuildContext context) {
+        return SimpleDialog(
+          title: const Text("Select a color"),
+          children: <Widget>[
+            SecondScreenColorOption(context, op1, "Orange"),
+            SecondScreenColorOption(context, op2, "Yellow"),
+            SecondScreenColorOption(context, op3, "Green"),
+            SecondScreenColorOption(context, op4, "Blue"),
+            SecondScreenColorOption(context, op5, "Purple"),
+          ],
+        );
+      }
+  )) {
+    case op1:
+      return op1;
+      break;
+    case op2:
+      return op2;
+      break;
+    case op3:
+      return op3;
+      break;
+    case op4:
+      return op4;
+      break;
+    case op5:
+      return op5;
+      break;
+  }
 }
