@@ -795,9 +795,11 @@ class _SecondScreenIconButton extends State<SecondScreenIconButton> {
             });
 
           } else if (key == Key("color")) {
-
-            const op1 = "first";
-            const op2 = "second";
+            const op1 = "Orange";
+            const op2 = "Yellow";
+            const op3 = "Green";
+            const op4 = "Blue";
+            const op5 = "Purple";
             String selectedColor;
 
             Future<String> selectColor() async {
@@ -807,61 +809,44 @@ class _SecondScreenIconButton extends State<SecondScreenIconButton> {
                     return SimpleDialog(
                       title: const Text("Select a color"),
                       children: <Widget>[
-                        SimpleDialogOption(
-                          onPressed: () { Navigator.pop(context, op1); },
-                          child: const Text("Blue"),
-                        ),
-                        SimpleDialogOption(
-                          onPressed: () { Navigator.pop(context, op2); },
-                          child: const Text("Purple"),
-                        ),
+                        SecondScreenColorOption(context, op1, "Orange"),
+                        SecondScreenColorOption(context, op2, "Yellow"),
+                        SecondScreenColorOption(context, op3, "Green"),
+                        SecondScreenColorOption(context, op4, "Blue"),
+                        SecondScreenColorOption(context, op5, "Purple"),
                       ],
                     );
                   }
               )) {
                 case op1:
-                  selectedColor = op1;
+                  return op1;
                   break;
                 case op2:
-                  selectedColor = op2;
+                  return op2;
+                  break;
+                case op3:
+                  return op3;
+                  break;
+                case op4:
+                  return op4;
+                  break;
+                case op5:
+                  return op5;
                   break;
               }
             }
 
-
-
-
-
-//            del = "Edit color";
-//            await selectColor();
-//            print(selectedColor);
-//            isSelected = true;
-
-
-
             if (!isSelected) {
-              await selectColor();
+              selectedColor = await selectColor();
               if (selectedColor != null) {
                 del = selectedColor;
-                print("test");
               }
-              //finalDate = selectedDate;
             } else {
               isSelected = false;
             }
             setState(() {
               isSelected = (selectedColor != null);
             });
-
-
-
-
-
-
-
-
-
-
 
           } else if (key == Key("tag")) {
             del = "Edit tags";
@@ -893,6 +878,22 @@ class _SecondScreenIconButton extends State<SecondScreenIconButton> {
           ),
         ),
       ),
+    );
+  }
+}
+
+
+class SecondScreenColorOption extends StatelessWidget {
+  final context;
+  final option;
+  final str;
+  SecondScreenColorOption(this.context, this.option, this.str);
+
+  @override
+  Widget build(BuildContext context) {
+    return SimpleDialogOption(
+      onPressed: () { Navigator.pop(context, option); },
+      child: Text(str),
     );
   }
 }

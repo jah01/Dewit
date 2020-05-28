@@ -55,6 +55,16 @@ class Task {
 }
 
 
+enum UserColors {
+  red,
+  orange,
+  yellow,
+  green,
+  blue,
+  purple
+}
+
+
 void resetAll() {
   selectedDate = null;
   selectedTime = null;
