@@ -22,8 +22,7 @@ List<Task> items = new List();
 class Task {
   final String title;
   final String note;
-  final DateTime date;
-  final DateTime time;
+  final DateTime dateAndTime;
   final Color color;
   final String tag;
   final bool priority;
@@ -36,12 +35,8 @@ class Task {
     return note;
   }
 
-  DateTime get getDate {
-    return date;
-  }
-
-  DateTime get getTime {
-    return time;
+  DateTime get getDateAndTime {
+    return dateAndTime;
   }
 
   Color get getColor {
@@ -56,7 +51,7 @@ class Task {
     return priority;
   }
 
-  Task(this.title, this.note, this.date, [this.time, this.color, this.tag, this.priority]);
+  Task(this.title, this.note, this.dateAndTime, [this.color, this.tag, this.priority]);
 }
 
 
@@ -67,6 +62,7 @@ void resetAll() {
   finalDate = null;
   finalTime = null;
   hasTime = false;
+  dateAndTime = null;
 }
 
 
@@ -76,6 +72,7 @@ var selectedTime;
 var finalTime;
 bool hasDate = false;
 bool hasTime = false;
+var dateAndTime;
 
 Future<DateTime> selectDate(BuildContext context) {
   return showDatePicker(

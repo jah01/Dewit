@@ -533,13 +533,22 @@ class SecondScreenAppBar extends StatelessWidget with PreferredSizeWidget {
                 if (condensed.length > 0) {
                   newNote = condensed;
                 }
+                if (finalTime != null) {
+                  dateAndTime = DateTime(finalDate.year, finalDate.month, finalDate.day, finalTime.hour, finalTime.minute);
+                } else {
+                  dateAndTime = finalDate;
+                }
                 if (!hasDate) {
                   Toast.show("You must add a date first", context,
                       duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
                   return;
+                } else if (DateTime.now().isAfter(dateAndTime)) {
+                  Toast.show("You must add a date after the current time", context,
+                      duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
+                  return;
                 } else {
-                  print(newTitle + " " + newNote.toString() + " " + finalDate.toString());
-                  items.add(Task(newTitle, newNote, finalDate));
+                  print(newTitle + " " + newNote.toString() + " " + dateAndTime.toString());
+                  items.add(Task(newTitle, newNote, dateAndTime));
                   SchedulerBinding.instance.addPostFrameCallback((_) {
                     Navigator.of(context).pushNamedAndRemoveUntil(
                         "/", (Route<dynamic> route) => false);
@@ -772,13 +781,17 @@ class _SecondScreenIconButton extends State<SecondScreenIconButton> {
                   return s;
                 }
                 int hour = selectedTime.hour;
-                String ending = "AM";
+                String ending = " AM";
+                if (hour >= 12) {
+                  ending = " PM";
+                }
                 if (hour > 12) {
                   hour -= 12;
-                  ending = "PM";
+                } else if (hour == 0) {
+                  hour += 12;
                 }
                 del = hour.toString() + ":" +
-                    format(selectedTime.minute) + " " + ending;
+                    format(selectedTime.minute) + ending;
               }
               finalTime = selectedTime;
             } else {
