@@ -533,10 +533,12 @@ class SecondScreenAppBar extends StatelessWidget with PreferredSizeWidget {
                 if (condensed.length > 0) {
                   newNote = condensed;
                 }
-                if (finalTime != null) {
-                  dateAndTime = DateTime(finalDate.year, finalDate.month, finalDate.day, finalTime.hour, finalTime.minute);
-                } else {
-                  dateAndTime = DateTime(finalDate.year, finalDate.month, finalDate.day, 23, 59, 59, 999);
+                if (finalDate != null) {
+                  if (finalTime != null) {
+                    dateAndTime = DateTime(finalDate.year, finalDate.month, finalDate.day, finalTime.hour, finalTime.minute);
+                  } else {
+                    dateAndTime = DateTime(finalDate.year, finalDate.month, finalDate.day, 23, 59, 59, 999);
+                  }
                 }
                 if (!hasDate) {
                   Toast.show("You must add a date first", context,
