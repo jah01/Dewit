@@ -818,7 +818,6 @@ class _SecondScreenIconButton extends State<SecondScreenIconButton> {
 
             if (createdTags == null) {
               createdTags = await createTags(context);
-              print("created: " + createdTags);
             } else {
               prev = createdTags;
               prev = createdTags;
