@@ -11,6 +11,12 @@ import 'package:toast/toast.dart';
 
 void main() {
   runApp(MaterialApp(
+      theme: ThemeData(
+        brightness: Brightness.dark,
+        primaryColor: DewitColors.background,
+        accentColor: DewitColors.darkPurple,
+        backgroundColor: DewitColors.lightPurple,
+      ),
     home: FirstScreen(),
     initialRoute: "/",
     routes: {
@@ -37,6 +43,7 @@ class _FirstScreen extends State<FirstScreen> {
 
   @override
   Widget build(BuildContext context) {
+    getMap();
     return Scaffold(
       backgroundColor: DewitColors.background,
       drawer: NavDrawer(),

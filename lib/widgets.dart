@@ -536,7 +536,7 @@ class SecondScreenAppBar extends StatelessWidget with PreferredSizeWidget {
                 if (finalTime != null) {
                   dateAndTime = DateTime(finalDate.year, finalDate.month, finalDate.day, finalTime.hour, finalTime.minute);
                 } else {
-                  dateAndTime = finalDate;
+                  dateAndTime = DateTime(finalDate.year, finalDate.month, finalDate.day, 23, 59, 59, 999);
                 }
                 if (!hasDate) {
                   Toast.show("You must add a date first", context,
@@ -548,7 +548,7 @@ class SecondScreenAppBar extends StatelessWidget with PreferredSizeWidget {
                   return;
                 } else {
                   print(newTitle + " " + newNote.toString() + " " + dateAndTime.toString() + " " + selectedColor.toString() + " " + createdTags.toString() + " " + isPriority.toString());
-                  items.add(Task(newTitle, newNote, dateAndTime));
+                  items.add(Task(newTitle, newNote, dateAndTime, selectedColor, createdTags, isPriority));
                   SchedulerBinding.instance.addPostFrameCallback((_) {
                     Navigator.of(context).pushNamedAndRemoveUntil(
                         "/", (Route<dynamic> route) => false);

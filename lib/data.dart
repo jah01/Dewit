@@ -21,6 +21,7 @@ const List<Select> selection = const <Select>[
 List<Task> items = new List();
 
 
+
 class Task {
   final String title;
   final String note;
@@ -53,7 +54,11 @@ class Task {
     return priority;
   }
 
-  Task(this.title, this.note, this.dateAndTime, [this.color, this.tag, this.priority]);
+  Task(this.title, this.note, this.dateAndTime, this.color, this.tag, this.priority);
+}
+
+void getMap() {
+
 }
 
 
