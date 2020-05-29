@@ -19,7 +19,7 @@ const List<Select> selection = const <Select>[
 
 
 List<Task> items = new List();
-
+Map<DateTime, List<Task>> map = new Map();
 
 
 class Task {
@@ -36,6 +36,10 @@ class Task {
 
   String get getNote {
     return note;
+  }
+
+  DateTime get getDate {
+    return DateTime(dateAndTime.year, dateAndTime.month, dateAndTime.day);
   }
 
   DateTime get getDateAndTime {
@@ -58,7 +62,55 @@ class Task {
 }
 
 void getMap() {
+  map.clear();
+  int limit = 23; //21 days is 3 weeks, plus today, plus anything overdue
+  for(int i = 0; i < items.length; i++) {
+    var value = items[i];
+    DateTime key = value.getDate;
+    //print(key);
+    //List<Task> listTemp = map[key];
+    List<Task> temp = new List();
+//    temp.add(value);
+//    map[key] = temp;
 
+    if (map.containsKey(key)) {
+      temp = map[key];
+      temp.add(value);
+    } else {
+      temp.add(value);
+      map[key] = temp;
+    }
+
+    //var current = listTemp.add(value);
+//    map[key].add(value);
+
+    //map.update(key, (v) => current, ifAbsent: () => current);
+//    print(key);
+//    print(map.containsKey(key));
+//    List<Task> listTemp = map[key];
+//    print(listTemp);
+
+    //map.update(key, (v) => , ifAbsent: () => new List(items[i]));
+    //List<Task> temp = map[key].values;
+//    if(map.containsKey(items[i].getDateAndTime)) {
+//      List<Task> temp = map.
+//      map.addEntries(key, items[i]);
+//    }
+  }
+}
+
+
+void addToMap(Task value) {
+  DateTime key = value.getDate;
+  List<Task> temp = new List();
+
+  if (map.containsKey(key)) {
+    temp = map[key];
+    temp.add(value);
+  } else {
+    temp.add(value);
+    map[key] = temp;
+  }
 }
 
 

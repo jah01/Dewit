@@ -43,7 +43,7 @@ class _FirstScreen extends State<FirstScreen> {
 
   @override
   Widget build(BuildContext context) {
-    getMap();
+    print(map);
     return Scaffold(
       backgroundColor: DewitColors.background,
       drawer: NavDrawer(),
@@ -60,14 +60,16 @@ class _FirstScreen extends State<FirstScreen> {
                   //TODO all other things on this page belong here and only here-- do not mess up the search bar
                   child: ListView.separated(
                     padding: const EdgeInsets.only(top: 4.0, bottom: 4.0),
-                    itemCount: items.length,
+                    itemCount: map.length,
                     itemBuilder: (BuildContext context, int index) {
-                      final item = items[index];
-                      final String title = "${item.title}";
-                      final String note = "${item.note}";
+                      var list = map.values.toList();
+                      final item = list[index];
+                      final String title = "${item[0].getTitle}";
+                      final String note = "${item[0].getNote}";
                       return Column(
                         children: <Widget>[
                           FirstScreenTopPadding(),
+
                           Dismissible(
                             key: UniqueKey(),
                             onDismissed: (direction) {
@@ -79,7 +81,7 @@ class _FirstScreen extends State<FirstScreen> {
                                   action: SnackBarAction(
                                     label: "UNDO",
                                     onPressed: () => setState(
-                                        () => items.insert(index, item)),
+                                        () => items.insert(index, item[0])),
                                   )));
                             },
                             background: DismissibleBackground1(),
@@ -87,7 +89,7 @@ class _FirstScreen extends State<FirstScreen> {
                             child: Hero(
                               tag: index.toString(),
                               child: FirstScreenHero(
-                                FirstScreenListButton(index, item, title, note),
+                                FirstScreenListButton(index, item[0], title, note),
                               ),
                             ),
                           ),
