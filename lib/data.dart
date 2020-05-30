@@ -22,6 +22,7 @@ List<Task> items = new List();
 Map<DateTime, List<Task>> map = new Map();
 Map<DateTime, List<Task>> newMap = new Map();
 List<ListTask> list = new List();
+List<Task> overdue = new List();
 
 
 class Task {
@@ -210,6 +211,61 @@ void addToList(Task task) {
   //print("TEMP: " + temp.getTasks.toString());
 
 
+}
+
+
+void getList() {
+  if (list.length > 0) {
+    DateTime now = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+    DateTime key = list[0].getDate;
+    if (key.compareTo(now) < 0) {
+      List<Task> current = list[0].getTasks;
+      for (int j = 0; j < current.length; j++) {
+        overdue.add(current[j]);
+      }
+      list.removeAt(0);
+    }
+    if (key.compareTo(now) == 0) {
+      List<Task> current = list[0].getTasks;
+      int deleted = 0;
+      for (int j = 0; j < current.length; j++) {
+        if (current[j].getDateAndTime.compareTo(DateTime.now()) <= 0) {
+          overdue.add(current[j]);
+          deleted++;
+        }
+      }
+      if (deleted == current.length) {
+        list.removeAt(0);
+      } else {
+        current.removeRange(0, deleted);
+      }
+    }
+  }
+
+
+//  if (list.length > 0) {
+//    while (list[0].getDate.compareTo(DateTime.now()) < 0) {
+//      List<Task> currentList = list[0].getTasks;
+//      int totalDeleted = 0;
+//      for (int j = 0; j < currentList.length; j++) {
+//        overdue.add(currentList[j]);
+//      }
+//      if (totalDeleted == currentList.length) {
+//        list.removeAt(0);
+//      }
+//    }
+//    if (list[0].getDate.compareTo(DateTime.now()))
+//    while (list[0].getDate.compareTo(DateTime.now()) < 0) {
+//      List<Task> currentList = list[0].getTasks;
+//      int totalDeleted = 0;
+//      for (int j = 0; j < currentList.length; j++) {
+//        overdue.add(currentList[j]);
+//      }
+//      if (totalDeleted == currentList.length) {
+//        list.removeAt(0);
+//      }
+//    }
+//  }
 }
 
 

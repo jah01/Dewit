@@ -43,7 +43,7 @@ class _FirstScreen extends State<FirstScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(map);
+    getList();
     return Scaffold(
       backgroundColor: DewitColors.background,
       drawer: NavDrawer(),
