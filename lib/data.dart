@@ -20,6 +20,8 @@ const List<Select> selection = const <Select>[
 
 List<Task> items = new List();
 Map<DateTime, List<Task>> map = new Map();
+Map<DateTime, List<Task>> newMap = new Map();
+List<ListTask> list = new List();
 
 
 class Task {
@@ -60,6 +62,23 @@ class Task {
 
   Task(this.title, this.note, this.dateAndTime, this.color, this.tag, this.priority);
 }
+
+
+class ListTask{
+  final DateTime date;
+  final List<Task> list;
+
+  DateTime get getDate {
+    return date;
+  }
+
+  List<Task> get getTasks {
+    return list;
+  }
+
+  ListTask(this.date, this.list);
+}
+
 
 void getMap() {
   map.clear();
@@ -102,6 +121,7 @@ void getMap() {
 
 void addToMap(Task value) {
   DateTime key = value.getDate;
+  DateTime time = value.getDateAndTime;
   List<Task> temp = new List();
 
   if (map.containsKey(key)) {
@@ -109,8 +129,87 @@ void addToMap(Task value) {
     temp.add(value);
   } else {
     temp.add(value);
+
+//    var keys = map.keys;
+//    for(int i = 0; i < keys.length; i++) {
+//
+//    }
+
+
+//    List<dynamic> list = new List();
+//    list = map.entries.map((e) => ListTask(e.key, e.value)).toList();
+//    print(list);
+
+
+    //for(int i = 0; i < )
+
+    //adding to map
     map[key] = temp;
   }
+
+}
+
+
+void addToList(Task task) {
+  DateTime date = task.getDate;
+
+  if (list.length == 0) {
+    List<Task> newList = new List();
+    newList.add(task);
+    list.insert(0, ListTask(date, newList));
+  } else {
+    bool b = false;
+    for (int i = 0; i < list.length; i++) {
+      DateTime temp = list[i].getDate;
+      if (date.compareTo(temp) == 0) {
+        List<Task> currentList = list[i].getTasks;
+        print("CURRENT: " + currentList.toString());
+        bool b1 = false;
+        for (int j = 0; j < currentList.length; j++) {
+          if (task.getDateAndTime.compareTo(currentList[j].getDateAndTime) < 0) {
+            currentList.insert(j, task);
+            b1 = true;
+            break;
+          }
+        }
+        if (!b1) {
+          currentList.add(task);
+        }
+        b = true;
+        break;
+      } else if (date.compareTo(temp) < 0) {
+        List<Task> newList = new List();
+        newList.add(task);
+        list.insert(i, ListTask(date, newList));
+        b = true;
+        break;
+      }
+    }
+    if (!b) {
+      List<Task> newList = new List();
+      newList.add(task);
+      list.insert(list.length, ListTask(date, newList));
+    }
+  }
+
+  for (int i = 0; i < list.length; i++) {
+    if (list[i].getTasks.length > 0) {
+      for (int j = 0; j < list[i].getTasks.length; j++) {
+        print("LIST: " + list[i].getDate.toString() + " " + list[i].getTasks.toString() + " THE DATE: " + list[i].getTasks[j].getDateAndTime.toString() + " THE TITLE: " + list[i].getTasks[j].getTitle);
+      }
+    } else {
+      print("LIST: " + list[i].getDate.toString() + " " + list[i].getTasks.toString() + " THE DATE: " + list[i].getTasks[0].getDateAndTime.toString());
+    }
+//    print("LIST: " + list[i].getDate.toString() + " " + list[i].getTasks.toString());
+  }
+
+//  print("here it goes... " + list);
+
+//  if (list.)
+  //var temp = ListTask(date, task);
+  //print("TEMP: " + temp.getTasks.toString());
+
+
 }
 
 

@@ -552,6 +552,7 @@ class SecondScreenAppBar extends StatelessWidget with PreferredSizeWidget {
                   print(newTitle + " " + newNote.toString() + " " + dateAndTime.toString() + " " + selectedColor.toString() + " " + createdTags.toString() + " " + isPriority.toString());
                   items.add(Task(newTitle, newNote, dateAndTime, selectedColor, createdTags, isPriority));
                   addToMap(Task(newTitle, newNote, dateAndTime, selectedColor, createdTags, isPriority));
+                  addToList(Task(newTitle, newNote, dateAndTime, selectedColor, createdTags, isPriority));
                   SchedulerBinding.instance.addPostFrameCallback((_) {
                     Navigator.of(context).pushNamedAndRemoveUntil(
                         "/", (Route<dynamic> route) => false);
