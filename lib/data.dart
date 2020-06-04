@@ -1,4 +1,5 @@
 import 'package:dewitapp/widgets.dart';
+import 'package:intl/intl.dart';
 
 import 'colors.dart';
 import 'package:flutter/material.dart';
@@ -219,19 +220,54 @@ void addToList(Task task) {
 
 void getList() {
   print("len: " + list.length.toString());
-  DateTime before = DateTime.now().subtract(new Duration(days: 1));
-  if (list.length > 0) {
+  DateTime before = DateTime.now().subtract(Duration(days: 1));
+  if (list.length > 1) {
     DateTime now = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
-    DateTime key = list[0].getDate;
+    DateTime key = list[1].getDate;
+    print(key);
+//    int i = 0;
+//
+//
+//    while (key.compareTo(now) < 0) {
+//      List<Task> current = list[i].getTasks;
+//      for (int j = 0; j < current.length; j++) {
+//        overdue.add(current[j]);
+//      }
+//      list.removeAt(i);
+//      i++;
+//      key = list[i].getDate;
+//    }
+//    key = DateTime(list[0].getDate.year, list[0].getDate.month, list[0].getDate.day);
+//    //DateTime hourKey = DateTime(list[0].getDate.hour, list[0].getDate.minute);
+//    DateTime nowTime = DateTime(DateTime.now().hour, DateTime.now().minute);
+//    if (key == now) {
+//      int deleted = 0;
+//      List<Task> current = list[0].getTasks;
+//      for (int i = 0; i < current.length; i++) {
+//        if (DateTime(current[i].getDateAndTime.hour, current[i].getDateAndTime.minute).compareTo(nowTime) <= 0) {
+//          overdue.add(current[i]);
+//          deleted++;
+//        }
+//      }
+//      print("deleted" + deleted.toString());
+//      if (deleted == current.length) {
+//        list.removeAt(0);
+//      } else {
+//        current.removeRange(0, deleted);
+//      }
+//    }
+
+
+
     if (key.compareTo(now) < 0) {
-      List<Task> current = list[0].getTasks;
+      List<Task> current = list[1].getTasks;
       for (int j = 0; j < current.length; j++) {
         overdue.add(current[j]);
       }
-      list.removeAt(0);
+      list.removeAt(1);
     }
     if (key.compareTo(now) == 0) {
-      List<Task> current = list[0].getTasks;
+      List<Task> current = list[1].getTasks;
       int deleted = 0;
       for (int j = 0; j < current.length; j++) {
         if (current[j].getDateAndTime.compareTo(DateTime.now()) <= 0) {
@@ -241,7 +277,8 @@ void getList() {
       }
       print("deleted" + deleted.toString());
       if (deleted == current.length) {
-        list.removeAt(0);
+        print("yes");
+        list.removeAt(1);
       } else {
         current.removeRange(0, deleted);
       }
@@ -252,12 +289,15 @@ void getList() {
 //    } else {
 //      list.insert(0, ListTask(before, overdue));
 //    }
+    list.removeAt(0);
     list.insert(0, ListTask(before, overdue));
 
 //    list.add(ListTask(before, overdue));
   //list.add(ListTask(before, overdue));
-  } else {
+  } else if (list.length == 0) {
     list.add(ListTask(before, overdue));
+  } else if (list.length == 1) {
+    print("FINALLY");
   }
   print("......................................." + list.toString());
   print("overdue: " + overdue.toString());
@@ -303,6 +343,20 @@ void getAllTasks() {
     for (int j = 0; j < list[i].getTasks.length; j++) {
       total.add(list[i].getTasks[j]);
     }
+  }
+}
+
+
+String formatDate(DateTime date) {
+  DateTime now = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+  if (now == date) {
+    return "Today";
+  } else if (now.add(Duration(days: 1)) == date) {
+    return "Tomorrow";
+  } else if (now.year == date.year){
+    return DateFormat("MMMMEEEEd").format(date);
+  } else {
+    return DateFormat("MMMM d YYYY").format(date);
   }
 }
 

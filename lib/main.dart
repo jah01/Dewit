@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:toast/toast.dart';
 
 
@@ -79,6 +80,8 @@ class _FirstScreen extends State<FirstScreen> {
                           final pad1 = (i == 0) ? 8.0 : 0.0;
                           final pad2 = (i == current.getTasks.length - 1) ? 0.0 : 10.0;
                           final element = current.getTasks[i];
+                          bool isOverdue = element.getDateAndTime.isBefore(DateTime.now());
+                          final header = isOverdue ? "Overdue" : formatDate(element.getDate);
 //                          final title = element.getTitle;
 //                          final note = element.getNote;
                           return Column(
@@ -93,7 +96,7 @@ class _FirstScreen extends State<FirstScreen> {
                                     Padding(
                                       padding: EdgeInsets.only(top: spacing, bottom: 0.0),
                                     child: Text(
-                                      element.getDate.toString(),
+                                      header,
                                       style: TextStyle(
                                         fontSize: size,
                                         fontWeight: FontWeight.bold,
