@@ -43,6 +43,9 @@ class _FirstScreen extends State<FirstScreen> {
 
   @override
   Widget build(BuildContext context) {
+    //total.clear();
+    //getAllTasks();
+    //mergeTasks();
     getList();
     return Scaffold(
       backgroundColor: DewitColors.background,
@@ -58,46 +61,88 @@ class _FirstScreen extends State<FirstScreen> {
                 margin: const EdgeInsets.only(top: 0.0, left: 0.0, right: 0.0),
                 child: Container(
                   //TODO all other things on this page belong here and only here-- do not mess up the search bar
-                  child: ListView.separated(
+                  child: ListView.builder(
+                    physics: ClampingScrollPhysics(),
+                    shrinkWrap: true,
                     padding: const EdgeInsets.only(top: 4.0, bottom: 4.0),
-                    itemCount: map.length,
+                    itemCount: list.length,
                     itemBuilder: (BuildContext context, int index) {
-                      var list = map.values.toList();
-                      final item = list[index];
-                      final String title = "${item[0].getTitle}";
-                      final String note = "${item[0].getNote}";
-                      return Column(
-                        children: <Widget>[
-                          FirstScreenTopPadding(),
-
-                          Dismissible(
-                            key: UniqueKey(),
-                            onDismissed: (direction) {
-                              setState(() {
-                                items.removeAt(index);
-                              });
+//                      var list = map.values.toList();
+                      final current = list[index];
+                      return ListView.separated(
+                        physics: ClampingScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: current.getTasks.length,
+                        itemBuilder: (BuildContext context, int i) {
+                          final size = (i == 0) ? 28.0 : 0.0;
+                          final spacing = (i == 0 && index > 0) ? 12.0 : 0.0;
+                          final pad1 = (i == 0) ? 8.0 : 0.0;
+                          final pad2 = (i == current.getTasks.length - 1) ? 0.0 : 10.0;
+                          final element = current.getTasks[i];
+//                          final title = element.getTitle;
+//                          final note = element.getNote;
+                          return Column(
+                            children: <Widget>[
+                              FirstScreenTopPadding(),
+                              Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                        top: pad1, left: pad1, right: pad1, bottom: 2.0),
+                                    child:
+                                    Padding(
+                                      padding: EdgeInsets.only(top: spacing, bottom: 0.0),
+                                    child: Text(
+                                      element.getDate.toString(),
+                                      style: TextStyle(
+                                        fontSize: size,
+                                        fontWeight: FontWeight.bold,
+                                        color: DewitColors.oldDarkPurple,
+                                      ),
+                                    ),
+                                    ),
+                                  )
+                              ),
+                              Dismissible(
+                                key: UniqueKey(),
+                                onDismissed: (direction) {
+                                  setState(() {
+                                    //TODO this part needs help
+                                    //dismissed = current.getTasks[i];
+                                    current.getTasks.removeAt(i);
+                                    if (current.getTasks.length == 0) {
+                                      list.removeAt(index);
+                                    }
+                                    //current.removeAt(i);
+                                    //total.removeAt(index);
+                                    //print("DISMISSED: " + dismissed.toString());
+                                  });
+                                  //TODO this needs fixing
                               Scaffold.of(context).showSnackBar(SnackBar(
-                                  content: Text("\"" + title + "\" dismissed."),
+                                  content: Text("\"" + element.getTitle + "\" dismissed."),
                                   action: SnackBarAction(
                                     label: "UNDO",
                                     onPressed: () => setState(
-                                        () => items.insert(index, item[0])),
-                                  )));
-                            },
-                            background: DismissibleBackground1(),
-                            secondaryBackground: DismissibleBackground2(),
-                            child: Hero(
-                              tag: index.toString(),
-                              child: FirstScreenHero(
-                                FirstScreenListButton(index, item[0], title, note),
+                                        () => current.getTasks.insert(i, element)),
+                                  ),),);
+                              //dismissed = null;
+                                },
+                                background: DismissibleBackground1(),
+                                secondaryBackground: DismissibleBackground2(),
+                                child: Hero(
+                                  tag: UniqueKey().toString(),
+                                  child: FirstScreenHero(
+                                    FirstScreenListButton(i, element),
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                        ],
+                            ],
+                          );
+                        },
+                        separatorBuilder: (context, index) {
+                          return firstScreenDivider();
+                        },
                       );
-                    },
-                    separatorBuilder: (context, index) {
-                      return firstScreenDivider();
                     },
                   ),
                 ),

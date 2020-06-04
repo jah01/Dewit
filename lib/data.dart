@@ -23,13 +23,16 @@ Map<DateTime, List<Task>> map = new Map();
 Map<DateTime, List<Task>> newMap = new Map();
 List<ListTask> list = new List();
 List<Task> overdue = new List();
+List<Task> total = new List();
+Task dismissed;
+TimeOfDay endOfDay = TimeOfDay(hour: 23, minute: 59);
 
 
 class Task {
   final String title;
   final String note;
   final DateTime dateAndTime;
-  final Color color;
+  final String color;
   final String tag;
   final bool priority;
 
@@ -49,7 +52,7 @@ class Task {
     return dateAndTime;
   }
 
-  Color get getColor {
+  String get getColor {
     return color;
   }
 
@@ -66,8 +69,8 @@ class Task {
 
 
 class ListTask{
-  final DateTime date;
-  final List<Task> list;
+  DateTime date;
+  List<Task> list;
 
   DateTime get getDate {
     return date;
@@ -193,16 +196,16 @@ void addToList(Task task) {
     }
   }
 
-  for (int i = 0; i < list.length; i++) {
-    if (list[i].getTasks.length > 0) {
-      for (int j = 0; j < list[i].getTasks.length; j++) {
-        print("LIST: " + list[i].getDate.toString() + " " + list[i].getTasks.toString() + " THE DATE: " + list[i].getTasks[j].getDateAndTime.toString() + " THE TITLE: " + list[i].getTasks[j].getTitle);
-      }
-    } else {
-      print("LIST: " + list[i].getDate.toString() + " " + list[i].getTasks.toString() + " THE DATE: " + list[i].getTasks[0].getDateAndTime.toString());
-    }
+//  for (int i = 0; i < list.length; i++) {
+//    if (list[i].getTasks.length > 0) {
+//      for (int j = 0; j < list[i].getTasks.length; j++) {
+//        print("LIST: " + list[i].getDate.toString() + " " + list[i].getTasks.toString() + " THE DATE: " + list[i].getTasks[j].getDateAndTime.toString() + " THE TITLE: " + list[i].getTasks[j].getTitle);
+//      }
+//    } else {
+//      print("LIST: " + list[i].getDate.toString() + " " + list[i].getTasks.toString() + " THE DATE: " + list[i].getTasks[0].getDateAndTime.toString());
+//    }
 //    print("LIST: " + list[i].getDate.toString() + " " + list[i].getTasks.toString());
-  }
+//  }
 
 //  print("here it goes... " + list);
 
@@ -215,6 +218,8 @@ void addToList(Task task) {
 
 
 void getList() {
+  print("len: " + list.length.toString());
+  DateTime before = DateTime.now().subtract(new Duration(days: 1));
   if (list.length > 0) {
     DateTime now = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
     DateTime key = list[0].getDate;
@@ -234,13 +239,29 @@ void getList() {
           deleted++;
         }
       }
+      print("deleted" + deleted.toString());
       if (deleted == current.length) {
         list.removeAt(0);
       } else {
         current.removeRange(0, deleted);
       }
     }
+
+//    if (list.length == 0) {
+//      list.add(ListTask(before, overdue));
+//    } else {
+//      list.insert(0, ListTask(before, overdue));
+//    }
+    list.insert(0, ListTask(before, overdue));
+
+//    list.add(ListTask(before, overdue));
+  //list.add(ListTask(before, overdue));
+  } else {
+    list.add(ListTask(before, overdue));
   }
+  print("......................................." + list.toString());
+  print("overdue: " + overdue.toString());
+  print("len after: " + list.length.toString());
 
 
 //  if (list.length > 0) {
@@ -266,6 +287,23 @@ void getList() {
 //      }
 //    }
 //  }
+}
+
+
+void mergeTasks() {
+  getList();
+  print("                             " + list.toString());
+}
+
+
+void getAllTasks() {
+  getList();
+  total.addAll(overdue);
+  for (int i = 0; i < list.length; i++) {
+    for (int j = 0; j < list[i].getTasks.length; j++) {
+      total.add(list[i].getTasks[j]);
+    }
+  }
 }
 
 

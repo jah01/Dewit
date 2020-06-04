@@ -193,9 +193,7 @@ class FirstScreenHero extends StatelessWidget {
 class FirstScreenListButton extends StatelessWidget {
   final int index;
   final Task item;
-  final String title;
-  final String note;
-  FirstScreenListButton(this.index, this.item, this.title, this.note);
+  FirstScreenListButton(this.index, this.item);
 
   @override
   Widget build(BuildContext context) {
@@ -211,16 +209,15 @@ class FirstScreenListButton extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.0),
       ),
-      child: FirstScreenListTile(title, note),
+      child: FirstScreenListTile(item),
     );
   }
 }
 
 
 class FirstScreenListTile extends StatelessWidget {
-  final String title;
-  final String note;
-  FirstScreenListTile(this.title, this.note);
+  final Task item;
+  FirstScreenListTile(this.item);
 
   @override
   Widget build(BuildContext context) {
@@ -235,9 +232,9 @@ class FirstScreenListTile extends StatelessWidget {
       //),
       contentPadding: EdgeInsets.only(left: 16.0, right: 16.0),
       dense: false,
-      title: FirstScreenTitle(title),
+      title: FirstScreenTitle(item.getTitle),
       //TODO make an if statement, make the cards less dense if desired
-      subtitle: FirstScreenSubtitle(note),
+      subtitle: FirstScreenSubtitle(item),
       isThreeLine: true,
       //trailing: Icon(Icons.access_alarm),
     );
@@ -270,17 +267,38 @@ class FirstScreenTitle extends StatelessWidget {
 }
 
 
+int display(int h) {
+  if (h > 12) {
+    h -= 12;
+  } else if (h == 0) {
+    h += 12;
+  }
+  return h;
+}
+
+String format(num n) {
+  final s = NumberFormat("00").format(n);
+  return s;
+}
+
+String timeOfDay(DateTime time) {
+  String ending = (time.hour < 12) ? " AM" : " PM";
+  return (TimeOfDay(hour: time.hour, minute: time.minute) == endOfDay) ? "the end of the day" : display(time.hour).toString() + ":" + format(time.minute) + ending;
+}
+
+// ignore: must_be_immutable
 class FirstScreenSubtitle extends StatelessWidget {
-  final String note;
-  FirstScreenSubtitle(this.note);
+  final Task item;
+  FirstScreenSubtitle(this.item);
 
   @override
   Widget build(BuildContext context) {
+    String completeByString = timeOfDay(item.getDateAndTime);
     return Container(
       margin:
       EdgeInsets.only(top: 0.0, bottom: 10.0),
       child: AutoSizeText(
-        note,
+        "Complete before " + completeByString,
         style: TextStyle(
           color: DewitColors.darkGray,
           fontSize: 12,
