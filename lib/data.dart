@@ -53,8 +53,22 @@ class Task {
     return dateAndTime;
   }
 
-  String get getColor {
-    return color;
+  Color get getColor {
+    if (color == "Red") {
+      return Colors.red;
+    } else if (color == "Orange") {
+      return Colors.orange;
+    } else if (color == "Yellow") {
+      return Colors.yellow;
+    } else if (color == "Green") {
+      return Colors.green;
+    } else if (color == "Blue") {
+      return Colors.blue;
+    } else if (color == "Purple"){
+      return Colors.purple;
+    } else {
+      return Colors.transparent;
+    }
   }
 
   String get getTag {

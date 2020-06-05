@@ -9,6 +9,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:toast/toast.dart';
+import 'package:dewitapp/custom_icons_icons.dart';
 
 
 //TODO NAVBAR
@@ -236,7 +237,10 @@ class FirstScreenListTile extends StatelessWidget {
       //TODO make an if statement, make the cards less dense if desired
       subtitle: FirstScreenSubtitle(item),
       isThreeLine: true,
-      //trailing: Icon(Icons.access_alarm),
+      trailing: Icon(
+        CustomIcons.colorcircle,
+        color: item.getColor,
+      ),
     );
   }
 }
