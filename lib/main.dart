@@ -205,7 +205,7 @@ class _SecondScreen extends State<SecondScreen> {
         child: Stack(
           children: <Widget>[
             Hero(tag: "addSomething", child: BigPurple()),
-            SecondScreenParent(
+            NoOverscrollWidget(
                 Column(
                   children: <Widget>[
                     Container(child: SecondScreenTitle(titleController)),

@@ -645,9 +645,9 @@ class BigPurple extends StatelessWidget{
 }
 
 
-class SecondScreenParent extends StatelessWidget {
+class NoOverscrollWidget extends StatelessWidget {
   final child;
-  SecondScreenParent(this.child);
+  NoOverscrollWidget(this.child);
 
   @override
   Widget build(BuildContext context) {
