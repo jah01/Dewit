@@ -200,6 +200,8 @@ class FirstScreenListButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FlatButton(
       padding: EdgeInsets.all(0.0),
+      splashColor: Colors.black12,
+      highlightColor: Colors.black26,
       onPressed: () {
         Navigator.push(
             context,
@@ -231,15 +233,31 @@ class FirstScreenListTile extends StatelessWidget {
       //size: 24.0,
       //),
       //),
+      leading: (item.getPriority) ? Column(
+        children: <Widget>[
+          Spacer(),
+          Icon(
+            Icons.flag,
+            color: Colors.red,
+          ),
+          Spacer(),
+        ],
+      ) : null,
       contentPadding: EdgeInsets.only(left: 16.0, right: 16.0),
       dense: false,
       title: FirstScreenTitle(item.getTitle),
       //TODO make an if statement, make the cards less dense if desired
       subtitle: FirstScreenSubtitle(item),
       isThreeLine: true,
-      trailing: Icon(
-        CustomIcons.colorcircle,
-        color: item.getColor,
+      trailing: Column(
+        children: <Widget>[
+          Spacer(),
+          Icon(
+            CustomIcons.colorcircle,
+            color: item.getColor,
+          ),
+          Spacer(),
+        ],
       ),
     );
   }
@@ -262,7 +280,7 @@ class FirstScreenTitle extends StatelessWidget {
         minFontSize: 20,
         style: TextStyle(
           color: DewitColors.lightGray,
-          fontWeight: FontWeight.bold,
+          fontWeight: FontWeight.w600,
           fontSize: 20,
         ),
       ),
@@ -297,16 +315,37 @@ class FirstScreenSubtitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String s = (item.getNote == null) ? "" : item.getNote;
+    double size = (item.getNote == null) ? 0 : 12;
     String completeByString = timeOfDay(item.getDateAndTime);
     return Container(
-      margin:
-      EdgeInsets.only(top: 0.0, bottom: 10.0),
-      child: AutoSizeText(
-        "Complete before " + completeByString,
-        style: TextStyle(
-          color: DewitColors.darkGray,
-          fontSize: 12,
-        ),
+      margin: EdgeInsets.only(top: 0.0, bottom: 10.0),
+      child: Column(
+        children: <Widget>[
+          Align(
+            alignment: Alignment.centerLeft,
+            child: AutoSizeText(
+              "Complete before " + completeByString,
+              style: TextStyle(
+                color: DewitColors.darkGray,
+                fontSize: 12,
+              ),
+            ),
+          ),
+//          Padding(
+//            padding: EdgeInsets.only(top: 0.0),
+//          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              s,
+              style: TextStyle(
+                color: DewitColors.darkGray,
+                fontSize: size,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -315,11 +354,11 @@ class FirstScreenSubtitle extends StatelessWidget {
 
 Widget firstScreenDivider() {
   return Divider(
-    color: DewitColors.coalBlack,
+    color: Colors.black38,
     height: 10,
-    thickness: 1,
-    indent: 16,
-    endIndent: 16,
+    thickness: 2,
+    indent: 32,
+    endIndent: 32,
   );
 }
 

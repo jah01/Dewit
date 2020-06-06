@@ -94,17 +94,33 @@ class _FirstScreen extends State<FirstScreen> {
                                         top: pad1, left: pad1, right: pad1, bottom: 2.0),
                                     child:
                                     Padding(
-                                      padding: EdgeInsets.only(top: spacing, bottom: 0.0),
-                                    child: Text(
-                                      header,
-                                      style: TextStyle(
-                                        fontSize: size,
-                                        fontWeight: FontWeight.bold,
-                                        color: DewitColors.oldDarkPurple,
-                                      ),
-                                    ),
-                                    ),
-                                  )
+                                      padding: EdgeInsets.only(
+                                          top: spacing, bottom: 0.0),
+                                      child: Row(children: <Widget>[
+                                        Text(
+                                          header,
+                                          style: TextStyle(
+                                            fontSize: size,
+                                            fontWeight: FontWeight.bold,
+                                            color: DewitColors.oldDarkPurple,
+                                          ),
+                                        ),
+                                        (i == 0)
+                                            ? Expanded(
+                                                child: Divider(
+                                                color:
+                                                    DewitColors.oldDarkPurple,
+                                                height: 10,
+                                                thickness: 3,
+                                                indent: 6,
+                                                endIndent: 8,
+                                              ))
+                                            : Container(
+                                                width: 0,
+                                                height: 0,
+                                              ),
+                                      ])),
+                                ),
                               ),
                               Dismissible(
                                 key: UniqueKey(),

@@ -370,7 +370,7 @@ String formatDate(DateTime date) {
   } else if (now.year == date.year){
     return DateFormat("MMMMEEEEd").format(date);
   } else {
-    return DateFormat("MMMM d YYYY").format(date);
+    return DateFormat("MMMM d, yyyy").format(date);
   }
 }
 
