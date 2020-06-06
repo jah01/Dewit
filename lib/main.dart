@@ -91,7 +91,7 @@ class _FirstScreen extends State<FirstScreen> {
                                   alignment: Alignment.centerLeft,
                                   child: Padding(
                                     padding: EdgeInsets.only(
-                                        top: pad1, left: pad1, right: pad1, bottom: 2.0),
+                                        top: pad1, left: pad1, right: pad1, bottom: 0.0),
                                     child:
                                     Padding(
                                       padding: EdgeInsets.only(
@@ -148,10 +148,13 @@ class _FirstScreen extends State<FirstScreen> {
                                 },
                                 background: DismissibleBackground1(),
                                 secondaryBackground: DismissibleBackground2(),
-                                child: Hero(
-                                  tag: UniqueKey().toString(),
-                                  child: FirstScreenHero(
-                                    FirstScreenListButton(i, element),
+                                child: Padding(
+                                  padding: EdgeInsets.only(top: 2.0, bottom: 2.0),
+                                  child: Hero(
+                                    tag: UniqueKey().toString(),
+                                    child: FirstScreenHero(
+                                      FirstScreenListButton(i, element),
+                                    ),
                                   ),
                                 ),
                               ),

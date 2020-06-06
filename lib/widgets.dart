@@ -354,11 +354,12 @@ class FirstScreenSubtitle extends StatelessWidget {
 
 Widget firstScreenDivider() {
   return Divider(
-    color: Colors.black38,
+//    color: Colors.black38,
+    color: DewitColors.darkGray,
     height: 10,
     thickness: 2,
-    indent: 32,
-    endIndent: 32,
+    indent: 40,
+    endIndent: 40,
   );
 }
 
