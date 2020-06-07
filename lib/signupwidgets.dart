@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'colors.dart';
+
 
 class SignUpInfo extends StatelessWidget {
   final saHeight;
@@ -32,7 +32,7 @@ class SignUpInfo extends StatelessWidget {
         ),
         Padding(
           padding: EdgeInsets.only(
-            top: saHeight * .01,
+            top: saHeight * .0025,
           ),
         ),
         Theme(
@@ -65,14 +65,6 @@ class SignUpInfo extends StatelessWidget {
               hintStyle:
               TextStyle(color: Colors.grey[700]),
             ),
-//                      decoration: InputDecoration(
-//                        border: OutlineInputBorder(
-//                          borderSide: BorderSide(color: Colors.grey, width: 12.0),
-//                        ),
-//                        //labelText: "email@example.com",
-//                        labelStyle: TextStyle(color: DewitColors.oldDarkPurple),
-//                        focusColor: DewitColors.oldDarkPurple,
-//                      ),
           ),
         ),
       ],

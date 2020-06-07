@@ -58,21 +58,7 @@ class _SignUp extends State<SignUp> {
         backgroundColor: DewitColors.darkPurple,
         body: Stack(
           children: <Widget>[
-            Stack(
-              children: <Widget>[
-                isTall ? Positioned(
-                  bottom: -20.0,
-                  left: 0,
-                  child: SvgPicture.asset("assets/images/bottomLeft.svg"),
-                ) : Container(width: 0, height: 0,),
-                isTall ? Positioned(
-                  bottom: -32.0,
-                  right: 0,
-                  child: SvgPicture.asset("assets/images/bottomRight.svg"),
-                ) : Container(width: 0, height: 0,),
-              ],
-            ),
-            //TODO all other widgets will go here (so as not to draw over the text)
+            //TODO under the text
             SafeArea(
               child: Align(
                 alignment: Alignment.center,
@@ -92,7 +78,7 @@ class _SignUp extends State<SignUp> {
                             //color: Colors.green,
                             width: MediaQuery.of(context).size.width - 32,
                             //height: saHeight * .8,
-                            padding: EdgeInsets.only(top: saHeight * .04, bottom: saHeight * .04),
+                            padding: EdgeInsets.only(top: isTall ? 100 : 0, bottom: isTall ? 100 : 0),
                             child: Column(
                               children: <Widget>[
                                 //Padding(padding: EdgeInsets.only(top: 16.0, bottom: 32.0),),
@@ -168,20 +154,26 @@ class _SignUp extends State<SignUp> {
                 ),
               ),
             ),
-            //TODO stuff actually goes here
-            Stack(
-              children: <Widget>[
-                isTall ? Positioned(
-                  top: -20.0,
-                  child: SvgPicture.asset("assets/images/topLeft.svg"),
-                ) : Container(width: 0, height: 0,),
-                isTall ? Positioned(
-                  top: -20.0,
-                  right: 0,
-                  child: SvgPicture.asset("assets/images/topRight.svg"),
-                ) : Container(width: 0, height: 0,),
-              ],
-            ),
+            //TODO below the text
+            isTall ? Positioned(
+              bottom: -20.0,
+              left: 0,
+              child: SvgPicture.asset("assets/images/bottomLeft.svg"),
+            ) : Container(width: 0, height: 0,),
+            isTall ? Positioned(
+              bottom: -32.0,
+              right: 0,
+              child: SvgPicture.asset("assets/images/bottomRight.svg"),
+            ) : Container(width: 0, height: 0,),
+            isTall ? Positioned(
+              top: -20.0,
+              child: SvgPicture.asset("assets/images/topLeft.svg"),
+            ) : Container(width: 0, height: 0,),
+            isTall ? Positioned(
+              top: -20.0,
+              right: 0,
+              child: SvgPicture.asset("assets/images/topRight.svg"),
+            ) : Container(width: 0, height: 0,),
           ],
         ),
       ),
