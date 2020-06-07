@@ -1,5 +1,6 @@
 import 'package:dewitapp/colors.dart';
 import 'package:dewitapp/widgets.dart';
+import 'package:dewitapp/signupwidgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -40,8 +41,10 @@ class _SignUp extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
+    var h = MediaQuery.of(context).size.height;
     var saHeight = (MediaQuery.of(context).size.height -
         MediaQuery.of(context).padding.top);
+    bool isTall = h >= 680;
     return GestureDetector(
       onTap: () {
         FocusScopeNode currentFocus = FocusScope.of(context);
@@ -106,223 +109,10 @@ class _SignUp extends State<SignUp> {
                                   ),
                                 ),
                                 //Spacer(),
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                    top: saHeight * .02,
-                                  ),
-                                ),
-                                Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    "Name",
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      color: DewitColors.oldDarkPurple,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                    top: saHeight * .01,
-                                  ),
-                                ),
-                                Theme(
-                                  data: new ThemeData(
-                                    primaryColor: DewitColors.oldLightPurple,
-                                    cursorColor: DewitColors.oldLightPurple,
-                                  ),
-                                  child: TextField(
-                                    controller: nameController,
-                                    autofocus: false,
-                                    style: TextStyle(
-                                        color: DewitColors.oldLightPurple),
-                                    decoration: new InputDecoration(
-                                      enabledBorder: const OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                            color: DewitColors.oldLightPurple,
-                                            width: 3.0),
-                                      ),
-                                      focusedBorder: const OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                            color: DewitColors.oldLightPurple,
-                                            width: 3.0),
-                                      ),
-                                      border: new OutlineInputBorder(
-                                          borderSide: new BorderSide(
-                                              color:
-                                                  DewitColors.oldLightPurple)),
-                                      hintText: "ex: Toucan Sam",
-                                      //prefixIcon: Icon(Icons.alternate_email, color: DewitColors.oldLightPurple,),
-                                      hintStyle:
-                                          TextStyle(color: Colors.grey[700]),
-                                    ),
-//                      decoration: InputDecoration(
-//                        border: OutlineInputBorder(
-//                          borderSide: BorderSide(color: Colors.grey, width: 12.0),
-//                        ),
-//                        //labelText: "email@example.com",
-//                        labelStyle: TextStyle(color: DewitColors.oldDarkPurple),
-//                        focusColor: DewitColors.oldDarkPurple,
-//                      ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                    top: saHeight * .02,
-                                  ),
-                                ),
-                                Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    "Email",
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      color: DewitColors.oldDarkPurple,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                    top: saHeight * .01,
-                                  ),
-                                ),
-                                Theme(
-                                  data: new ThemeData(
-                                    primaryColor: DewitColors.oldLightPurple,
-                                    cursorColor: DewitColors.oldLightPurple,
-                                  ),
-                                  child: TextField(
-                                    controller: emailController,
-                                    autofocus: false,
-                                    style: TextStyle(
-                                        color: DewitColors.oldLightPurple),
-                                    decoration: new InputDecoration(
-                                      enabledBorder: const OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                            color: DewitColors.oldLightPurple,
-                                            width: 3.0),
-                                      ),
-                                      focusedBorder: const OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                            color: DewitColors.oldLightPurple,
-                                            width: 3.0),
-                                      ),
-                                      border: new OutlineInputBorder(
-                                          borderSide: new BorderSide(
-                                              color:
-                                                  DewitColors.oldLightPurple)),
-                                      hintText: "ex: toucan@sam.com",
-                                      hintStyle:
-                                          TextStyle(color: Colors.grey[700]),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                    top: saHeight * .02,
-                                  ),
-                                ),
-                                Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    "Password",
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      color: DewitColors.oldDarkPurple,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                    top: saHeight * .01,
-                                  ),
-                                ),
-                                Theme(
-                                  data: new ThemeData(
-                                    primaryColor: DewitColors.oldLightPurple,
-                                    cursorColor: DewitColors.oldLightPurple,
-                                  ),
-                                  child: TextField(
-                                    controller: passwordController,
-                                    autofocus: false,
-                                    style: TextStyle(
-                                        color: DewitColors.oldLightPurple),
-                                    decoration: new InputDecoration(
-                                      enabledBorder: const OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                            color: DewitColors.oldLightPurple,
-                                            width: 3.0),
-                                      ),
-                                      focusedBorder: const OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                            color: DewitColors.oldLightPurple,
-                                            width: 3.0),
-                                      ),
-                                      border: new OutlineInputBorder(
-                                          borderSide: new BorderSide(
-                                              color:
-                                                  DewitColors.oldLightPurple)),
-                                      hintText: "create a password",
-                                      hintStyle:
-                                          TextStyle(color: Colors.grey[700]),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                    top: saHeight * .02,
-                                  ),
-                                ),
-                                Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    "Confirm Password",
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      color: DewitColors.oldDarkPurple,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                    top: saHeight * .01,
-                                  ),
-                                ),
-                                Theme(
-                                  data: new ThemeData(
-                                    primaryColor: DewitColors.oldLightPurple,
-                                    cursorColor: DewitColors.oldLightPurple,
-                                  ),
-                                  child: TextField(
-                                    controller: confirmPasswordController,
-                                    autofocus: false,
-                                    style: TextStyle(
-                                        color: DewitColors.oldLightPurple),
-                                    decoration: new InputDecoration(
-                                      enabledBorder: const OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                            color: DewitColors.oldLightPurple,
-                                            width: 3.0),
-                                      ),
-                                      focusedBorder: const OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                            color: DewitColors.oldLightPurple,
-                                            width: 3.0),
-                                      ),
-                                      border: new OutlineInputBorder(
-                                          borderSide: new BorderSide(
-                                              color:
-                                                  DewitColors.oldLightPurple)),
-                                      hintText: "verify your password",
-                                      hintStyle:
-                                          TextStyle(color: Colors.grey[700]),
-                                    ),
-                                  ),
-                                ),
+                                SignUpInfo(saHeight, "Name", "ex: Toucan Sam", nameController),
+                                SignUpInfo(saHeight, "Email", "ex: toucan@sam.com", emailController),
+                                SignUpInfo(saHeight, "Password", "create a password", passwordController),
+                                SignUpInfo(saHeight, "Confirm Password", "verify your password", confirmPasswordController),
                                 Padding(
                                   padding: EdgeInsets.only(
                                     top: saHeight * .04,
