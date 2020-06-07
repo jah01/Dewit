@@ -38,6 +38,9 @@ dependencies:
   # This is for the date and time
   intl: ^0.15.8
 
+  # This is for using SVGs
+  flutter_svg: ^0.17.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -89,3 +92,7 @@ flutter:
     - family:  CustomIcons
       fonts:
         - asset: fonts/CustomIcons.ttf
+
+  # This is for including images
+  assets:
+    - assets/images/

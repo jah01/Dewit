@@ -3,6 +3,7 @@ import 'package:dewitapp/widgets.dart';
 import 'package:dewitapp/signupwidgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 
 void main() {
@@ -57,12 +58,27 @@ class _SignUp extends State<SignUp> {
         backgroundColor: DewitColors.darkPurple,
         body: Stack(
           children: <Widget>[
-            //TODO all other widgets will go here (so as not to draw over the text
+            Stack(
+              children: <Widget>[
+                isTall ? Positioned(
+                  bottom: -20.0,
+                  left: 0,
+                  child: SvgPicture.asset("assets/images/bottomLeft.svg"),
+                ) : Container(width: 0, height: 0,),
+                isTall ? Positioned(
+                  bottom: -32.0,
+                  right: 0,
+                  child: SvgPicture.asset("assets/images/bottomRight.svg"),
+                ) : Container(width: 0, height: 0,),
+              ],
+            ),
+            //TODO all other widgets will go here (so as not to draw over the text)
             SafeArea(
               child: Align(
                 alignment: Alignment.center,
                 child: NoOverscrollWidget(
                   SingleChildScrollView(
+                    //padding: EdgeInsets.only(top: 200.0),
                     scrollDirection: Axis.vertical,
                     physics: ClampingScrollPhysics(),
                     child: Column(
@@ -93,7 +109,7 @@ class _SignUp extends State<SignUp> {
                                 ),
                                 Padding(
                                   padding: EdgeInsets.only(
-                                    top: saHeight * .04,
+                                    top: saHeight * .01,
                                   ),
                                 ),
                                 Align(
@@ -113,11 +129,7 @@ class _SignUp extends State<SignUp> {
                                 SignUpInfo(saHeight, "Email", "ex: toucan@sam.com", emailController),
                                 SignUpInfo(saHeight, "Password", "create a password", passwordController),
                                 SignUpInfo(saHeight, "Confirm Password", "verify your password", confirmPasswordController),
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                    top: saHeight * .04,
-                                  ),
-                                ),
+                                Padding(padding: EdgeInsets.only(top: saHeight * .04,),),
                                 RichText(
                                   text: TextSpan(
                                     children: [
@@ -155,6 +167,20 @@ class _SignUp extends State<SignUp> {
                   ),
                 ),
               ),
+            ),
+            //TODO stuff actually goes here
+            Stack(
+              children: <Widget>[
+                isTall ? Positioned(
+                  top: -20.0,
+                  child: SvgPicture.asset("assets/images/topLeft.svg"),
+                ) : Container(width: 0, height: 0,),
+                isTall ? Positioned(
+                  top: -20.0,
+                  right: 0,
+                  child: SvgPicture.asset("assets/images/topRight.svg"),
+                ) : Container(width: 0, height: 0,),
+              ],
             ),
           ],
         ),
