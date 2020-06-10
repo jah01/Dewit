@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="17px" height="17px" viewBox="0 0 17 17" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <desc>Created with Lunacy</desc>
+  <defs>
+    <linearGradient x1="-0.51391387" y1="0.826594949" x2="-0.985245943" y2="0.9638411" id="gradient_1">
+      <stop offset="0" stop-color="#C7C9ED" />
+      <stop offset="1" stop-color="#FFFFFF" />
+    </linearGradient>
+    <path d="M0 0L17 0L17 17L0 17L0 0Z" id="path_1" />
+    <clipPath id="mask_1">
+      <use xlink:href="#path_1" />
+    </clipPath>
+  </defs>
+  <g id="svg">
+    <path d="M0 0L17 0L17 17L0 17L0 0Z" id="Background" fill="none" stroke="none" />
+    <g clip-path="url(#mask_1)">
+      <path d="M0 6.5C0 2.91015 2.91015 0 6.5 0C10.0899 0 13 2.91015 13 6.5C13 10.0899 10.0899 13 6.5 13C2.91015 13 0 10.0899 0 6.5Z" transform="matrix(0.3491118 0.9370811 -0.9370811 0.3491118 12.32181 0.1397665)" id="Circle" fill="url(#gradient_1)" stroke="none" />
+    </g>
+  </g>
+</svg>

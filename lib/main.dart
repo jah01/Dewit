@@ -11,20 +11,24 @@ import 'package:toast/toast.dart';
 
 
 void main() {
-  runApp(MaterialApp(
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp(MaterialApp(
       theme: ThemeData(
         brightness: Brightness.dark,
         primaryColor: DewitColors.background,
         accentColor: DewitColors.darkPurple,
         backgroundColor: DewitColors.lightPurple,
       ),
-    home: FirstScreen(),
-    initialRoute: "/",
-    routes: {
-      //'/': (context) => FirstScreen(),
-      "/second": (context) => SecondScreen(),
-    },
-  ));
+      home: FirstScreen(),
+      initialRoute: "/",
+      routes: {
+        //'/': (context) => FirstScreen(),
+        "/second": (context) => SecondScreen(),
+      },
+    ));
+  });
 }
 
 

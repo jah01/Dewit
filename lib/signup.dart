@@ -3,24 +3,29 @@ import 'package:dewitapp/widgets.dart';
 import 'package:dewitapp/signupwidgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 
 void main() {
-  runApp(MaterialApp(
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp(MaterialApp(
 //    theme: ThemeData(
 //      brightness: Brightness.dark,
 //      primaryColor: DewitColors.background,
 //      accentColor: DewitColors.darkPurple,
 //      backgroundColor: DewitColors.lightPurple,
 //    ),
-    home: SignUp(),
-    initialRoute: "/",
-    routes: {
-      //'/': (context) => FirstScreen(),
-      //"/second": (context) => SecondScreen(),
-    },
-  ));
+      home: SignUp(),
+      initialRoute: "/",
+      routes: {
+        //'/': (context) => FirstScreen(),
+        //"/second": (context) => SecondScreen(),
+      },
+    ));
+  });
 }
 
 
@@ -173,6 +178,35 @@ class _SignUp extends State<SignUp> {
               top: -20.0,
               right: 0,
               child: SvgPicture.asset("assets/images/topRight.svg"),
+            ) : Container(width: 0, height: 0,),
+            isTall ? Positioned(
+              top: 76,
+              child: SvgPicture.asset("assets/images/top1.svg"),
+            ) : Container(width: 0, height: 0,),
+            isTall ? Positioned(
+              top: 50,
+              left: 100,
+              child: SvgPicture.asset("assets/images/top2.svg"),
+            ) : Container(width: 0, height: 0,),
+            isTall ? Positioned(
+              top: 120,
+              right: 0,
+              child: SvgPicture.asset("assets/images/top3.svg"),
+            ) : Container(width: 0, height: 0,),
+            isTall ? Positioned(
+              bottom: 60,
+              left: 6,
+              child: SvgPicture.asset("assets/images/bottom1.svg"),
+            ) : Container(width: 0, height: 0,),
+            isTall ? Positioned(
+              bottom: 66,
+              right: 180,
+              child: SvgPicture.asset("assets/images/bottom2.svg"),
+            ) : Container(width: 0, height: 0,),
+            isTall ? Positioned(
+              right: 0,
+              bottom: 56,
+              child: SvgPicture.asset("assets/images/bottom3.svg"),
             ) : Container(width: 0, height: 0,),
           ],
         ),
