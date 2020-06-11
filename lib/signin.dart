@@ -83,141 +83,154 @@ class _SignUp extends State<SignUp> {
         backgroundColor: DewitColors.darkPurple,
         resizeToAvoidBottomInset: false,
         resizeToAvoidBottomPadding: false,
-        body: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF465666), DewitColors.lightPurple],
-              //colors: [Color(0xFF25507d), DewitColors.lightPurple],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              stops: [0, .9],
+        body: Stack(
+          children: <Widget>[
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Color(0xFF465666), DewitColors.lightPurple],
+                  //colors: [Color(0xFF25507d), DewitColors.lightPurple],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  stops: [0, .9],
+                ),
+              ),
             ),
-          ),
-          child: SafeArea(
-            child: Column(
-              children: <Widget>[
-                Padding(padding: EdgeInsets.only(top: 60)),
-                AutoSizeText(
-                  "Welcome to Dewit",
-                  style: TextStyle(
-                    //color: Color(0xFF9099a3),
-                    color: DewitColors.oldLightPurple,
-                    fontSize: 40,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-                Padding(padding: EdgeInsets.only(top: 20)),
-                AutoSizeText(
-                  "The app for reaching goals\nand keeping habits",
-                  style: TextStyle(
-                    color: DewitColors.oldLightPurple,
-                    //color: Color(0xFF9099a3),
-                    fontSize: 20,
-                    fontWeight: FontWeight.w400,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                Padding(padding: EdgeInsets.only(top: 40)),
-                Spacer(),
-                Text(
-                  "New around here?",
-                  style: TextStyle(
-                    //color: Color(0xFF9099a3),
-                    color: DewitColors.oldLightPurple,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w300,
-                  ),
-                ),
-                Padding(padding: EdgeInsets.only(top: 8.0)),
-                Container(
-                  height: 60,
-                  //width: 208,
-                  //width: w,
-                  //padding: EdgeInsets.only(left: w - 100, right: 80.0),
-                  child: FlatButton(
-                    onPressed: () {
-                    },
-                    padding: EdgeInsets.all(0.0),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
+            Container(
+              margin: EdgeInsets.only(
+                  top: (saHeight * .2) + MediaQuery.of(context).padding.top),
+              height: saHeight * .6,
+              child: Align(
+                alignment: Alignment.center,
+                child: Column(
+                  children: <Widget>[
+                    //Padding(padding: EdgeInsets.only(top: 60)),
+                    AutoSizeText(
+                      "Welcome to Dewit",
+                      style: TextStyle(
+                        //color: Color(0xFF9099a3),
+                        color: DewitColors.oldLightPurple,
+                        fontSize: 40,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
+                    Padding(padding: EdgeInsets.only(top: 20)),
+                    AutoSizeText(
+                      "The app for reaching goals\nand keeping habits",
+                      style: TextStyle(
+                        color: DewitColors.oldLightPurple,
+                        //color: Color(0xFF9099a3),
+                        fontSize: 20,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    Padding(padding: EdgeInsets.only(top: 40)),
+                    Spacer(),
+                    Text(
+                      "New around here?",
+                      style: TextStyle(
+                        //color: Color(0xFF9099a3),
+                        color: DewitColors.oldLightPurple,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                    Padding(padding: EdgeInsets.only(top: 8.0)),
+                    Container(
+                      height: 60,
+                      //width: 208,
+                      //width: w,
+                      //padding: EdgeInsets.only(left: w - 100, right: 80.0),
+                      child: FlatButton(
+                        onPressed: () {},
+                        padding: EdgeInsets.all(0.0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
 //                    color: Color(0xFF9099a3),
 //                    child: Text("hello"),
-                    child: Ink(
-                      decoration: BoxDecoration(
-                          gradient: LinearGradient(colors: [DewitColors.oldDarkPurple, DewitColors.oldLightPurple],
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
-                          ),
-                          borderRadius: BorderRadius.circular(32.0)
-                      ),
-                      child: Container(
-                        constraints: BoxConstraints(maxWidth: 208.0, minHeight: 50.0),
-                        alignment: Alignment.center,
-                        child: Text(
-                          "Sign Up",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
+                        child: Ink(
+                          decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  DewitColors.oldDarkPurple,
+                                  DewitColors.oldLightPurple
+                                ],
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                              ),
+                              borderRadius: BorderRadius.circular(32.0)),
+                          child: Container(
+                            constraints: BoxConstraints(
+                                maxWidth: 208.0, minHeight: 50.0),
+                            alignment: Alignment.center,
+                            child: Text(
+                              "Sign Up",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ),
-                Padding(padding: EdgeInsets.only(top: 24.0)),
-                Text(
-                  "Already have an account?",
-                  style: TextStyle(
-                    //color: Color(0xFF9099a3),
-                    color: DewitColors.oldLightPurple,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w300,
-                  ),
-                ),
-                Padding(padding: EdgeInsets.only(top: 8.0)),
-                FlatButton(
-                  onPressed: () {},
-                  padding: EdgeInsets.all(0.0),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
+                    Padding(padding: EdgeInsets.only(top: 24.0)),
+                    Text(
+                      "Already have an account?",
+                      style: TextStyle(
+                        //color: Color(0xFF9099a3),
+                        color: DewitColors.oldLightPurple,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                    Padding(padding: EdgeInsets.only(top: 8.0)),
+                    FlatButton(
+                      onPressed: () {},
+                      padding: EdgeInsets.all(0.0),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
 //                    color: Color(0xFF9099a3),
 //                    child: Text("hello"),
-                    child: OutlineGradientButton(
-                      onTap: () {
-                        //print("hello");
-                      },
-                      child: Container(
-                        constraints:
-                            BoxConstraints(maxWidth: 200.0, minHeight: 50.0),
-                        alignment: Alignment.center,
-                        child: Text(
-                          "Sign In",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
+                      child: OutlineGradientButton(
+                        onTap: () {
+                          //print("hello");
+                        },
+                        child: Container(
+                          constraints:
+                              BoxConstraints(maxWidth: 200.0, minHeight: 50.0),
+                          alignment: Alignment.center,
+                          child: Text(
+                            "Sign In",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                         ),
+                        gradient: LinearGradient(colors: [
+                          DewitColors.oldDarkPurple,
+                          DewitColors.oldLightPurple
+                        ]),
+                        strokeWidth: 4,
+                        radius: Radius.circular(32.0),
                       ),
-                      gradient: LinearGradient(colors: [
-                        DewitColors.oldDarkPurple,
-                        DewitColors.oldLightPurple
-                      ]),
-                      strokeWidth: 4,
-                      radius: Radius.circular(32.0),
                     ),
-                  ),
-                Padding(padding: EdgeInsets.only(top: 32.0)),
-              ],
+                    //Padding(padding: EdgeInsets.only(top: 32.0)),
+                  ],
+                ),
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );
