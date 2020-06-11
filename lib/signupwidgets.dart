@@ -71,3 +71,45 @@ class SignUpInfo extends StatelessWidget {
     );
   }
 }
+
+
+class StandardTF extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      //focusNode: firstName,
+      //controller: firstNameController,
+      keyboardType: TextInputType.text,
+      autocorrect: false,
+      textCapitalization: TextCapitalization.words,
+      style: TextStyle(color: Color(0xFF9099a3)),
+      decoration: new InputDecoration(
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            //color: Color(0xFF465666),
+            color: Color(0xFF6a7784),
+            width: 2,
+          ),
+        ),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: DewitColors.lightPurple,
+            width: 2,
+          ),
+        ),
+        border: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: Color(0xFF6a7784),
+            width: 2,
+          ),
+        ),
+        hintText: "First Name",
+        //prefixIcon: Icon(Icons.alternate_email, color: DewitColors.oldLightPurple,),
+        hintStyle: TextStyle(color: Color(0xFF6a7784)),
+        counterStyle: TextStyle(fontSize: 0),
+      ),
+      cursorColor: Color(0xFF9099a3),
+      maxLength: 20,
+    );
+  }
+}

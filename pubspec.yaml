@@ -41,6 +41,9 @@ dependencies:
   # This is for using SVGs
   flutter_svg: ^0.17.1
 
+  # This is for buttons with gradient outline
+  outline_gradient_button: ^1.0.0+2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
