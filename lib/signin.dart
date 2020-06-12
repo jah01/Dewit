@@ -50,27 +50,10 @@ class _LandingPage extends State<LandingPage> {
 
   @override
   Widget build(BuildContext context) {
-    //clears everything beforehand (great for after a user logs out
-//    SchedulerBinding.instance.addPostFrameCallback((_) {
-//      Navigator.of(context).pushNamedAndRemoveUntil(
-//          "/", (Route<dynamic> route) => false);
-//    });
-//    FocusNode firstName = FocusNode();
-//    FocusNode lastName = FocusNode();
-//    FocusNode email = FocusNode();
-//    FocusNode password = FocusNode();
-//    FocusNode confirmPassword = FocusNode();
-//    TextEditingController firstNameController = TextEditingController();
-//    TextEditingController lastNameController = TextEditingController();
-//    TextEditingController emailController = TextEditingController();
-//    TextEditingController passwordController = TextEditingController();
-//    TextEditingController confirmPasswordController = TextEditingController();
+    //TODO clear everything beforehand (great for after a user logs out)
 
-    var h = MediaQuery.of(context).size.height;
-    var w = MediaQuery.of(context).size.width;
     var saHeight = (MediaQuery.of(context).size.height -
         MediaQuery.of(context).padding.top);
-    bool isTall = h >= 680;
     return GestureDetector(
       onTap: () {
         FocusScopeNode currentFocus = FocusScope.of(context);
@@ -233,41 +216,40 @@ class _LandingPage extends State<LandingPage> {
                       ),
                     ),
                     Padding(padding: EdgeInsets.only(top: 8.0)),
-                Container(
-                  height: 64,
-                    child:
-                    FlatButton(
-                      onPressed: () {},
-                      padding: EdgeInsets.all(0.0),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
+                    Container(
+                      height: 64,
+                      child: FlatButton(
+                        onPressed: () {},
+                        padding: EdgeInsets.all(0.0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(32.0),
+                        ),
 //                    color: Color(0xFF9099a3),
 //                    child: Text("hello"),
-                      child: OutlineGradientButton(
-                        child: Container(
-                          constraints:
-                              BoxConstraints(maxWidth: 200.0, minHeight: 50.0),
-                          alignment: Alignment.center,
-                          child: Text(
-                            "Sign In",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
+                        child: OutlineGradientButton(
+                          child: Container(
+                            constraints: BoxConstraints(
+                                maxWidth: 200.0, minHeight: 50.0),
+                            alignment: Alignment.center,
+                            child: Text(
+                              "Sign In",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ),
+                          gradient: LinearGradient(colors: [
+                            DewitColors.oldDarkPurple,
+                            DewitColors.oldLightPurple
+                          ]),
+                          strokeWidth: 4,
+                          radius: Radius.circular(32.0),
                         ),
-                        gradient: LinearGradient(colors: [
-                          DewitColors.oldDarkPurple,
-                          DewitColors.oldLightPurple
-                        ]),
-                        strokeWidth: 4,
-                        radius: Radius.circular(8.0),
                       ),
                     ),
-                ),
                     //Padding(padding: EdgeInsets.only(top: 32.0)),
                   ],
                 ),
@@ -321,7 +303,7 @@ class _SignUp extends State<SignUp> {
                   gradient: LinearGradient(
                     colors: [
                       DewitColors.oldDarkPurple,
-                      DewitColors.oldLightPurple
+                      DewitColors.oldLightPurple,
                     ],
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
@@ -372,7 +354,8 @@ class _SignUp extends State<SignUp> {
                         children: <Widget>[
                           Expanded(
                             flex: 10,
-                            child: StandardTF("First Name", firstNameController),
+                            child:
+                                StandardTF("First Name", firstNameController),
                           ),
                           Spacer(flex: 2),
                           Expanded(
@@ -388,41 +371,48 @@ class _SignUp extends State<SignUp> {
                       height: 60,
                       child: StandardTF("Email", emailController),
                     ),
-                    Padding(padding: EdgeInsets.only(bottom: 16.0)),
+                    Padding(padding: EdgeInsets.only(bottom: 24.0)),
                     FlatButton(
                       padding: EdgeInsets.all(0.0),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8.0),
                       ),
-                      child: Ink(
-                        decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                DewitColors.darkPurple,
-                                DewitColors.lightPurple
-                              ],
-                              begin: Alignment.centerLeft,
-                              end: Alignment.centerRight,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0)),
-                        child: InkWell(
-                          borderRadius: BorderRadius.circular(8.0),
-                          splashColor: DewitColors.oldDarkPurple,
-                          highlightColor: Color(0xAAC7C9ED),
-                          onTap: () {
-                            print("hello");
-                          },
-                          child: Container(
-                            constraints: BoxConstraints(
-                                maxWidth: 208.0, minHeight: 50.0),
-                            alignment: Alignment.center,
-                            child: Text(
-                              "Continue",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500,
+                      child: Hero(
+                        tag: "continue",
+                        child: Material(
+                          color: Colors.transparent,
+                          child: Ink(
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    DewitColors.darkPurple,
+                                    DewitColors.lightPurple
+                                  ],
+                                  begin: Alignment.centerLeft,
+                                  end: Alignment.centerRight,
+                                ),
+                                borderRadius: BorderRadius.circular(32.0)),
+                            child: InkWell(
+                              borderRadius: BorderRadius.circular(32.0),
+                              splashColor: DewitColors.oldDarkPurple,
+                              highlightColor: Color(0xAAC7C9ED),
+                              onTap: () {
+                                //Navigator.pushNamed(context, "/signup");
+                                print("hello there");
+                              },
+                              child: Container(
+                                constraints: BoxConstraints(
+                                    maxWidth: 208.0, minHeight: 50.0),
+                                alignment: Alignment.center,
+                                child: Text(
+                                  "Continue",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
