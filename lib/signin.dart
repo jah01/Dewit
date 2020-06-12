@@ -24,7 +24,7 @@ void main() {
       home: LandingPage(),
       initialRoute: "/",
       routes: {
-        //"/": (context) => SignUp(),
+        "/signup": (context) => SignUp(),
         //"/second": (context) => SecondScreen(),
       },
     ));
@@ -145,28 +145,41 @@ class _LandingPage extends State<LandingPage> {
                       //width: w,
                       //padding: EdgeInsets.only(left: w - 100, right: 80.0),
                       child: FlatButton(
-                        onPressed: () {},
+//                        onPressed: () {
+//                          Navigator.pushNamed(context, "/signup");
+//                        },
                         padding: EdgeInsets.all(0.0),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30.0),
                         ),
 //                    color: Color(0xFF9099a3),
 //                    child: Text("hello"),
-                        child: Ink(
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [
-                                  DewitColors.oldDarkPurple,
-                                  DewitColors.oldLightPurple
-                                ],
-                                begin: Alignment.centerLeft,
-                                end: Alignment.centerRight,
-                              ),
-                              borderRadius: BorderRadius.circular(32.0)),
-                          child: Container(
-                            constraints: BoxConstraints(
-                                maxWidth: 208.0, minHeight: 50.0),
-                            alignment: Alignment.center,
+                        child: Hero(
+                          tag: "signup",
+                          child: Material(
+                            color: Colors.transparent,
+                            child: Ink(
+                              decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      DewitColors.oldDarkPurple,
+                                      DewitColors.oldLightPurple
+                                    ],
+                                    begin: Alignment.centerLeft,
+                                    end: Alignment.centerRight,
+                                  ),
+                                  borderRadius: BorderRadius.circular(32.0)),
+                              child: InkWell(
+                                borderRadius: BorderRadius.circular(32.0),
+                                splashColor: DewitColors.oldDarkPurple,
+                                highlightColor: Color(0xAAC7C9ED),
+                                onTap: () {
+                                  Navigator.pushNamed(context, "/signup");
+                                },
+                                child: Container(
+                                  constraints: BoxConstraints(
+                                      maxWidth: 208.0, minHeight: 50.0),
+                                  alignment: Alignment.center,
 //                            child: Row(
 //                              crossAxisAlignment: CrossAxisAlignment.center,
 //                              mainAxisAlignment: MainAxisAlignment.center,
@@ -182,24 +195,28 @@ class _LandingPage extends State<LandingPage> {
 //                                ),
 //                              ],
 //                            )
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: <Widget>[
-                              Text(
-                                  "Sign Up",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w500,
+                                  child: Stack(
+                                    alignment: Alignment.center,
+                                    children: <Widget>[
+                                      Text(
+                                        "Sign Up",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      ListTile(
+                                        trailing: Icon(
+                                          Icons.arrow_forward,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                ListTile(
-                                  trailing: Icon(Icons.arrow_forward,
-                                  color: Colors.white,
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
                           ),
                         ),
@@ -217,7 +234,7 @@ class _LandingPage extends State<LandingPage> {
                     ),
                     Padding(padding: EdgeInsets.only(top: 8.0)),
                 Container(
-                  height: 60,
+                  height: 64,
                     child:
                     FlatButton(
                       onPressed: () {},
@@ -280,9 +297,64 @@ class SignUp extends StatefulWidget {
 class _SignUp extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 0,
-      height: 0,
+    return GestureDetector(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+
+        if (!currentFocus.hasPrimaryFocus) {
+          currentFocus.unfocus();
+        }
+      },
+      child: Scaffold(
+        backgroundColor: DewitColors.darkPurple,
+        resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomPadding: false,
+        body: Stack(
+          children: <Widget>[
+//            Positioned(
+//              top: -160,
+//              left: -160,
+//              child: SvgPicture.asset("assets/images/topLeftBig.svg"),
+////              tag: "signup",
+////              child: Positioned(
+////                top: 100,
+////                left: 50,
+////                child: SvgPicture.asset("assets/images/topLeftBig.svg"),
+//              ),
+//            Hero(
+//                tag: "signup",
+//                child: Container(
+//                  width: double.infinity,
+//                  height: 200,
+//                  color: Colors.greenAccent,
+//                ),
+////              tag: "signup",
+////              child: Positioned(
+////                top: 100,
+////                left: 50,
+////                child: SvgPicture.asset("assets/images/topLeftBig.svg"),
+//            ),
+            Hero(
+              tag: "signup",
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      DewitColors.oldDarkPurple,
+                      DewitColors.oldLightPurple
+                    ],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                  ),
+                ),
+                //color: DewitColors.darkPurple,
+                width: double.infinity,
+                height: double.infinity,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
