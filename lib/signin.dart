@@ -21,7 +21,7 @@ void main() {
 //      accentColor: DewitColors.darkPurple,
 //      backgroundColor: DewitColors.lightPurple,
 //    ),
-      home: SignUp(),
+      home: LandingPage(),
       initialRoute: "/",
       routes: {
         //"/": (context) => SignUp(),
@@ -32,17 +32,17 @@ void main() {
 }
 
 
-class SignUp extends StatefulWidget {
-  SignUp({Key key}) : super(key: key);
+class LandingPage extends StatefulWidget {
+  LandingPage({Key key}) : super(key: key);
 
   @override
-  _SignUp createState() {
-    return _SignUp();
+  _LandingPage createState() {
+    return _LandingPage();
   }
 }
 
 
-class _SignUp extends State<SignUp> {
+class _LandingPage extends State<LandingPage> {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -167,14 +167,39 @@ class _SignUp extends State<SignUp> {
                             constraints: BoxConstraints(
                                 maxWidth: 208.0, minHeight: 50.0),
                             alignment: Alignment.center,
-                            child: Text(
-                              "Sign Up",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500,
-                              ),
+//                            child: Row(
+//                              crossAxisAlignment: CrossAxisAlignment.center,
+//                              mainAxisAlignment: MainAxisAlignment.center,
+//                              children: <Widget>[
+//                                Text(
+//                                  "Sign Up",
+//                                  textAlign: TextAlign.center,
+//                                  style: TextStyle(
+//                                    color: Colors.white,
+//                                    fontSize: 20,
+//                                    fontWeight: FontWeight.w500,
+//                                  ),
+//                                ),
+//                              ],
+//                            )
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: <Widget>[
+                              Text(
+                                  "Sign Up",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                ListTile(
+                                  trailing: Icon(Icons.arrow_forward,
+                                  color: Colors.white,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
@@ -191,6 +216,9 @@ class _SignUp extends State<SignUp> {
                       ),
                     ),
                     Padding(padding: EdgeInsets.only(top: 8.0)),
+                Container(
+                  height: 60,
+                    child:
                     FlatButton(
                       onPressed: () {},
                       padding: EdgeInsets.all(0.0),
@@ -225,6 +253,7 @@ class _SignUp extends State<SignUp> {
                         radius: Radius.circular(32.0),
                       ),
                     ),
+                ),
                     //Padding(padding: EdgeInsets.only(top: 32.0)),
                   ],
                 ),
@@ -233,6 +262,27 @@ class _SignUp extends State<SignUp> {
           ],
         ),
       ),
+    );
+  }
+}
+
+
+class SignUp extends StatefulWidget {
+  SignUp({Key key}) : super(key: key);
+
+  @override
+  _SignUp createState() {
+    return _SignUp();
+  }
+}
+
+
+class _SignUp extends State<SignUp> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 0,
+      height: 0,
     );
   }
 }
