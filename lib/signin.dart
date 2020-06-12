@@ -150,7 +150,7 @@ class _LandingPage extends State<LandingPage> {
 //                        },
                         padding: EdgeInsets.all(0.0),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.0),
+                          borderRadius: BorderRadius.circular(32.0),
                         ),
 //                    color: Color(0xFF9099a3),
 //                    child: Text("hello"),
@@ -240,14 +240,11 @@ class _LandingPage extends State<LandingPage> {
                       onPressed: () {},
                       padding: EdgeInsets.all(0.0),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0),
+                        borderRadius: BorderRadius.circular(8.0),
                       ),
 //                    color: Color(0xFF9099a3),
 //                    child: Text("hello"),
                       child: OutlineGradientButton(
-                        onTap: () {
-                          //print("hello");
-                        },
                         child: Container(
                           constraints:
                               BoxConstraints(maxWidth: 200.0, minHeight: 50.0),
@@ -267,7 +264,7 @@ class _LandingPage extends State<LandingPage> {
                           DewitColors.oldLightPurple
                         ]),
                         strokeWidth: 4,
-                        radius: Radius.circular(32.0),
+                        radius: Radius.circular(8.0),
                       ),
                     ),
                 ),
@@ -295,8 +292,14 @@ class SignUp extends StatefulWidget {
 
 
 class _SignUp extends State<SignUp> {
+  final firstNameController = TextEditingController();
+  final lastNameController = TextEditingController();
+  final emailController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    var saHeight = (MediaQuery.of(context).size.height -
+        MediaQuery.of(context).padding.top);
     return GestureDetector(
       onTap: () {
         FocusScopeNode currentFocus = FocusScope.of(context);
@@ -311,29 +314,6 @@ class _SignUp extends State<SignUp> {
         resizeToAvoidBottomPadding: false,
         body: Stack(
           children: <Widget>[
-//            Positioned(
-//              top: -160,
-//              left: -160,
-//              child: SvgPicture.asset("assets/images/topLeftBig.svg"),
-////              tag: "signup",
-////              child: Positioned(
-////                top: 100,
-////                left: 50,
-////                child: SvgPicture.asset("assets/images/topLeftBig.svg"),
-//              ),
-//            Hero(
-//                tag: "signup",
-//                child: Container(
-//                  width: double.infinity,
-//                  height: 200,
-//                  color: Colors.greenAccent,
-//                ),
-////              tag: "signup",
-////              child: Positioned(
-////                top: 100,
-////                left: 50,
-////                child: SvgPicture.asset("assets/images/topLeftBig.svg"),
-//            ),
             Hero(
               tag: "signup",
               child: Container(
@@ -350,6 +330,107 @@ class _SignUp extends State<SignUp> {
                 //color: DewitColors.darkPurple,
                 width: double.infinity,
                 height: double.infinity,
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(
+                  top: (saHeight * .1) + MediaQuery.of(context).padding.top),
+              //height: saHeight * .6,
+              child: Align(
+                alignment: Alignment.center,
+                child: Column(
+                  children: <Widget>[
+                    //Padding(padding: EdgeInsets.only(top: 60)),
+                    AutoSizeText(
+                      "We're so glad you're here!",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        //color: Color(0xFF9099a3),
+                        color: DewitColors.lightPurple,
+                        fontSize: 32,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    Padding(padding: EdgeInsets.only(top: 20)),
+                    AutoSizeText(
+                      "Let's create an account",
+                      style: TextStyle(
+                        color: DewitColors.lightPurple,
+                        //color: Color(0xFF9099a3),
+                        fontSize: 20,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    Padding(padding: EdgeInsets.only(top: 40)),
+                    //Spacer(),
+                    Container(
+                      width: MediaQuery.of(context).size.width - 64,
+                      height: 60,
+                      //color: Colors.greenAccent,
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(
+                            flex: 10,
+                            child: StandardTF("First Name", firstNameController),
+                          ),
+                          Spacer(flex: 2),
+                          Expanded(
+                            flex: 10,
+                            child: StandardTF("Last Name", lastNameController),
+                          )
+                        ],
+                      ),
+                    ),
+                    Padding(padding: EdgeInsets.only(bottom: 16.0)),
+                    Container(
+                      width: MediaQuery.of(context).size.width - 64,
+                      height: 60,
+                      child: StandardTF("Email", emailController),
+                    ),
+                    Padding(padding: EdgeInsets.only(bottom: 16.0)),
+                    FlatButton(
+                      padding: EdgeInsets.all(0.0),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      child: Ink(
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                DewitColors.darkPurple,
+                                DewitColors.lightPurple
+                              ],
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0)),
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(8.0),
+                          splashColor: DewitColors.oldDarkPurple,
+                          highlightColor: Color(0xAAC7C9ED),
+                          onTap: () {
+                            print("hello");
+                          },
+                          child: Container(
+                            constraints: BoxConstraints(
+                                maxWidth: 208.0, minHeight: 50.0),
+                            alignment: Alignment.center,
+                            child: Text(
+                              "Continue",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

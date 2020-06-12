@@ -74,42 +74,65 @@ class SignUpInfo extends StatelessWidget {
 
 
 class StandardTF extends StatelessWidget {
+  final c;
+  final hintText;
+  StandardTF(this.hintText, this.c);
+
   @override
   Widget build(BuildContext context) {
     return TextField(
       //focusNode: firstName,
       //controller: firstNameController,
+      controller: c,
       keyboardType: TextInputType.text,
       autocorrect: false,
       textCapitalization: TextCapitalization.words,
-      style: TextStyle(color: Color(0xFF9099a3)),
+      style: TextStyle(
+//        color: Color(0xFF9099a3),
+      color: DewitColors.lightPurple,
+        fontSize: 16,
+      ),
       decoration: new InputDecoration(
+        //contentPadding: EdgeInsets.all(0),
         enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(
             //color: Color(0xFF465666),
-            color: Color(0xFF6a7784),
+            //color: Color(0xFF6a7784),
+            //color: Color(0xFF6a7784),
+            color: DewitColors.lightPurple,
+            //color: Color(0xFF4c4d61),
             width: 2,
           ),
         ),
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(
+            //color: Color(0xFF465666),
+            //color: Color(0xFF888896),
             color: DewitColors.lightPurple,
             width: 2,
           ),
         ),
         border: UnderlineInputBorder(
           borderSide: BorderSide(
-            color: Color(0xFF6a7784),
+            //color: Color(0xFF6a7784),
+            //color: Color(0xFF6a7784),
+            color: DewitColors.lightPurple,
+            //color: Color(0xFF4c4d61),
             width: 2,
           ),
         ),
-        hintText: "First Name",
+        hintText: hintText,
         //prefixIcon: Icon(Icons.alternate_email, color: DewitColors.oldLightPurple,),
-        hintStyle: TextStyle(color: Color(0xFF6a7784)),
+        hintStyle: TextStyle(
+          color: Color(0xFF6a7784),
+          //color: DewitColors.lightPurple,
+        ),
         counterStyle: TextStyle(fontSize: 0),
       ),
-      cursorColor: Color(0xFF9099a3),
-      maxLength: 20,
+      //cursorColor: Color(0xFF9099a3),
+      cursorColor: DewitColors.lightPurple,
+      cursorWidth: 2,
+      maxLength: 24,
     );
   }
 }
