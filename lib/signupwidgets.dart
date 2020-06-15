@@ -76,7 +76,8 @@ class SignUpInfo extends StatelessWidget {
 class StandardTF extends StatelessWidget {
   final c;
   final hintText;
-  StandardTF(this.hintText, this.c);
+  final darkBackground;
+  StandardTF(this.hintText, this.c, this.darkBackground);
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +90,7 @@ class StandardTF extends StatelessWidget {
       textCapitalization: TextCapitalization.words,
       style: TextStyle(
 //        color: Color(0xFF9099a3),
-      color: DewitColors.lightPurple,
+      color: (darkBackground) ? DewitColors.oldLightPurple : DewitColors.lightPurple,
         fontSize: 16,
       ),
       decoration: new InputDecoration(
@@ -99,7 +100,7 @@ class StandardTF extends StatelessWidget {
             //color: Color(0xFF465666),
             //color: Color(0xFF6a7784),
             //color: Color(0xFF6a7784),
-            color: DewitColors.lightPurple,
+            color: (darkBackground) ? DewitColors.oldLightPurple : DewitColors.lightPurple,
             //color: Color(0xFF4c4d61),
             width: 2,
           ),
@@ -108,7 +109,7 @@ class StandardTF extends StatelessWidget {
           borderSide: BorderSide(
             //color: Color(0xFF465666),
             //color: Color(0xFF888896),
-            color: DewitColors.lightPurple,
+            color: (darkBackground) ? DewitColors.oldLightPurple : DewitColors.lightPurple,
             width: 2,
           ),
         ),
@@ -116,7 +117,7 @@ class StandardTF extends StatelessWidget {
           borderSide: BorderSide(
             //color: Color(0xFF6a7784),
             //color: Color(0xFF6a7784),
-            color: DewitColors.lightPurple,
+            color: (darkBackground) ? DewitColors.oldLightPurple : DewitColors.lightPurple,
             //color: Color(0xFF4c4d61),
             width: 2,
           ),
@@ -124,13 +125,14 @@ class StandardTF extends StatelessWidget {
         hintText: hintText,
         //prefixIcon: Icon(Icons.alternate_email, color: DewitColors.oldLightPurple,),
         hintStyle: TextStyle(
-          color: Color(0xFF6a7784),
+          //color: Color(0xFF6a7784),
+          color: (darkBackground) ? Color(0xFF505050) : Color(0xFF6a7784),
           //color: DewitColors.lightPurple,
         ),
         counterStyle: TextStyle(fontSize: 0),
       ),
       //cursorColor: Color(0xFF9099a3),
-      cursorColor: DewitColors.lightPurple,
+      cursorColor: (darkBackground) ? DewitColors.oldLightPurple : DewitColors.lightPurple,
       cursorWidth: 2,
       maxLength: 24,
     );

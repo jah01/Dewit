@@ -362,12 +362,12 @@ class _SignUp extends State<SignUp> {
                           Expanded(
                             flex: 10,
                             child:
-                                StandardTF("First Name", firstNameController),
+                                StandardTF("First Name", firstNameController, false),
                           ),
                           Spacer(flex: 2),
                           Expanded(
                             flex: 10,
-                            child: StandardTF("Last Name", lastNameController),
+                            child: StandardTF("Last Name", lastNameController, false),
                           )
                         ],
                       ),
@@ -376,7 +376,7 @@ class _SignUp extends State<SignUp> {
                     Container(
                       width: MediaQuery.of(context).size.width - 64,
                       height: 60,
-                      child: StandardTF("Email", emailController),
+                      child: StandardTF("Email", emailController, false),
                     ),
                     Padding(padding: EdgeInsets.only(bottom: 24.0)),
                     FlatButton(
@@ -497,20 +497,20 @@ class _SignUp2 extends State<SignUp2> {
                   children: <Widget>[
                     //Padding(padding: EdgeInsets.only(top: 60)),
                     AutoSizeText(
-                      "We're so glad you're here!",
+                      "Almost done!",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         //color: Color(0xFF9099a3),
-                        color: DewitColors.lightPurple,
+                        color: DewitColors.oldLightPurple,
                         fontSize: 32,
                         fontWeight: FontWeight.w400,
                       ),
                     ),
                     Padding(padding: EdgeInsets.only(top: 20)),
                     AutoSizeText(
-                      "Let's create an account",
+                      "You'll just need to add a password",
                       style: TextStyle(
-                        color: DewitColors.lightPurple,
+                        color: DewitColors.oldLightPurple,
                         //color: Color(0xFF9099a3),
                         fontSize: 20,
                         fontWeight: FontWeight.w400,
@@ -523,13 +523,13 @@ class _SignUp2 extends State<SignUp2> {
                       width: MediaQuery.of(context).size.width - 64,
                       height: 60,
                             child:
-                            StandardTF("Create password", passwordController),
+                            StandardTF("Create password", passwordController, true),
                     ),
                     Padding(padding: EdgeInsets.only(bottom: 16.0)),
                     Container(
                       width: MediaQuery.of(context).size.width - 64,
                       height: 60,
-                      child: StandardTF("Confirm password", confirmPasswordController),
+                      child: StandardTF("Confirm password", confirmPasswordController, true),
                     ),
                     Padding(padding: EdgeInsets.only(bottom: 24.0)),
                     FlatButton(
@@ -545,8 +545,8 @@ class _SignUp2 extends State<SignUp2> {
                             decoration: BoxDecoration(
                                 gradient: LinearGradient(
                                   colors: [
-                                    DewitColors.darkPurple,
-                                    DewitColors.lightPurple
+                                    DewitColors.oldDarkPurple,
+                                    DewitColors.oldLightPurple
                                   ],
                                   begin: Alignment.centerLeft,
                                   end: Alignment.centerRight,
@@ -558,14 +558,14 @@ class _SignUp2 extends State<SignUp2> {
                               highlightColor: Color(0xAAC7C9ED),
                               onTap: () {
                                 //Navigator.pushNamed(context, "/signup2");
-                                print("this works");
+                                print("Sign up complete.");
                               },
                               child: Container(
                                 constraints: BoxConstraints(
                                     maxWidth: 208.0, minHeight: 50.0),
                                 alignment: Alignment.center,
                                 child: Text(
-                                  "Continue",
+                                  "Let's go!",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     color: Colors.white,
@@ -632,7 +632,7 @@ class _SignIn extends State<SignIn> {
 //                      Color(0xFF465666),
 //                      DewitColors.lightPurple,
                     DewitColors.oldDarkPurple,
-                    DewitColors.lightPurple
+                    DewitColors.oldLightPurple,
                     ],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
@@ -650,7 +650,7 @@ class _SignIn extends State<SignIn> {
                   children: <Widget>[
                     //Padding(padding: EdgeInsets.only(top: 60)),
                     AutoSizeText(
-                      "We're so glad you're here!",
+                      "Welcome back!",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         //color: Color(0xFF9099a3),
@@ -661,7 +661,7 @@ class _SignIn extends State<SignIn> {
                     ),
                     Padding(padding: EdgeInsets.only(top: 20)),
                     AutoSizeText(
-                      "Let's create an account",
+                      "Let's get you right back into it",
                       style: TextStyle(
                         color: DewitColors.lightPurple,
                         //color: Color(0xFF9099a3),
@@ -675,13 +675,13 @@ class _SignIn extends State<SignIn> {
                     Container(
                       width: MediaQuery.of(context).size.width - 64,
                       height: 60,
-                      child: StandardTF("Email", usernameController),
+                      child: StandardTF("Email", usernameController, true),
                     ),
                     Padding(padding: EdgeInsets.only(bottom: 16.0)),
                     Container(
                       width: MediaQuery.of(context).size.width - 64,
                       height: 60,
-                      child: StandardTF("Password", pwController),
+                      child: StandardTF("Password", pwController, true),
                     ),
                     Padding(padding: EdgeInsets.only(bottom: 24.0)),
                     FlatButton(
@@ -690,7 +690,7 @@ class _SignIn extends State<SignIn> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       child: Hero(
-                        tag: "continue",
+                        tag: "signInContinue",
                         child: Material(
                           color: Colors.transparent,
                           child: Ink(
@@ -710,13 +710,14 @@ class _SignIn extends State<SignIn> {
                               highlightColor: Color(0xAAC7C9ED),
                               onTap: () {
                                 //Navigator.pushNamed(context, "/signup2");
+                                print("Sign in complete.");
                               },
                               child: Container(
                                 constraints: BoxConstraints(
                                     maxWidth: 208.0, minHeight: 50.0),
                                 alignment: Alignment.center,
                                 child: Text(
-                                  "Continue",
+                                  "Sign In",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     color: Colors.white,
