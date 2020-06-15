@@ -26,6 +26,7 @@ void main() {
       routes: {
         "/signup": (context) => SignUp(),
         "/signup2": (context) => SignUp2(),
+        "/signin": (context) => SignIn(),
         //"/second": (context) => SecondScreen(),
       },
     ));
@@ -219,35 +220,40 @@ class _LandingPage extends State<LandingPage> {
                     Padding(padding: EdgeInsets.only(top: 8.0)),
                     Container(
                       height: 64,
-                      child: FlatButton(
-                        onPressed: () {},
-                        padding: EdgeInsets.all(0.0),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(32.0),
-                        ),
+                      child: Hero(
+                        tag: "signin",
+                        child: FlatButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, "/signin");
+                          },
+                          padding: EdgeInsets.all(0.0),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(32.0),
+                          ),
 //                    color: Color(0xFF9099a3),
 //                    child: Text("hello"),
-                        child: OutlineGradientButton(
-                          child: Container(
-                            constraints: BoxConstraints(
-                                maxWidth: 200.0, minHeight: 50.0),
-                            alignment: Alignment.center,
-                            child: Text(
-                              "Sign In",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500,
+                          child: OutlineGradientButton(
+                            child: Container(
+                              constraints: BoxConstraints(
+                                  maxWidth: 200.0, minHeight: 50.0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Sign In",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
                             ),
+                            gradient: LinearGradient(colors: [
+                              DewitColors.oldDarkPurple,
+                              DewitColors.oldLightPurple
+                            ]),
+                            strokeWidth: 4,
+                            radius: Radius.circular(32.0),
                           ),
-                          gradient: LinearGradient(colors: [
-                            DewitColors.oldDarkPurple,
-                            DewitColors.oldLightPurple
-                          ]),
-                          strokeWidth: 4,
-                          radius: Radius.circular(32.0),
                         ),
                       ),
                     ),
@@ -553,6 +559,157 @@ class _SignUp2 extends State<SignUp2> {
                               onTap: () {
                                 //Navigator.pushNamed(context, "/signup2");
                                 print("this works");
+                              },
+                              child: Container(
+                                constraints: BoxConstraints(
+                                    maxWidth: 208.0, minHeight: 50.0),
+                                alignment: Alignment.center,
+                                child: Text(
+                                  "Continue",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+class SignIn extends StatefulWidget {
+  SignIn({Key key}) : super(key: key);
+
+  @override
+  _SignIn createState() {
+    return _SignIn();
+  }
+}
+
+
+class _SignIn extends State<SignIn> {
+  final usernameController = TextEditingController();
+  final pwController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    var saHeight = (MediaQuery.of(context).size.height -
+        MediaQuery.of(context).padding.top);
+    return GestureDetector(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+
+        if (!currentFocus.hasPrimaryFocus) {
+          currentFocus.unfocus();
+        }
+      },
+      child: Scaffold(
+        backgroundColor: DewitColors.darkPurple,
+        resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomPadding: false,
+        body: Stack(
+          children: <Widget>[
+            Hero(
+              tag: "signin",
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+//                      Color(0xFF465666),
+//                      DewitColors.lightPurple,
+                    DewitColors.oldDarkPurple,
+                    DewitColors.lightPurple
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(
+                  top: (saHeight * .1) + MediaQuery.of(context).padding.top),
+              //height: saHeight * .6,
+              child: Align(
+                alignment: Alignment.center,
+                child: Column(
+                  children: <Widget>[
+                    //Padding(padding: EdgeInsets.only(top: 60)),
+                    AutoSizeText(
+                      "We're so glad you're here!",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        //color: Color(0xFF9099a3),
+                        color: DewitColors.lightPurple,
+                        fontSize: 32,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    Padding(padding: EdgeInsets.only(top: 20)),
+                    AutoSizeText(
+                      "Let's create an account",
+                      style: TextStyle(
+                        color: DewitColors.lightPurple,
+                        //color: Color(0xFF9099a3),
+                        fontSize: 20,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    Padding(padding: EdgeInsets.only(top: 40)),
+                    //Spacer(),
+                    Container(
+                      width: MediaQuery.of(context).size.width - 64,
+                      height: 60,
+                      child: StandardTF("Email", usernameController),
+                    ),
+                    Padding(padding: EdgeInsets.only(bottom: 16.0)),
+                    Container(
+                      width: MediaQuery.of(context).size.width - 64,
+                      height: 60,
+                      child: StandardTF("Password", pwController),
+                    ),
+                    Padding(padding: EdgeInsets.only(bottom: 24.0)),
+                    FlatButton(
+                      padding: EdgeInsets.all(0.0),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      child: Hero(
+                        tag: "continue",
+                        child: Material(
+                          color: Colors.transparent,
+                          child: Ink(
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    DewitColors.darkPurple,
+                                    DewitColors.lightPurple
+                                  ],
+                                  begin: Alignment.centerLeft,
+                                  end: Alignment.centerRight,
+                                ),
+                                borderRadius: BorderRadius.circular(32.0)),
+                            child: InkWell(
+                              borderRadius: BorderRadius.circular(32.0),
+                              splashColor: DewitColors.oldDarkPurple,
+                              highlightColor: Color(0xAAC7C9ED),
+                              onTap: () {
+                                //Navigator.pushNamed(context, "/signup2");
                               },
                               child: Container(
                                 constraints: BoxConstraints(
