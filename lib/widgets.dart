@@ -305,7 +305,19 @@ String format(num n) {
 
 String timeOfDay(DateTime time) {
   String ending = (time.hour < 12) ? " AM" : " PM";
-  return (TimeOfDay(hour: time.hour, minute: time.minute) == endOfDay) ? "the end of the day" : display(time.hour).toString() + ":" + format(time.minute) + ending;
+  if (time.isBefore(DateTime.now())) {
+    int hourEdit = time.hour;
+    if (time.hour == 0) {
+      hourEdit = 12;
+    } else if (time.hour > 12) {
+      hourEdit = time.hour - 12;
+    }
+      return "Was due " + DateFormat("MMMMEEEEd").format(time) + " at " + hourEdit.toString() + ":" + format(time.minute).toString() + ending;
+  } else {
+    return (TimeOfDay(hour: time.hour, minute: time.minute) == endOfDay)
+        ? "Complete before the end of the day"
+        : "Complete before " + display(time.hour).toString() + ":" + format(time.minute) + ending;
+  }
 }
 
 // ignore: must_be_immutable
@@ -325,7 +337,7 @@ class FirstScreenSubtitle extends StatelessWidget {
           Align(
             alignment: Alignment.centerLeft,
             child: AutoSizeText(
-              "Complete before " + completeByString,
+              completeByString,
               style: TextStyle(
                 color: DewitColors.darkGray,
                 fontSize: 12,
