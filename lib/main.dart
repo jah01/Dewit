@@ -130,30 +130,32 @@ class _FirstScreen extends State<FirstScreen> {
                                 key: UniqueKey(),
                                 onDismissed: (direction) {
                                   setState(() {
-                                    //TODO this part needs help
                                     //dismissed = current.getTasks[i];
                                     current.getTasks.removeAt(i);
                                     if (current.getTasks.length == 0) {
+                                      makeNewOne = true;
+                                      makeNewOneIndex = index;
                                       list.removeAt(index);
                                     }
-                                    //current.removeAt(i);
-                                    //total.removeAt(index);
-                                    //print("DISMISSED: " + dismissed.toString());
                                   });
-                                  //TODO this needs fixing
-                              Scaffold.of(context).showSnackBar(SnackBar(
-                                  content: Text("\"" + element.getTitle + "\" dismissed."),
-                                  action: SnackBarAction(
-                                    label: "UNDO",
-                                    onPressed: () => setState(
-                                        () => current.getTasks.insert(i, element)),
-                                  ),),);
-                              //dismissed = null;
+                                  Scaffold.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text("\"" +
+                                          element.getTitle +
+                                          "\" dismissed."),
+                                      action: SnackBarAction(
+                                        label: "UNDO",
+                                        onPressed: () =>
+                                            setState(() => addToList(element)),
+                                      ),
+                                    ),
+                                  );
                                 },
                                 background: DismissibleBackground1(),
                                 secondaryBackground: DismissibleBackground2(),
                                 child: Padding(
-                                  padding: EdgeInsets.only(top: 2.0, bottom: 2.0),
+                                  padding:
+                                      EdgeInsets.only(top: 2.0, bottom: 2.0),
                                   child: Hero(
                                     tag: UniqueKey().toString(),
                                     child: FirstScreenHero(

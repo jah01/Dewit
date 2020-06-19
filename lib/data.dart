@@ -27,6 +27,8 @@ List<Task> overdue = new List();
 List<Task> total = new List();
 Task dismissed;
 TimeOfDay endOfDay = TimeOfDay(hour: 23, minute: 59);
+bool makeNewOne = false;
+int makeNewOneIndex;
 
 
 class Task {
