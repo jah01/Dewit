@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "787312385237",
+    "firebase_url": "https://dewit-app.firebaseio.com",
+    "project_id": "dewit-app",
+    "storage_bucket": "dewit-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:787312385237:android:3fc03558b0c2ccae51d65c",
+        "android_client_info": {
+          "package_name": "com.dewitapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "787312385237-sqm53sdnjgjs4ibnlmj5f570l75ukvml.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBx7--MMu_YVmn---3293HWQgUx0qvOng8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "787312385237-sqm53sdnjgjs4ibnlmj5f570l75ukvml.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
