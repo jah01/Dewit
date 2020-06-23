@@ -271,18 +271,21 @@ class _Popup extends State<Popup> with SingleTickerProviderStateMixin {
                 padding: const EdgeInsets.all(0.0),
                 child: Container(
                   width: MediaQuery.of(context).size.width * .8,
-                  height: MediaQuery.of(context).size.height * .6,
-                    child: Column(
+                  height: MediaQuery.of(context).size.height * .65,
+                  child: Column(
                     children: <Widget>[
                       Expanded(
                         flex: 2,
-                          child: Container(
-                            padding: EdgeInsets.only(top: 16.0, right: 16.0),
+                        child: Container(
+                          padding: EdgeInsets.only(top: 16.0, right: 16.0),
                           alignment: Alignment.centerRight,
-                          child: Text(
-                            "EDIT",
-                            style: TextStyle(
-                              color: DewitColors.oldDarkPurple,
+                          child: FlatButton(
+                            onPressed: () {},
+                            child: Text(
+                              "EDIT",
+                              style: TextStyle(
+                                color: DewitColors.oldDarkPurple,
+                              ),
                             ),
                           ),
                         ),
@@ -291,7 +294,14 @@ class _Popup extends State<Popup> with SingleTickerProviderStateMixin {
                         flex: 2,
                         child: Container(
                           alignment: Alignment.center,
-                          child: Text("${item.getTitle}"),
+                          child: Row(
+                            children: <Widget>[
+                              Padding(padding: EdgeInsets.only(left: 32.0)),
+                              Expanded(flex: 1, child: Text("Task Name:")),
+                              Expanded(flex: 1, child: Text("${item.getTitle}")),
+                            ],
+                          ),
+                          //child: Text("Task Name: " + "${item.getTitle}"),
                         ),
                       ),
                       Expanded(
@@ -305,7 +315,14 @@ class _Popup extends State<Popup> with SingleTickerProviderStateMixin {
                         flex: 2,
                         child: Container(
                           alignment: Alignment.center,
-                          child: Text("${item.getDateAndTime}"),
+                          child: Text(formatDate(item.getDate)),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: Text(timeOfDay((item.getDateAndTime))),
                         ),
                       ),
                       Expanded(
@@ -329,12 +346,7 @@ class _Popup extends State<Popup> with SingleTickerProviderStateMixin {
                           child: Text("${item.getPriority}"),
                         ),
                       ),
-                      Spacer(flex: 2,),
-                      // Text("${item.getTitle}"),
-                      // Text("${item.getNote}"),
-                      // Text("${item.getDateAndTime}"),
-                      // Text("${item.getTag}"),
-                      // Text("${item.getPriority}"),
+                      Spacer(flex: 2),
                     ],
                   ),
                 ),
