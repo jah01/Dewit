@@ -9,7 +9,6 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:toast/toast.dart';
 
-
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
@@ -31,7 +30,6 @@ void main() {
   });
 }
 
-
 class FirstScreen extends StatefulWidget {
   FirstScreen({Key key}) : super(key: key);
 
@@ -40,7 +38,6 @@ class FirstScreen extends StatefulWidget {
     return _FirstScreen();
   }
 }
-
 
 class _FirstScreen extends State<FirstScreen> {
   //TODO this will be redone once backend is developed
@@ -82,22 +79,30 @@ class _FirstScreen extends State<FirstScreen> {
                           final size = (i == 0) ? 28.0 : 0.0;
                           final spacing = (i == 0 && index > 0) ? 12.0 : 0.0;
                           final pad1 = (i == 0) ? 8.0 : 0.0;
-                          final pad2 = (i == current.getTasks.length - 1) ? 0.0 : 10.0;
+                          final pad2 =
+                              (i == current.getTasks.length - 1) ? 0.0 : 10.0;
                           final element = current.getTasks[i];
-                          bool isOverdue = element.getDateAndTime.isBefore(DateTime.now());
-                          final header = isOverdue ? "Overdue" : formatDate(element.getDate);
+                          bool isOverdue =
+                              element.getDateAndTime.isBefore(DateTime.now());
+                          final header = isOverdue
+                              ? "Overdue"
+                              : formatDate(element.getDate);
+                          final Key k = new UniqueKey();
+                          print(k.toString());
 //                          final title = element.getTitle;
 //                          final note = element.getNote;
                           return Column(
                             children: <Widget>[
                               FirstScreenTopPadding(),
                               Align(
-                                  alignment: Alignment.centerLeft,
+                                alignment: Alignment.centerLeft,
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                      top: pad1,
+                                      left: pad1,
+                                      right: pad1,
+                                      bottom: 0.0),
                                   child: Padding(
-                                    padding: EdgeInsets.only(
-                                        top: pad1, left: pad1, right: pad1, bottom: 0.0),
-                                    child:
-                                    Padding(
                                       padding: EdgeInsets.only(
                                           top: spacing, bottom: 0.0),
                                       child: Row(children: <Widget>[
@@ -156,11 +161,9 @@ class _FirstScreen extends State<FirstScreen> {
                                 child: Padding(
                                   padding:
                                       EdgeInsets.only(top: 2.0, bottom: 2.0),
-                                  child: Hero(
-                                    tag: UniqueKey().toString(),
-                                    child: FirstScreenHero(
-                                      FirstScreenListButton(i, element),
-                                    ),
+                                  child: FirstScreenHero(
+                                    FirstScreenListButton(
+                                        k.toString(), element),
                                   ),
                                 ),
                               ),
@@ -189,7 +192,6 @@ class SecondScreen extends StatefulWidget {
   _SecondScreen createState() => _SecondScreen();
 }
 
-
 class _SecondScreen extends State<SecondScreen> {
   final titleController = TextEditingController();
   final noteController = TextEditingController();
@@ -212,47 +214,56 @@ class _SecondScreen extends State<SecondScreen> {
           children: <Widget>[
             Hero(tag: "addSomething", child: BigPurple()),
             NoOverscrollWidget(
-                Column(
-                  children: <Widget>[
-                    Container(child: SecondScreenTitle(titleController)),
-                    SecondScreenNotes(noteController),
-                    SecondScreenSpacer(),
-                    Container(
-                      height: 236,
-                      child: Column(
-                        children: <Widget>[
-                          Row(children: <Widget>[SecondScreenCategory("Required")]),
-                          Container(
-                            margin: EdgeInsets.only(left: 20.0, right: 20.0),
-                            alignment: Alignment.topLeft,
-                            child: Wrap(
-                              direction: Axis.horizontal,
-                              children: <Widget>[
-                                SecondScreenIconButton("Add a date", Icons.today, 8.0, Key("date")),
-                              ],
-                            ),
+              Column(
+                children: <Widget>[
+                  Container(child: SecondScreenTitle(titleController)),
+                  SecondScreenNotes(noteController),
+                  SecondScreenSpacer(),
+                  Container(
+                    height: 236,
+                    child: Column(
+                      children: <Widget>[
+                        Row(children: <Widget>[
+                          SecondScreenCategory("Required")
+                        ]),
+                        Container(
+                          margin: EdgeInsets.only(left: 20.0, right: 20.0),
+                          alignment: Alignment.topLeft,
+                          child: Wrap(
+                            direction: Axis.horizontal,
+                            children: <Widget>[
+                              SecondScreenIconButton(
+                                  "Add a date", Icons.today, 8.0, Key("date")),
+                            ],
                           ),
-                          Container(margin: EdgeInsets.only(top: 10.0)),
-                          Row(children: <Widget>[SecondScreenCategory("Optional")]),
-                          Container(
-                            margin: EdgeInsets.only(left: 20.0, right: 20.0),
-                            alignment: Alignment.topLeft,
-                            child: Wrap(
-                              direction: Axis.horizontal,
-                              children: <Widget>[
-                                SecondScreenIconButton("Add a time", Icons.access_time, 8.0, Key("time")),
-                                SecondScreenIconButton("Add a color", Icons.color_lens, 8.0, Key("color")),
-                                SecondScreenIconButton("Add a tag", Icons.label_outline, 8.0, Key("tag")),
-                                SecondScreenIconButton("Make Priority", Icons.outlined_flag, 8.0, Key("priority")),
-                              ],
-                            ),
+                        ),
+                        Container(margin: EdgeInsets.only(top: 10.0)),
+                        Row(children: <Widget>[
+                          SecondScreenCategory("Optional")
+                        ]),
+                        Container(
+                          margin: EdgeInsets.only(left: 20.0, right: 20.0),
+                          alignment: Alignment.topLeft,
+                          child: Wrap(
+                            direction: Axis.horizontal,
+                            children: <Widget>[
+                              SecondScreenIconButton("Add a time",
+                                  Icons.access_time, 8.0, Key("time")),
+                              SecondScreenIconButton("Add a color",
+                                  Icons.color_lens, 8.0, Key("color")),
+                              SecondScreenIconButton("Add a tag",
+                                  Icons.label_outline, 8.0, Key("tag")),
+                              SecondScreenIconButton("Make Priority",
+                                  Icons.outlined_flag, 8.0, Key("priority")),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
+            ),
           ],
         ),
       ),
@@ -268,6 +279,7 @@ class ThirdScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("INDEX: " + index);
     return Scaffold(
       appBar: ThirdScreenAppBar(),
       body: SafeArea(
@@ -276,7 +288,6 @@ class ThirdScreen extends StatelessWidget {
     );
   }
 }
-
 
 class GoalsScreen extends StatefulWidget {
   GoalsScreen({Key key}) : super(key: key);
@@ -287,17 +298,16 @@ class GoalsScreen extends StatefulWidget {
   }
 }
 
-
 class _GoalsScreen extends State<GoalsScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold (
+    return Scaffold(
       appBar: AppBar(
-        //app bar will go here
-      ),
+          //app bar will go here
+          ),
       body: Expanded(
-        //body goes here-- does not have to be "Expanded," but might be the best way later on
-      ),
+          //body goes here-- does not have to be "Expanded," but might be the best way later on
+          ),
     );
   }
 }

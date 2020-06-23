@@ -11,7 +11,6 @@ import 'package:intl/intl.dart';
 import 'package:toast/toast.dart';
 import 'package:dewitapp/custom_icons_icons.dart';
 
-
 //TODO NAVBAR
 class NavDrawer extends StatelessWidget {
   @override
@@ -38,7 +37,8 @@ class NavDrawer extends StatelessWidget {
               padding: EdgeInsets.all(0.0),
               onPressed: () => {},
               child: ListTile(
-                leading: Icon(Icons.home,
+                leading: Icon(
+                  Icons.home,
                   color: DewitColors.darkGray,
                 ),
                 title: Text(
@@ -51,20 +51,8 @@ class NavDrawer extends StatelessWidget {
               padding: EdgeInsets.all(0.0),
               onPressed: () => {Navigator.of(context).pop()},
               child: ListTile(
-                leading: Icon(Icons.drafts,
-                  color: DewitColors.darkGray,
-                ),
-                title: Text(
-                    "Other",
-                  style: TextStyle(color: DewitColors.darkGray),
-                ),
-              ),
-            ),
-            FlatButton(
-              padding: EdgeInsets.all(0.0),
-              onPressed: () => {Navigator.of(context).pop()},
-              child: ListTile(
-                leading: Icon(Icons.restore,
+                leading: Icon(
+                  Icons.drafts,
                   color: DewitColors.darkGray,
                 ),
                 title: Text(
@@ -77,7 +65,8 @@ class NavDrawer extends StatelessWidget {
               padding: EdgeInsets.all(0.0),
               onPressed: () => {Navigator.of(context).pop()},
               child: ListTile(
-                leading: Icon(Icons.timeline,
+                leading: Icon(
+                  Icons.restore,
                   color: DewitColors.darkGray,
                 ),
                 title: Text(
@@ -90,7 +79,22 @@ class NavDrawer extends StatelessWidget {
               padding: EdgeInsets.all(0.0),
               onPressed: () => {Navigator.of(context).pop()},
               child: ListTile(
-                leading: Icon(Icons.settings,
+                leading: Icon(
+                  Icons.timeline,
+                  color: DewitColors.darkGray,
+                ),
+                title: Text(
+                  "Other",
+                  style: TextStyle(color: DewitColors.darkGray),
+                ),
+              ),
+            ),
+            FlatButton(
+              padding: EdgeInsets.all(0.0),
+              onPressed: () => {Navigator.of(context).pop()},
+              child: ListTile(
+                leading: Icon(
+                  Icons.settings,
                   color: DewitColors.darkGray,
                 ),
                 title: Text(
@@ -105,7 +109,6 @@ class NavDrawer extends StatelessWidget {
     );
   }
 }
-
 
 //TODO FirstScreen starts here
 class FirstScreenAppBar extends StatelessWidget with PreferredSizeWidget {
@@ -124,11 +127,11 @@ class FirstScreenAppBar extends StatelessWidget with PreferredSizeWidget {
             return IconButton(
               icon: Icon(Icons.search),
               onPressed: () {
-              //one or the other
-              //Scaffold.of(context).showSnackBar(SnackBar(content: Text("SnackBar search!"),));
-              //TODO THIS IS IMPORTANT FOR LATER
-              //Navigator.push(context, MaterialPageRoute(builder: (context) => SecondScreen()));
-              //Toast.show("You selected search!", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+                //one or the other
+                //Scaffold.of(context).showSnackBar(SnackBar(content: Text("SnackBar search!"),));
+                //TODO THIS IS IMPORTANT FOR LATER
+                //Navigator.push(context, MaterialPageRoute(builder: (context) => SecondScreen()));
+                //Toast.show("You selected search!", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
               },
             );
           },
@@ -151,7 +154,6 @@ class FirstScreenAppBar extends StatelessWidget with PreferredSizeWidget {
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }
 
-
 class FirstScreenTopPadding extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -172,7 +174,6 @@ class FirstScreenTopPadding extends StatelessWidget {
   }
 }
 
-
 class FirstScreenHero extends StatelessWidget {
   final w;
   FirstScreenHero(this.w);
@@ -192,31 +193,30 @@ class FirstScreenHero extends StatelessWidget {
 }
 
 class FirstScreenListButton extends StatelessWidget {
-  final int index;
+  final String k;
   final Task item;
-  FirstScreenListButton(this.index, this.item);
+  FirstScreenListButton(this.k, this.item);
 
   @override
   Widget build(BuildContext context) {
-    return FlatButton(
-      padding: EdgeInsets.all(0.0),
-      splashColor: Colors.black12,
-      highlightColor: Colors.black26,
-      onPressed: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => ThirdScreen(
-                    index.toString(), item)));
-      },
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.0),
+    return Hero(
+      tag: k,
+      child: FlatButton(
+        padding: EdgeInsets.all(0.0),
+        splashColor: Colors.black12,
+        highlightColor: Colors.black26,
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => ThirdScreen(k, item)));
+        },
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        child: FirstScreenListTile(item),
       ),
-      child: FirstScreenListTile(item),
     );
   }
 }
-
 
 class FirstScreenListTile extends StatelessWidget {
   final Task item;
@@ -233,16 +233,18 @@ class FirstScreenListTile extends StatelessWidget {
       //size: 24.0,
       //),
       //),
-      leading: (item.getPriority) ? Column(
-        children: <Widget>[
-          Spacer(),
-          Icon(
-            Icons.flag,
-            color: Colors.red,
-          ),
-          Spacer(),
-        ],
-      ) : null,
+      leading: (item.getPriority)
+          ? Column(
+              children: <Widget>[
+                Spacer(),
+                Icon(
+                  Icons.flag,
+                  color: Colors.red,
+                ),
+                Spacer(),
+              ],
+            )
+          : null,
       contentPadding: EdgeInsets.only(left: 16.0, right: 16.0),
       dense: false,
       title: FirstScreenTitle(item.getTitle),
@@ -263,7 +265,6 @@ class FirstScreenListTile extends StatelessWidget {
   }
 }
 
-
 class FirstScreenTitle extends StatelessWidget {
   final String title;
   FirstScreenTitle(this.title);
@@ -271,8 +272,7 @@ class FirstScreenTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin:
-      EdgeInsets.only(top: 8.0, bottom: 8.0),
+      margin: EdgeInsets.only(top: 8.0, bottom: 8.0),
       child: AutoSizeText(
         title,
         maxLines: 1,
@@ -287,7 +287,6 @@ class FirstScreenTitle extends StatelessWidget {
     );
   }
 }
-
 
 int display(int h) {
   if (h > 12) {
@@ -312,11 +311,21 @@ String timeOfDay(DateTime time) {
     } else if (time.hour > 12) {
       hourEdit = time.hour - 12;
     }
-      return "Was due " + DateFormat("MMMMEEEEd").format(time) + " at " + hourEdit.toString() + ":" + format(time.minute).toString() + ending;
+    return "Was due " +
+        DateFormat("MMMMEEEEd").format(time) +
+        " at " +
+        hourEdit.toString() +
+        ":" +
+        format(time.minute).toString() +
+        ending;
   } else {
     return (TimeOfDay(hour: time.hour, minute: time.minute) == endOfDay)
         ? "Complete before the end of the day"
-        : "Complete before " + display(time.hour).toString() + ":" + format(time.minute) + ending;
+        : "Complete before " +
+            display(time.hour).toString() +
+            ":" +
+            format(time.minute) +
+            ending;
   }
 }
 
@@ -363,7 +372,6 @@ class FirstScreenSubtitle extends StatelessWidget {
   }
 }
 
-
 Widget firstScreenDivider() {
   return Divider(
 //    color: Colors.black38,
@@ -374,7 +382,6 @@ Widget firstScreenDivider() {
     endIndent: 40,
   );
 }
-
 
 class DismissibleBackground1 extends StatelessWidget {
   @override
@@ -391,7 +398,6 @@ class DismissibleBackground1 extends StatelessWidget {
   }
 }
 
-
 class DismissibleBackground2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -406,7 +412,6 @@ class DismissibleBackground2 extends StatelessWidget {
     );
   }
 }
-
 
 class FirstScreenBottomBar extends StatelessWidget {
   @override
@@ -446,8 +451,7 @@ class FirstScreenBottomBar extends StatelessWidget {
                                       )),
                                   child: FlatButton(
                                     shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                      BorderRadius.circular(4.0),
+                                      borderRadius: BorderRadius.circular(4.0),
                                     ),
                                     onPressed: () {
 //                                            Navigator.of(context)
@@ -487,13 +491,16 @@ class FirstScreenBottomBar extends StatelessWidget {
                                   verticalOffset: 36,
                                   child: FlatButton(
                                     shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                      BorderRadius.circular(4.0),
+                                      borderRadius: BorderRadius.circular(4.0),
                                     ),
                                     onPressed: () {
                                       //TODO this button must do something
                                       //THIS IS TEMPORARY
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => GoalsScreen()));
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  GoalsScreen()));
                                     },
                                     padding: EdgeInsets.all(0.0),
                                     child: Icon(
@@ -518,7 +525,6 @@ class FirstScreenBottomBar extends StatelessWidget {
   }
 }
 
-
 //TODO SecondScreen starts here
 class SecondScreenAppBar extends StatelessWidget with PreferredSizeWidget {
   final titleController;
@@ -531,7 +537,8 @@ class SecondScreenAppBar extends StatelessWidget with PreferredSizeWidget {
       leading: Tooltip(
         message: "Discard task",
         child: IconButton(
-          icon:Icon(Icons.delete,
+          icon: Icon(
+            Icons.delete,
             color: Colors.white,
           ),
           onPressed: () {
@@ -539,7 +546,8 @@ class SecondScreenAppBar extends StatelessWidget with PreferredSizeWidget {
           },
         ),
       ),
-      title: Text("Add a task!",
+      title: Text(
+        "Add a task!",
         style: TextStyle(color: Colors.white),
       ),
       backgroundColor: Color(0xFF1c1d28),
@@ -609,9 +617,11 @@ class SecondScreenAppBar extends StatelessWidget with PreferredSizeWidget {
                 }
                 if (finalDate != null) {
                   if (finalTime != null) {
-                    dateAndTime = DateTime(finalDate.year, finalDate.month, finalDate.day, finalTime.hour, finalTime.minute);
+                    dateAndTime = DateTime(finalDate.year, finalDate.month,
+                        finalDate.day, finalTime.hour, finalTime.minute);
                   } else {
-                    dateAndTime = DateTime(finalDate.year, finalDate.month, finalDate.day, 23, 59, 59, 999);
+                    dateAndTime = DateTime(finalDate.year, finalDate.month,
+                        finalDate.day, 23, 59, 59, 999);
                   }
                 }
                 if (!hasDate) {
@@ -619,14 +629,28 @@ class SecondScreenAppBar extends StatelessWidget with PreferredSizeWidget {
                       duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
                   return;
                 } else if (DateTime.now().isAfter(dateAndTime)) {
-                  Toast.show("You must add a date after the current time", context,
+                  Toast.show(
+                      "You must add a date after the current time", context,
                       duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
                   return;
                 } else {
-                  print(newTitle + " " + newNote.toString() + " " + dateAndTime.toString() + " " + selectedColor.toString() + " " + createdTags.toString() + " " + isPriority.toString());
-                  items.add(Task(newTitle, newNote, dateAndTime, selectedColor, createdTags, isPriority));
-                  addToMap(Task(newTitle, newNote, dateAndTime, selectedColor, createdTags, isPriority));
-                  addToList(Task(newTitle, newNote, dateAndTime, selectedColor, createdTags, isPriority));
+                  print(newTitle +
+                      " " +
+                      newNote.toString() +
+                      " " +
+                      dateAndTime.toString() +
+                      " " +
+                      selectedColor.toString() +
+                      " " +
+                      createdTags.toString() +
+                      " " +
+                      isPriority.toString());
+                  items.add(Task(newTitle, newNote, dateAndTime, selectedColor,
+                      createdTags, isPriority));
+                  addToMap(Task(newTitle, newNote, dateAndTime, selectedColor,
+                      createdTags, isPriority));
+                  addToList(Task(newTitle, newNote, dateAndTime, selectedColor,
+                      createdTags, isPriority));
                   SchedulerBinding.instance.addPostFrameCallback((_) {
                     Navigator.of(context).pushNamedAndRemoveUntil(
                         "/", (Route<dynamic> route) => false);
@@ -644,8 +668,7 @@ class SecondScreenAppBar extends StatelessWidget with PreferredSizeWidget {
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }
 
-
-class BigPurple extends StatelessWidget{
+class BigPurple extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -655,7 +678,6 @@ class BigPurple extends StatelessWidget{
     );
   }
 }
-
 
 class NoOverscrollWidget extends StatelessWidget {
   final child;
@@ -680,7 +702,8 @@ class SecondScreenTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 4.0),
+      margin: const EdgeInsets.only(
+          left: 20.0, right: 20.0, top: 20.0, bottom: 4.0),
       child: TextField(
         controller: titleController,
         maxLength: 200,
@@ -705,7 +728,6 @@ class SecondScreenTitle extends StatelessWidget {
     );
   }
 }
-
 
 class SecondScreenNotes extends StatelessWidget {
   final noteController;
@@ -735,13 +757,14 @@ class SecondScreenNotes extends StatelessWidget {
           hintText: "Any short notes?",
           hintStyle: TextStyle(color: Colors.white54),
           counterText: "",
-          counterStyle: TextStyle(fontSize: 0,),
+          counterStyle: TextStyle(
+            fontSize: 0,
+          ),
         ),
       ),
     );
   }
 }
-
 
 class SecondScreenSpacer extends StatelessWidget {
   @override
@@ -759,7 +782,6 @@ class SecondScreenSpacer extends StatelessWidget {
     );
   }
 }
-
 
 class SecondScreenCategory extends StatelessWidget {
   final String text;
@@ -781,9 +803,7 @@ class SecondScreenCategory extends StatelessWidget {
   }
 }
 
-
 class SecondScreenIconButton extends StatefulWidget {
-
   final String text;
   final IconData ic;
   final double leftMargin;
@@ -791,9 +811,9 @@ class SecondScreenIconButton extends StatefulWidget {
   SecondScreenIconButton(this.text, this.ic, this.leftMargin, this.key);
 
   @override
-  _SecondScreenIconButton createState() => new _SecondScreenIconButton(this.text, this.ic, this.leftMargin, this.key);
+  _SecondScreenIconButton createState() => new _SecondScreenIconButton(
+      this.text, this.ic, this.leftMargin, this.key);
 }
-
 
 class _SecondScreenIconButton extends State<SecondScreenIconButton> {
   final String text;
@@ -827,22 +847,23 @@ class _SecondScreenIconButton extends State<SecondScreenIconButton> {
           FocusScope.of(context).unfocus();
           if (key == Key("date")) {
             altIcon = Icons.clear;
-              if (selectedDate == null) {
-                selectedDate = await selectDate(context);
-                if (selectedDate != null) {
-                  del = selectedDate.month.toString() + "/" +
-                      selectedDate.day.toString() + "/" +
-                      selectedDate.year.toString();
-                }
-                finalDate = selectedDate;
-              } else {
-                selectedDate = null;
+            if (selectedDate == null) {
+              selectedDate = await selectDate(context);
+              if (selectedDate != null) {
+                del = selectedDate.month.toString() +
+                    "/" +
+                    selectedDate.day.toString() +
+                    "/" +
+                    selectedDate.year.toString();
               }
-              setState(() {
-                hasDate = (selectedDate != null);
-                isSelected = hasDate;
-              });
-
+              finalDate = selectedDate;
+            } else {
+              selectedDate = null;
+            }
+            setState(() {
+              hasDate = (selectedDate != null);
+              isSelected = hasDate;
+            });
           } else if (key == Key("time")) {
             altIcon = Icons.clear;
             if (selectedTime == null) {
@@ -853,6 +874,7 @@ class _SecondScreenIconButton extends State<SecondScreenIconButton> {
                   final s = f.format(n);
                   return s;
                 }
+
                 int hour = selectedTime.hour;
                 String ending = " AM";
                 if (hour >= 12) {
@@ -863,8 +885,10 @@ class _SecondScreenIconButton extends State<SecondScreenIconButton> {
                 } else if (hour == 0) {
                   hour += 12;
                 }
-                del = hour.toString() + ":" +
-                    format(selectedTime.minute) + ending;
+                del = hour.toString() +
+                    ":" +
+                    format(selectedTime.minute) +
+                    ending;
               }
               finalTime = selectedTime;
             } else {
@@ -874,7 +898,6 @@ class _SecondScreenIconButton extends State<SecondScreenIconButton> {
               hasTime = (selectedTime != null);
               isSelected = hasTime;
             });
-
           } else if (key == Key("color")) {
             altIcon = Icons.clear;
             if (selectedColor == null) {
@@ -888,7 +911,6 @@ class _SecondScreenIconButton extends State<SecondScreenIconButton> {
             setState(() {
               isSelected = (selectedColor != null);
             });
-
           } else if (key == Key("tag")) {
             altIcon = Icons.edit;
             del = "Edit tags";
@@ -905,7 +927,6 @@ class _SecondScreenIconButton extends State<SecondScreenIconButton> {
             setState(() {
               isSelected = (createdTags.length != 0);
             });
-
           } else if (key == Key("priority")) {
             altIcon = Icons.clear;
             del = "Delete priority";
@@ -918,35 +939,29 @@ class _SecondScreenIconButton extends State<SecondScreenIconButton> {
             setState(() {
               isSelected = isPriority;
             });
-
           } else {
             print("ERROR");
           }
         },
         icon: Padding(
           padding: EdgeInsets.only(left: leftMargin, right: 0.0),
-          child: Icon(
-              isSelected ? altIcon : ic,
-              color: Colors.white70,
-              size: 20
-          ),
+          child:
+              Icon(isSelected ? altIcon : ic, color: Colors.white70, size: 20),
         ),
         label: Padding(
           padding: EdgeInsets.only(right: 10.0, left: 0.0),
           child: Text(
-
             isSelected ? del : text,
-              style: TextStyle(
-                color: Colors.white70,
-                fontSize: 14,
-              ),
+            style: TextStyle(
+              color: Colors.white70,
+              fontSize: 14,
+            ),
           ),
         ),
       ),
     );
   }
 }
-
 
 class SecondScreenColorOption extends StatelessWidget {
   final context;
@@ -957,12 +972,13 @@ class SecondScreenColorOption extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SimpleDialogOption(
-      onPressed: () { Navigator.pop(context, option); },
+      onPressed: () {
+        Navigator.pop(context, option);
+      },
       child: Text(str),
     );
   }
 }
-
 
 class SecondScreenBottomBar extends StatelessWidget {
   @override
@@ -974,7 +990,8 @@ class SecondScreenBottomBar extends StatelessWidget {
           color: Colors.transparent,
           width: double.infinity,
           height: 60.0,
-          margin: const EdgeInsets.only(left: 0.0, right: 0.0, top: 4.0, bottom: 0.0),
+          margin: const EdgeInsets.only(
+              left: 0.0, right: 0.0, top: 4.0, bottom: 0.0),
           //padding: EdgeInsets.only(bottom: 20.0, top: 20.0),
           child: Container(
             decoration: new BoxDecoration(
@@ -1075,9 +1092,7 @@ class SecondScreenBottomBar extends StatelessWidget {
   }
 }
 
-
 //TODO ThirdScreen starts here
-
 
 class ThirdScreenAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
@@ -1093,7 +1108,6 @@ class ThirdScreenAppBar extends StatelessWidget with PreferredSizeWidget {
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }
 
-
 class ThirdScreenBody extends StatelessWidget {
   final String index;
   final Task _selectedTask;
@@ -1102,6 +1116,7 @@ class ThirdScreenBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      //color: Colors.green,
       color: DewitColors.background,
       child: Align(
         alignment: FractionalOffset(0.5, 0.3),
@@ -1110,6 +1125,7 @@ class ThirdScreenBody extends StatelessWidget {
           flightShuttleBuilder: flightShuttleBuilder,
           child: Text(
             "${_selectedTask.title}\n${_selectedTask.note}",
+            //"${_selectedTask.title}",
             style: TextStyle(
               color: Colors.white,
               fontSize: 20,
@@ -1122,15 +1138,14 @@ class ThirdScreenBody extends StatelessWidget {
   }
 }
 
-
 //huge help from zyllus17 on https://github.com/flutter/flutter/issues/12463
 Widget flightShuttleBuilder(
-    BuildContext flightContext,
-    Animation<double> animation,
-    HeroFlightDirection flightDirection,
-    BuildContext fromHeroContext,
-    BuildContext toHeroContext,
-    ) {
+  BuildContext flightContext,
+  Animation<double> animation,
+  HeroFlightDirection flightDirection,
+  BuildContext fromHeroContext,
+  BuildContext toHeroContext,
+) {
   return DefaultTextStyle(
     style: DefaultTextStyle.of(toHeroContext).style,
     child: toHeroContext.widget,
