@@ -209,9 +209,9 @@ class FirstScreenListButton extends StatelessWidget {
           // Navigator.push(context,
           //     MaterialPageRoute(builder: (context) => ThirdScreen(k, item)));
           showDialog(
-                context: context,
-                builder: (_) => Popup(item),
-              );
+            context: context,
+            builder: (_) => Popup(item),
+          );
         },
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.0),
@@ -223,15 +223,14 @@ class FirstScreenListButton extends StatelessWidget {
 }
 
 class Popup extends StatefulWidget {
-final item;
-Popup(this.item);
+  final item;
+  Popup(this.item);
 
   @override
   _Popup createState() => _Popup(this.item);
 }
 
-class _Popup extends State<Popup>
-    with SingleTickerProviderStateMixin {
+class _Popup extends State<Popup> with SingleTickerProviderStateMixin {
   AnimationController controller;
   Animation<double> scaleAnimation;
   final item;
@@ -243,9 +242,8 @@ class _Popup extends State<Popup>
 
     controller =
         AnimationController(vsync: this, duration: Duration(milliseconds: 400));
-    scaleAnimation =
-        CurvedAnimation(parent: controller, curve: Curves.fastLinearToSlowEaseIn);
-    
+    scaleAnimation = CurvedAnimation(
+        parent: controller, curve: Curves.fastLinearToSlowEaseIn);
 
     controller.addListener(() {
       setState(() {});
@@ -261,14 +259,86 @@ class _Popup extends State<Popup>
         color: Colors.transparent,
         child: ScaleTransition(
           scale: scaleAnimation,
-          child: Container(
-            decoration: ShapeDecoration(
-                color: DewitColors.background,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0))),
-            child: Padding(
-              padding: const EdgeInsets.all(50.0),
-              child: Text("${item.getTitle}"),
+          child: Padding(
+            padding: EdgeInsets.all(0.0),
+            //padding: EdgeInsets.fromLTRB(40.0, 120.0, 40.0, 120.0),
+            child: Container(
+              decoration: ShapeDecoration(
+                  color: DewitColors.background,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0))),
+              child: Padding(
+                padding: const EdgeInsets.all(0.0),
+                child: Container(
+                  width: MediaQuery.of(context).size.width * .8,
+                  height: MediaQuery.of(context).size.height * .6,
+                    child: Column(
+                    children: <Widget>[
+                      Expanded(
+                        flex: 2,
+                          child: Container(
+                            padding: EdgeInsets.only(top: 16.0, right: 16.0),
+                          alignment: Alignment.centerRight,
+                          child: Text(
+                            "EDIT",
+                            style: TextStyle(
+                              color: DewitColors.oldDarkPurple,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: Text("${item.getTitle}"),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: Text("${item.getNote}"),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: Text("${item.getDateAndTime}"),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: Text("${item.getColor}"),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: Text("${item.getTag}"),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: Text("${item.getPriority}"),
+                        ),
+                      ),
+                      Spacer(flex: 2,),
+                      // Text("${item.getTitle}"),
+                      // Text("${item.getNote}"),
+                      // Text("${item.getDateAndTime}"),
+                      // Text("${item.getTag}"),
+                      // Text("${item.getPriority}"),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ),
         ),
