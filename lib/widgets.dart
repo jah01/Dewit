@@ -206,13 +206,72 @@ class FirstScreenListButton extends StatelessWidget {
         splashColor: Colors.black12,
         highlightColor: Colors.black26,
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => ThirdScreen(k, item)));
+          // Navigator.push(context,
+          //     MaterialPageRoute(builder: (context) => ThirdScreen(k, item)));
+          showDialog(
+                context: context,
+                builder: (_) => Popup(item),
+              );
         },
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.0),
         ),
         child: FirstScreenListTile(item),
+      ),
+    );
+  }
+}
+
+class Popup extends StatefulWidget {
+final item;
+Popup(this.item);
+
+  @override
+  _Popup createState() => _Popup(this.item);
+}
+
+class _Popup extends State<Popup>
+    with SingleTickerProviderStateMixin {
+  AnimationController controller;
+  Animation<double> scaleAnimation;
+  final item;
+  _Popup(this.item);
+
+  @override
+  void initState() {
+    super.initState();
+
+    controller =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 400));
+    scaleAnimation =
+        CurvedAnimation(parent: controller, curve: Curves.fastLinearToSlowEaseIn);
+    
+
+    controller.addListener(() {
+      setState(() {});
+    });
+
+    controller.forward();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Material(
+        color: Colors.transparent,
+        child: ScaleTransition(
+          scale: scaleAnimation,
+          child: Container(
+            decoration: ShapeDecoration(
+                color: DewitColors.background,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0))),
+            child: Padding(
+              padding: const EdgeInsets.all(50.0),
+              child: Text("${item.getTitle}"),
+            ),
+          ),
+        ),
       ),
     );
   }
