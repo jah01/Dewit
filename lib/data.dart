@@ -73,6 +73,14 @@ class Task {
     }
   }
 
+  String get strColor {
+    if (color == null) {
+      return "N/A";
+    } else {
+      return color;
+    }
+  }
+
   String get getTag {
     return tag;
   }

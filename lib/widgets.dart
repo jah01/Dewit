@@ -252,6 +252,56 @@ class _Popup extends State<Popup> with SingleTickerProviderStateMixin {
     controller.forward();
   }
 
+  String strNote(Task t) {
+    if (t.getNote == null) {
+      return "N/A";
+    } else {
+      return t.getNote;
+    }
+  }
+
+  String timeOfDayRevised(DateTime time) {
+  String ending = (time.hour < 12) ? " AM" : " PM";
+  if (time.isBefore(DateTime.now())) {
+    int hourEdit = time.hour;
+    if (time.hour == 0) {
+      hourEdit = 12;
+    } else if (time.hour > 12) {
+      hourEdit = time.hour - 12;
+    }
+    return "Was due " +
+        DateFormat("MMMMEEEEd").format(time) +
+        " at " +
+        hourEdit.toString() +
+        ":" +
+        format(time.minute).toString() +
+        ending;
+  } else {
+    return (TimeOfDay(hour: time.hour, minute: time.minute) == endOfDay)
+        ? "Before midnight"
+        : display(time.hour).toString() +
+            ":" +
+            format(time.minute) +
+            ending;
+  }
+}
+
+String strTag(Task t) {
+  if (t.getTag == null) {
+    return "N/A";
+  } else {
+    return t.getTag;
+  }
+}
+
+String strPriority(Task t) {
+  if (t.getPriority) {
+    return "Yes";
+  } else {
+    return "No";
+  }
+}
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -268,7 +318,7 @@ class _Popup extends State<Popup> with SingleTickerProviderStateMixin {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0))),
               child: Padding(
-                padding: const EdgeInsets.all(0.0),
+                padding: const EdgeInsets.only(left: 0.0),
                 child: Container(
                   width: MediaQuery.of(context).size.width * .8,
                   height: MediaQuery.of(context).size.height * .65,
@@ -297,8 +347,9 @@ class _Popup extends State<Popup> with SingleTickerProviderStateMixin {
                           child: Row(
                             children: <Widget>[
                               Padding(padding: EdgeInsets.only(left: 32.0)),
-                              Expanded(flex: 1, child: Text("Task Name:")),
-                              Expanded(flex: 1, child: Text("${item.getTitle}")),
+                              Expanded(flex: 2, child: Text("Task:")),
+                              Expanded(flex: 3, child: Text("${item.getTitle}")),
+                              Padding(padding: EdgeInsets.only(right: 32.0)),
                             ],
                           ),
                           //child: Text("Task Name: " + "${item.getTitle}"),
@@ -308,45 +359,105 @@ class _Popup extends State<Popup> with SingleTickerProviderStateMixin {
                         flex: 2,
                         child: Container(
                           alignment: Alignment.center,
-                          child: Text("${item.getNote}"),
+                          child: Row(
+                            children: <Widget>[
+                              Padding(padding: EdgeInsets.only(left: 32.0)),
+                              Expanded(flex: 2, child: Text("Notes:")),
+                              Expanded(flex: 3, child: Text(strNote(item))),
+                              Padding(padding: EdgeInsets.only(right: 32.0)),
+                            ],
+                          ),
                         ),
                       ),
                       Expanded(
                         flex: 2,
                         child: Container(
                           alignment: Alignment.center,
-                          child: Text(formatDate(item.getDate)),
+                          child: Row(
+                            children: <Widget>[
+                              Padding(padding: EdgeInsets.only(left: 32.0)),
+                              Expanded(flex: 2, child: Text("Date:")),
+                              Expanded(flex: 3, child: Text(formatDate(item.getDate))),
+                              Padding(padding: EdgeInsets.only(right: 32.0)),
+                            ],
+                          ),
                         ),
                       ),
                       Expanded(
                         flex: 2,
                         child: Container(
                           alignment: Alignment.center,
-                          child: Text(timeOfDay((item.getDateAndTime))),
+                          child: Row(
+                            children: <Widget>[
+                              Padding(padding: EdgeInsets.only(left: 32.0)),
+                              Expanded(flex: 2, child: Text("Time:")),
+                              Expanded(flex: 3, child: Text(timeOfDayRevised(item.getDateAndTime))),
+                              Padding(padding: EdgeInsets.only(right: 32.0)),
+                            ],
+                          ),
                         ),
                       ),
                       Expanded(
                         flex: 2,
                         child: Container(
                           alignment: Alignment.center,
-                          child: Text("${item.getColor}"),
+                         child: Row(
+                            children: <Widget>[
+                              Padding(padding: EdgeInsets.only(left: 32.0)),
+                              Expanded(flex: 2, child: Text("Color:")),
+                              Expanded(flex: 3, child: Text("${item.strColor}")),
+                              Padding(padding: EdgeInsets.only(right: 32.0)),
+                            ],
+                          ),
                         ),
                       ),
                       Expanded(
                         flex: 2,
                         child: Container(
                           alignment: Alignment.center,
-                          child: Text("${item.getTag}"),
+                          child: Row(
+                            children: <Widget>[
+                              Padding(padding: EdgeInsets.only(left: 32.0)),
+                              Expanded(flex: 2, child: Text("Tags:")),
+                              Expanded(flex: 3, child: Text(strTag(item))),
+                              Padding(padding: EdgeInsets.only(right: 32.0)),
+                            ],
+                          ),
                         ),
                       ),
                       Expanded(
                         flex: 2,
                         child: Container(
                           alignment: Alignment.center,
-                          child: Text("${item.getPriority}"),
+                          child: Row(
+                            children: <Widget>[
+                              Padding(padding: EdgeInsets.only(left: 32.0)),
+                              Expanded(flex: 2, child: Text("Priority:")),
+                              Expanded(flex: 3, child: Text(strPriority(item))),
+                              Padding(padding: EdgeInsets.only(right: 32.0)),
+                            ],
+                          ),
                         ),
                       ),
-                      Spacer(flex: 2),
+                      Expanded(
+                        flex: 2,
+                        child: Container(
+                          padding: EdgeInsets.only(bottom: 16.0, right: 16.0),
+                          alignment: Alignment.centerRight,
+                          child: FlatButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text(
+                              "BACK",
+                              style: TextStyle(
+                                color: DewitColors.oldDarkPurple,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      //Spacer(flex: 2),
                     ],
                   ),
                 ),
